@@ -1,0 +1,19 @@
+
+# Pull node image
+FROM node:alpine
+MAINTAINER Eco Team
+
+# Store files in the app folder (so cliche)
+WORKDIR /app
+COPY ./ ./
+
+# Restore all npm packages
+RUN npm install
+
+# expose port
+EXPOSE 3000
+
+# Set default command to RUN
+CMD ["npm", "run", "start"]
+
+

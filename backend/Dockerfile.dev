@@ -1,0 +1,21 @@
+
+# Pull the Mirsoft sdk image
+FROM microsoft/dotnet
+MAINTAINER Eco Team
+
+# Store files in the app folder (so cliche)
+WORKDIR /app
+COPY ./ ./
+
+WORKDIR /app/Api
+
+# Restore all dotnet nuget packages
+RUN dotnet restore
+
+# expose port
+EXPOSE 5000
+
+# Set default command to RUN
+CMD ["dotnet", "watch", "run"]
+
+
