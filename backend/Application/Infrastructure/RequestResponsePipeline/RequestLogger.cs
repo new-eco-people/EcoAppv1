@@ -20,7 +20,7 @@ namespace Application.Infrastructure.RequestResponsePipeline
 
             // TODO: Add User Details
 
-            _logger.LogWarning("Eco Request: {Name} {@Request}", name, request);
+            _logger.LogInformation("Eco Request: {Name} {@Request}", name, request);
 
             return Task.CompletedTask;
         }

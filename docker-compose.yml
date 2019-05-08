@@ -2,36 +2,42 @@ version: "3.4"
 
 services:
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.dev
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules/
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.dev
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./backend:/app
-      - /app/Api/bin/
-      - /app/Application/bin/
-      - /app/Domain/bin/
-      - /app/Infrastructure/bin/
-      - /app/Persistence/bin/
-    environment:
-      - DefaultConnection="Server=mssql_image;Database=eco-appDb; user id=sa; password=noPassword@247;"
-    depends_on:
-      - mssql_image
-
   mssql_image:
     image: mcr.microsoft.com/mssql/server
     environment:
         SA_PASSWORD: "noPassword@247"
         ACCEPT_EULA: "Y"
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "4000:80"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+      - /app/Api/bin
+      - /app/Application/bin
+      - /app/Domain/bin
+      - /app/Infrastructure/bin
+      - /app/Persistence/bin
+    environment:
+      - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
+    depends_on:
+      - mssql_image
+    ports:
+      - "5000:5000"

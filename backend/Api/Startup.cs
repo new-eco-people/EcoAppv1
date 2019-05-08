@@ -28,14 +28,8 @@ namespace Api
     public class Startup
     {
         public Startup(IConfiguration configuration, IHostingEnvironment ienv)
-        {
-            var builder = new ConfigurationBuilder()
-                            .SetBasePath(ienv.ContentRootPath)
-                            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                            .AddJsonFile($"appsettings.{ienv.EnvironmentName}.json", optional: true)
-                            .AddEnvironmentVariables();
-                            
-            Configuration = builder.Build();   
+        {                           
+            Configuration = configuration;  
             env = ienv;
         }
 
@@ -96,9 +90,10 @@ namespace Api
                 // specifying the Swagger JSON endpoint.
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                    c.SwaggerEndpoint("swagger/v1/swagger.json", "My API V1");
                     c.RoutePrefix = string.Empty;
                 });
+
             }
             else
             {

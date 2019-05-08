@@ -23,9 +23,7 @@
       "launchUrl": "api/values",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "DefaultConnection" : "Server=localhost;Database=appDb; user id=SA; password=noPassword@247",
-        "DefaultConnection_" : "Add your connectionstring here know you will have to repeat this process on everylogin"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }
