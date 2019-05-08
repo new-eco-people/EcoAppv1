@@ -21,7 +21,7 @@ For just viewing the project live the following tools are required:
 
 * [Docker CE](https://docs.docker.com/install/) Installation guide for the preferred OS is found on the left sidebar. You will need to create a dockerhub account so be prepared.
 
-    Once you have downloaded and installed docker on your machine (hopefully), run in your terminal for Mac/Linux or CMD/Powershell for Windows to login to dockerhub with the credentials used to create the docker hub account. This will be done only once. For Mac or Linux user, you may be required to run by add ```sudo``` before the command.
+    Once you have downloaded and installed docker on your machine (hopefully), run in your terminal for Mac/Linux or CMD/Powershell for Windows to login to dockerhub with the credentials used to create the docker hub account. This will be done only once. For Mac or Linux user, you may be required to run by add `sudo` before the command.
 
     ```
     docker login
@@ -46,7 +46,7 @@ Follow these steps to get your viewing or development environment set up. For Ma
      docker-compose up --build
      ```
 
-    Go to `http://localhost:4000` on your browser. If a react app shows, you are good to go else kindly contact [Perez247](https://github.com/perez247) detailing your issue.
+Go to `http://localhost:4000` on your browser. If a react app shows, you are good to go else kindly contact [Perez247](https://github.com/perez247) detailing your issue.
 
 3. This is the most important part. kindly press Ctrl+c or CMD+c to end the application and `docker-compose down` to clean up. Ensure this is done everytime an application is down.
 
