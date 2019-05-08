@@ -9,7 +9,7 @@ As such please feel free to ask me any question where you find confusing.
 
 ## Project Structure
 
-As seen already, the consists of the frontend, backend and Nginx (which is still in testing phase). Any framewark can be used for the frontend and backend. In this project, .net core webapi is used for the backend to focus on handling api request while react is used for interfacing with the user.
+As seen already, this consists of the frontend, backend and Nginx (which is still in testing phase). Any framewark can be used for the frontend and backend. In this project, .net core webapi is used for the backend to focus on handling api request while react is used for interfacing with the user.
 
 ## Getting Started
 
@@ -17,11 +17,11 @@ Follow these instructions to get the project up and running either for just vewi
 
 ### Prerequisites
 
-For just viewing the project live the following tools are required:
+For just viewing the project live, the following tools are required:
 
-* [Docker CE](https://docs.docker.com/install/) Installation guide for the preferred OS is found on the left sidebar. You will need to create a dockerhub account so be prepared.
+* [Docker CE](https://docs.docker.com/install/). The installation guide for the preferred OS is found on the left sidebar. You will need to create a dockerhub account so be prepared.
 
-    Once you have downloaded and installed docker on your machine (hopefully), run in your terminal for Mac/Linux or CMD/Powershell for Windows to login to dockerhub with the credentials used to create the docker hub account. This will be done only once. For Mac or Linux user, you may be required to run by add `sudo` before the command.
+    Once you have downloaded and installed docker on your machine (hopefully), run in your terminal for Mac/Linux or CMD/Powershell for Windows to login to dockerhub with the credentials used to create the docker hub account. This will be done only once. For Mac or Linux user, you may be required to run by add ```sudo``` before the command.
 
     ```
     docker login
