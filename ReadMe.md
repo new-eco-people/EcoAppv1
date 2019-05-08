@@ -41,9 +41,10 @@ For viewing and Development, the following tools are required:
 Follow these steps to get your viewing or development environment set up. For Mac or Linux user, you may be required to add `sudo` before the command.
 
   1. Clone or download the repository
-  2. Open ther terminal at the root directory of the download folder and restore required packages by running:
+  2. Open ther terminal at the root directory of the download folder and start docker: (note: It will take long time for the very first time)
      ```
      docker-compose up --build
+     ```
 
     Go to `http://localhost:4000` on your browser. If a react app shows, you are good to go else kindly contact [Perez247](https://github.com/perez247) detailing your issue.
 
