@@ -2,11 +2,11 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker build -t neweco/react-test -f ./frontend/Dockerfile.dev ./frontend
+# before_install:
+#   - docker build -t neweco/react-test -f ./frontend/Dockerfile.dev ./frontend
 
-script:
-  - docker run eco/react-test npm run test -- --coverage
+# script:
+#   - docker run eco/react-test npm run test -- --coverage
 
 after_success:
   - docker build -t neweco/frontend ./frontend
