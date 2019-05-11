@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t neweco/react-test -f ./frontend/Dockerfile.dev ./frontend
+
+script:
+  - docker run eco/react-test npm run test -- --coverage
+
+after_success:
+  - docker build -t neweco/frontend ./frontend
+  - docker build -t neweco/backend ./backend
+  - docker build -t neweco/nginx ./nginx
+  # login to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push to docker hub
+  - docker push neweco/frontend
+  - docker push neweco/backend
+  - docker push neweco/nginx

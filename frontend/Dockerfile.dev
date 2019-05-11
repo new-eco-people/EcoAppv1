@@ -1,7 +1,7 @@
 
 # Pull node image
 FROM node:alpine
-MAINTAINER Eco Team
+LABEL Eco Team
 
 # Store files in the app folder (so cliche)
 WORKDIR /app
