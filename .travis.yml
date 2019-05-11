@@ -7,7 +7,7 @@ before_install:
   - docker build -t neweco/react-test -f ./frontend/Dockerfile.dev ./frontend
 
 script:
-  - docker run neweco/react-test npm run test -- --coverage
+  - docker run neweco/react-test npm test -- --coverage
 
 after_success:
   - docker build -t neweco/frontend ./frontend
