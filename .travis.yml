@@ -10,7 +10,7 @@ before_install:
 
 script:
   # login to docker hub
-  - echo "$AZURE_REGISTRY_PW" | docker login -u "$AZURE_REGISTRY_ID" --password-stdin "$AZURE_REGISTRY_NAME"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # push to docker hub
   - docker push neweco/frontend
