@@ -16,7 +16,7 @@ script:
   - docker push neweco/frontend
   - docker push neweco/backend
   - docker push neweco/nginx
-  on:
-    branch: develop
+  # on:
+  #   branch: develop
 
   #
