@@ -10,16 +10,26 @@ services:
 
   nginx:
     restart: always
-    image: ecoafrica/nginx_dev
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
     ports:
       - "80:80"
 
   frontend:
-    image: ecoafrica/frontend_dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
 
   backend:
-    image: ecoafrica/backend_dev
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     environment:
       - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
     depends_on:
       - mssql_image
+    ports:
+      - "5000:5000"
