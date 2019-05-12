@@ -39,9 +39,12 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             // Configure Database and Microsoft Identity
+            // var prod = Environment.GetEnvironmentVariable("DefaultConnection");
+            // var dev = Configuration.GetConnectionString("DefaultConnection");
+            // var connectionString = prod != null ? prod : dev;
+            // //  Configure Database and Microsoft Identity
             // services.ConfigureDatabaseConnections(
-            //     Environment.GetEnvironmentVariable("DefaultConnection"),
+            //     connectionString,
             //     "Api",
             //     env.IsProduction()
             // );

@@ -13,8 +13,8 @@ services:
 
   backend:
     image: ecoafrica/backend_dev
-  #   environment:
-  #     - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
+    # environment:
+    #   - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
 
   # mssql_image:
   #   image: mcr.microsoft.com/mssql/server
