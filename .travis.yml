@@ -30,7 +30,7 @@ jobs:
         # login to docker hub
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-        # push to docker hub
+        # push to docker hub uisng login_page
         - docker push ecoafrica/frontend
         - docker push ecoafrica/backend
         - docker push ecoafrica/nginx
