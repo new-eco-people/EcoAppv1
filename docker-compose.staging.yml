@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+
+  nginx:
+    restart: always
+    image: ecoafrica/nginx_dev
+    ports:
+      - "80:80"
+
+  frontend:
+    image: ecoafrica/frontend_dev
+
+  backend:
+    image: ecoafrica/backend_dev
+    # environment:
+    #   - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
+
+  # mssql_image:
+  #   image: mcr.microsoft.com/mssql/server
+  #   environment:
+  #       SA_PASSWORD: "noPassword@247"
+  #       ACCEPT_EULA: "Y"

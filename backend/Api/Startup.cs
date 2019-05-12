@@ -39,12 +39,15 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             // Configure Database and Microsoft Identity
-            services.ConfigureDatabaseConnections(
-                Environment.GetEnvironmentVariable("DefaultConnection"),
-                "Api",
-                env.IsProduction()
-            );
+            // var prod = Environment.GetEnvironmentVariable("DefaultConnection");
+            // var dev = Configuration.GetConnectionString("DefaultConnection");
+            // var connectionString = prod != null ? prod : dev;
+            // //  Configure Database and Microsoft Identity
+            // services.ConfigureDatabaseConnections(
+            //     connectionString,
+            //     "Api",
+            //     env.IsProduction()
+            // );
 
             // Handling Application Exceptions on the Web
             services.AddMvc(options => {
@@ -101,8 +104,8 @@ namespace Api
                 app.UseHsts();
             }
 
-            // Make sure the database is created and the migration that was created is up to date
-            app.EnsureDatabaseAndMigrationsExtension();
+            // Make sure the database is created and the migration that was created is up to date..
+            // app.EnsureDatabaseAndMigrationsExtension();
 
             // app.UseHttpsRedirection();
             app.UseMvc();
