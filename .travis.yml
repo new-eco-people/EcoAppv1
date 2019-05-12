@@ -4,18 +4,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t neweco/frontend ./frontend
-  - docker build -t neweco/backend ./backend
-  - docker build -t neweco/nginx ./nginx
+  - docker build -t ecoafrica/frontend ./frontend
+  - docker build -t ecoafrica/backend ./backend
+  - docker build -t ecoafrica/nginx ./nginx
 
 script:
   # login to docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
+  
   # push to docker hub
-  - docker push neweco/frontend
-  - docker push neweco/backend
-  - docker push neweco/nginx
+  - docker push ecoafrica/frontend
+  - docker push ecoafrica/backend
+  - docker push ecoafrica/nginx
   # on:
   #   branch: develop
 
