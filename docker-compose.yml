@@ -2,44 +2,14 @@ version: "3.4"
 
 services:
 
-  mssql_image:
-    image: mcr.microsoft.com/mssql/server
-    environment:
-        SA_PASSWORD: "noPassword@247"
-        ACCEPT_EULA: "Y"
-
   nginx:
     restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
+    image: ecoafrica/nginx_dev
     ports:
-      - "4000:80"
+      - "80:80"
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    ports:
-      - "3000:3000"
+    image: ecoafrica/frontend_dev
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./backend:/app
-      - /app/Api/bin
-      - /app/Application/bin
-      - /app/Domain/bin
-      - /app/Infrastructure/bin
-      - /app/Persistence/bin
-    environment:
-      - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
-    depends_on:
-      - mssql_image
-    ports:
-      - "5000:5000"
+    image: ecoafrica/backend

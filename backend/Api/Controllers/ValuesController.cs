@@ -22,7 +22,7 @@ namespace Api.Controllers
         public ActionResult<string> Get(int id)
         {
             // return "value";
-            return Environment.GetEnvironmentVariable("DefaultConnection");
+            return "Environment.GetEnvironmentVariable(DefaultConnection);";
         }
 
         // POST api/values
