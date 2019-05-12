@@ -4,18 +4,17 @@ services:
   - docker
 
 before_install:
-  - docker build -t neweco/react-test -f ./frontend/Dockerfile.dev ./frontend
-
-script:
-  - docker run neweco/react-test npm test -- --coverage
-
-after_success:
   - docker build -t neweco/frontend ./frontend
   - docker build -t neweco/backend ./backend
   - docker build -t neweco/nginx ./nginx
+
+script:
   # login to docker hub
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$AZURE_REGISTRY_PW" | docker login -u "$AZURE_REGISTRY_ID" --password-stdin "$AZURE_REGISTRY_NAME"
+
   # push to docker hub
   - docker push neweco/frontend
   - docker push neweco/backend
   - docker push neweco/nginx
+  on:
+    branch: develop
