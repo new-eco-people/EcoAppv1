@@ -101,7 +101,7 @@ namespace Api
                 app.UseHsts();
             }
 
-            // Make sure the database is created and the migration that was created is up to date
+            // Make sure the database is created and the migration that was created is up to date..
             // app.EnsureDatabaseAndMigrationsExtension();
 
             // app.UseHttpsRedirection();
