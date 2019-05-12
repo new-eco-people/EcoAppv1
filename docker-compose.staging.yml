@@ -16,8 +16,6 @@ services:
 
   frontend:
     image: ecoafrica/frontend_dev
-    ports:
-      - "3000:3000"
 
   backend:
     image: ecoafrica/backend_dev
@@ -25,5 +23,3 @@ services:
       - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
     depends_on:
       - mssql_image
-    ports:
-      - "5000:5000"
