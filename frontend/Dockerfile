@@ -14,13 +14,13 @@ RUN npm install
 RUN npm run build
 
 # Use nginx to serve application
-FROM nginx
+FROM nginx:alpine
 
 # expose port
 EXPOSE 3000
 
 # copy default.conf file
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./default.conf /etc/nginx/conf.d/default.conf
 
 # Copy ready prod file
 COPY --from=builder /app/build /usr/share/nginx/html
