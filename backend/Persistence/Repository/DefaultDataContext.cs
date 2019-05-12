@@ -11,7 +11,9 @@ namespace Persistence.Repository
         IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
     {
 
+        // Entities to add to the database
         public DbSet<UserDetail> UserDetails { get; set; }
+        public DbSet<OrganizationDetail> OrganizationDetails { get; set; }
         public DefaultDataContext(DbContextOptions<DefaultDataContext> options)
         : base(options) {}
 

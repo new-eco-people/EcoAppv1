@@ -42,12 +42,12 @@ namespace Api
             // var prod = Environment.GetEnvironmentVariable("DefaultConnection");
             // var dev = Configuration.GetConnectionString("DefaultConnection");
             // var connectionString = prod != null ? prod : dev;
-            // //  Configure Database and Microsoft Identity
-            // services.ConfigureDatabaseConnections(
-            //     connectionString,
-            //     "Api",
-            //     env.IsProduction()
-            // );
+            //  Configure Database and Microsoft Identity
+            services.ConfigureDatabaseConnections(
+                Environment.GetEnvironmentVariable("DefaultConnection"),
+                "Api",
+                env.IsStaging()
+            );
 
             // Handling Application Exceptions on the Web
             services.AddMvc(options => {
@@ -105,7 +105,7 @@ namespace Api
             }
 
             // Make sure the database is created and the migration that was created is up to date..
-            // app.EnsureDatabaseAndMigrationsExtension();
+            app.EnsureDatabaseAndMigrationsExtension();
 
             // app.UseHttpsRedirection();
             app.UseMvc();
