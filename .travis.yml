@@ -3,20 +3,34 @@ language: generic
 services:
   - docker
 
-before_install:
-  - docker build -t ecoafrica/frontend ./frontend
-  - docker build -t ecoafrica/backend ./backend
-  - docker build -t ecoafrica/nginx ./nginx
+jobs:
+  include:
+    - stage: deploy-staging
+      if: branch = develop
+      before_install:
+        - docker build -t ecoafrica/frontend_dev ./frontend
+        - docker build -t ecoafrica/backend_dev ./backend
+        - docker build -t ecoafrica/nginx_dev ./nginx
+      install:
+        # login to docker hub
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-script:
-  # login to docker hub
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  
-  # push to docker hub
-  - docker push ecoafrica/frontend
-  - docker push ecoafrica/backend
-  - docker push ecoafrica/nginx
-  # on:
-  #   branch: develop
+        # push to docker hub
+        - docker push ecoafrica/frontend_dev
+        - docker push ecoafrica/backend_dev
+        - docker push ecoafrica/nginx_dev
+      
+    - stage: deploy-production
+      if: branch = master
+      before_install:
+        - docker build -t ecoafrica/frontend ./frontend
+        - docker build -t ecoafrica/backend ./backend
+        - docker build -t ecoafrica/nginx ./nginx
+      install:
+        # login to docker hub
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  #
+        # push to docker hub
+        - docker push ecoafrica/frontend
+        - docker push ecoafrica/backend
+        - docker push ecoafrica/nginx
