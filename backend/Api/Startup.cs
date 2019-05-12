@@ -40,11 +40,11 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
              // Configure Database and Microsoft Identity
-            services.ConfigureDatabaseConnections(
-                Environment.GetEnvironmentVariable("DefaultConnection"),
-                "Api",
-                env.IsProduction()
-            );
+            // services.ConfigureDatabaseConnections(
+            //     Environment.GetEnvironmentVariable("DefaultConnection"),
+            //     "Api",
+            //     env.IsProduction()
+            // );
 
             // Handling Application Exceptions on the Web
             services.AddMvc(options => {
@@ -102,7 +102,7 @@ namespace Api
             }
 
             // Make sure the database is created and the migration that was created is up to date
-            app.EnsureDatabaseAndMigrationsExtension();
+            // app.EnsureDatabaseAndMigrationsExtension();
 
             // app.UseHttpsRedirection();
             app.UseMvc();
