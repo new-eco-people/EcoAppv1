@@ -17,7 +17,7 @@ Follow these instructions to get the project up and running either for just vewi
 
 ### Prerequisites
 
-For just viewing the project live, the following tools are required:
+For Development, the following tools are required:
 
 * [Docker CE](https://docs.docker.com/install/). The installation guide for the preferred OS is found on the left sidebar. You will need to create a dockerhub account so be prepared.
 
@@ -28,27 +28,36 @@ For just viewing the project live, the following tools are required:
     ```
     This will enable you download the neccesary files for running the app on your local machine.
 
-For viewing and Development, the following tools are required:
-
-* [Docker CE](https://docs.docker.com/install/) and follow the remaining instructions stated above.
 * [Visual Studio Code](https://code.visualstudio.com/) or your preferred IDE.
 * [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2).
 * [Nodejs](https://nodejs.org/en/) LTS version please.
-* SQL Server for the Database (Default). Optional, since most of the work will be done via docker.
+* SQL Server for the Database (Default). This is required and is neccesary for migrations. 
+
 
 ### Setup
 
-Follow these steps to get your viewing or development environment set up. For Mac or Linux user, you may be required to add `sudo` before the command.
+Follow these steps to get your environment set up. For Mac or Linux user, you may be required to add `sudo` before the command.
 
   1. Clone or download the repository
-  2. Open ther terminal at the root directory of the download folder and start docker: (note: It will take long time for the very first time)
+  2. Open ther terminal at the root directory of the download folder and start docker: (note: It will take long time for the very first time).
+     Before typing in the following command, there are four docker-compose commands. docker-compose.dev.yml, docker-compose.local_prod.yml, docker-compose.staging.yml and docker-compose.yml. docker-compose.staging.yml and docker-compose.yml are only used for staging and production respectively and should be ignored for production. 
+
+     docker-compose.dev.yml uses MS SQL database and uses the local docker build while docker-compose.local_prod.yml uses SQlite database and uses the dockerhub containers. Migrations should be made via the docker-compose.dev.yml and copied from the container since it will contain the most recent MS SQL migrations.
+
+     So you can either use for local container build
      ```
-     docker-compose up --build
+     docker-compose -f docker-compose.dev.yml up --build
      ```
+
+     or you can use the dockerhub build images
+     ```
+     docker-compose -f docker-compose.local_prod.yml up --build
+     ```
+
 
 Go to `http://localhost:4000` on your browser. If a react app shows, you are good to go else kindly contact [Perez247](https://github.com/perez247) detailing your issue.
 
-3. This is the most important part. kindly press Ctrl+c or CMD+c to end the application and `docker-compose down` to clean up. Ensure this is done everytime an application is down.
+3. This is the most important part. kindly press Ctrl+c or CMD+c to end the application and `docker-compose -f <name of docker-compose file>.yml down` to clean up. Ensure this is done everytime an application is down.
 
 ### For Development
 
