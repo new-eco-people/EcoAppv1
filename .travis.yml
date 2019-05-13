@@ -9,7 +9,7 @@ jobs:
       if: branch = develop
       before_install:
         - docker build -t ecoafrica/frontend_dev ./frontend
-        - docker build -t ecoafrica/backend_dev ./backend
+        - docker build -t ecoafrica/backend_dev -f ./backend/Dockerfile.staging ./backend
         - docker build -t ecoafrica/nginx_dev ./nginx
       install:
         # login to docker hub
