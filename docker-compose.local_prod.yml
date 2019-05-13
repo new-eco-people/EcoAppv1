@@ -2,12 +2,6 @@ version: "3.4"
 
 services:
 
-  # mssql_image:
-  #   image: mcr.microsoft.com/mssql/server
-  #   environment:
-  #       SA_PASSWORD: "noPassword@247"
-  #       ACCEPT_EULA: "Y"
-
   nginx:
     restart: always
     build:
@@ -26,9 +20,9 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.staging
     environment:
-      - DefaultConnection=Data Source=StagingDb.db
+      - DefaultConnection=Filename=StagingDb.db
       - ASPNETCORE_ENVIRONMENT=Staging
     ports:
       - "5000:5000"

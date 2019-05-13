@@ -9,8 +9,8 @@ namespace Application.Interfaces.IRepositories
         // This interface should be modified
         // This interface is used because UserManager and SignInManage Implemented by Entityframework isnt 
         // certain to be used in the future, so it is abstracted 
-        Task<SignUpResult> RegisterUser(User newUser, string Password);
+        Task<SignUpResult> SignUp(User newUser, string Password);
 
-        Task<User> LoginUser(string userName, string Password);
+        Task<User> SignIn(string userName, string Password);
     }
 }

@@ -23,7 +23,7 @@ namespace Application.Entities.UserEntity.Query.SignIn
         }
         public async Task<SignInModel> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
-            var user  = await _auth.LoginUser(request.UserNameEmail, request.Password);
+            var user  = await _auth.SignIn(request.UserNameEmail, request.Password);
 
             if (user == null)
                 throw new NotFoundException(nameof(User), request.UserNameEmail);

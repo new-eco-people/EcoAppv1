@@ -4,8 +4,13 @@ WORKDIR /app
 # Copy everything .dockerignore ignores the rest of the files
 COPY . ./
 
-# Restore files from the Api folder which affects all other folders
+# Move to Api directory
 WORKDIR /app/Api
+
+# Create file for Sqlite Db since this is staging, not for prod
+RUN touch StagingDb.db
+
+# Restore files from the Api folder which affects all other folders
 RUN dotnet restore
 
 # Build production files
