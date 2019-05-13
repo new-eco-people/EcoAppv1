@@ -13,11 +13,6 @@ services:
 
   backend:
     image: ecoafrica/backend_dev
-    # environment:
-    #   - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
-
-  # mssql_image:
-  #   image: mcr.microsoft.com/mssql/server
-  #   environment:
-  #       SA_PASSWORD: "noPassword@247"
-  #       ACCEPT_EULA: "Y"
+    environment:
+      - DefaultConnection=Data Source=StagingDb.db
+      - ASPNETCORE_ENVIRONMENT=Staging

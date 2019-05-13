@@ -2,11 +2,17 @@ FROM microsoft/dotnet AS build-env
 WORKDIR /app
 
 # Copy everything .dockerignore ignores the rest of the files
-COPY . ./
+COPY . .
+
+# Move to Api directory
+WORKDIR /app/Api
+
 
 # Restore files from the Api folder which affects all other folders
-WORKDIR /app/Api
 RUN dotnet restore
+
+# Create file for Sqlite Db since this is staging, not for prod
+RUN touch StagingDb.db
 
 # Build production files
 RUN dotnet publish -c Release -o out
@@ -16,6 +22,7 @@ WORKDIR /app
 
 # Build runtime image
 FROM microsoft/dotnet:aspnetcore-runtime
+
 WORKDIR /app
 COPY --from=build-env /app/Api/out .
 ENTRYPOINT [ "dotnet","Api.dll"  ]

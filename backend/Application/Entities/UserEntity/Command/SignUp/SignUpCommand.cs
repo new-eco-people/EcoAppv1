@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Exceptions;
 using Application.Interfaces.IRepositories;
 using Domain.Entities;
 using MediatR;
@@ -23,9 +24,24 @@ namespace Application.Entities.UserEntity.Command.SignUp
         {
             _auth = auth;
         }
-        public Task<SignUpDto> Handle(SignUpCommand request, CancellationToken cancellationToken)
+        public async Task<SignUpDto> Handle(SignUpCommand request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var newUser = new User() {
+                Email = request.Email,
+                UserName = request.Username,
+                UserDetail = new UserDetail() {
+                    FirstName = request.FirstName,
+                    LastName = request.LastName
+                }
+            };
+
+            var result = await _auth.SignUp(newUser,request.Password);
+
+            if (result.User == null)
+                throw new CreationFailureException(nameof(User), result.Errors);
+
+            return SignUpDto.Create(newUser);
+
         }
     }
 

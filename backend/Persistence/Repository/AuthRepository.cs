@@ -19,7 +19,7 @@ namespace Persistence.Repository
             _signInManager = signInManager;
         }
 
-        public async Task<SignUpResult> RegisterUser(User user, string Password) {
+        public async Task<SignUpResult> SignUp(User user, string Password) {
             var result = await _userManager.CreateAsync(user, Password);
 
             if (result.Succeeded)
@@ -31,7 +31,7 @@ namespace Persistence.Repository
             };
         }
 
-        public async Task<User> LoginUser(string userNameOrEmail, string Password) {
+        public async Task<User> SignIn(string userNameOrEmail, string Password) {
             var user = await _userManager.Users
                 .FirstOrDefaultAsync(u => 
                     u.Email.ToUpper() == userNameOrEmail.ToUpper() ||

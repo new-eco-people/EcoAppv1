@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.staging
+    environment:
+      - DefaultConnection=Filename=StagingDb.db
+      - ASPNETCORE_ENVIRONMENT=Staging
+    ports:
+      - "5000:5000"
