@@ -7,7 +7,9 @@ services:
     environment:
         SA_PASSWORD: "noPassword@247"
         ACCEPT_EULA: "Y"
-
+    ports:
+      - "3200:1433"
+    
   nginx:
     restart: always
     build:
@@ -32,13 +34,19 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./backend:/app
-      - /app/Api/bin
-      - /app/Application/bin
-      - /app/Domain/bin
-      - /app/Infrastructure/bin
-      - /app/Persistence/bin
+      - /app/Api/bin/
+      - /app/Application/bin/
+      - /app/Domain/bin/
+      - /app/Infrastructure/bin/
+      - /app/Persistence/bin/
+      - /app/Api/obj/
+      - /app/Application/obj/
+      - /app/Domain/obj/
+      - /app/Infrastructure/obj/
+      - /app/Persistence/obj/
     environment:
-      - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247;MultipleActiveResultSets=True
     depends_on:
       - mssql_image
     ports:

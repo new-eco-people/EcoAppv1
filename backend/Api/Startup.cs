@@ -80,6 +80,9 @@ namespace Api
                     c.SwaggerDoc("v1", new Info { Title = "ECO API", Version = "v1" });
                 });
             }
+
+            // Check for JWT authentication where neccessary
+            services.AddJwtAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,8 +109,10 @@ namespace Api
 
             // Make sure the database is created and the migration that was created is up to date..
             app.EnsureDatabaseAndMigrationsExtension();
+            app.SeedLocationsToDatabase();
 
             // app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

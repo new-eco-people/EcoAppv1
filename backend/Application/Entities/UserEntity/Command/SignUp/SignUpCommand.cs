@@ -7,28 +7,32 @@ using MediatR;
 
 namespace Application.Entities.UserEntity.Command.SignUp
 {
-    public class SignUpCommand : IRequest<SignUpDto>
+    public class SignUpCommand : IRequest<Unit>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
+        public bool AgreeToTermsAndCondition { get; set; }
     }
 
-    public class SignUpHandler : IRequestHandler<SignUpCommand, SignUpDto>
+    public class SignUpHandler : IRequestHandler<SignUpCommand, Unit>
     {
         private readonly IAuthRepository _auth;
+        private readonly IMediator _mediator;
 
-        public SignUpHandler(IAuthRepository auth)
+        public SignUpHandler(IAuthRepository auth, IMediator mediator)
         {
             _auth = auth;
+            _mediator = mediator;
         }
-        public async Task<SignUpDto> Handle(SignUpCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(SignUpCommand request, CancellationToken cancellationToken)
         {
             var newUser = new User() {
                 Email = request.Email,
                 UserName = request.Username,
+                AgreeToTermsAndCondition = request.AgreeToTermsAndCondition,
                 UserDetail = new UserDetail() {
                     FirstName = request.FirstName,
                     LastName = request.LastName
@@ -40,8 +44,8 @@ namespace Application.Entities.UserEntity.Command.SignUp
             if (result.User == null)
                 throw new CreationFailureException(nameof(User), result.Errors);
 
-            return SignUpDto.Create(newUser);
-
+            await _mediator.Publish(new UserCreated() { User = result.User });
+            return Unit.Value;
         }
     }
 

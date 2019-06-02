@@ -4,12 +4,12 @@ services:
 
   nginx:
     restart: always
-    image: ecoafrica/nginx_dev
+    image: newecopeoplev1/nginx_dev
     ports:
       - "80:80"
 
   frontend:
-    image: ecoafrica/frontend_dev
+    image: newecopeoplev1/frontend_dev
 
   backend:
-    image: ecoafrica/backend
+    image: newecopeoplev1/backend

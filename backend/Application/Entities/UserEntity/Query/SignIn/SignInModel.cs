@@ -7,6 +7,7 @@ namespace Application.Entities.UserEntity.Query.SignIn
     public class SignInModel
     {
         public Guid Id { get; set; }
+        public string Token { get; set; }
 
         public static Expression<Func<User, SignInModel>> Projection
         {
