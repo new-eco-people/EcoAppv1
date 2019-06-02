@@ -2,11 +2,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Repository;
 using Microsoft.AspNetCore.Builder;
+using System;
+using System.Linq;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using Domain.Entities.CoreEntities;
 
 namespace Persistence.Extensions
 {
     public static class DatabaseExtension
     {
+        private static string initialDir = "../Persistence/data/";
         public static void ConfigureDatabaseConnections(this IServiceCollection services, string connectionString, string assemblyName, bool Staging) {
             
             // Using MSSQL, But any connection can be used in this case
@@ -45,5 +52,50 @@ namespace Persistence.Extensions
                     context.Database.Migrate();
                 }
         }
+
+
+        public static IApplicationBuilder SeedLocationsToDatabase(this IApplicationBuilder app) { 
+            IServiceProvider serviceProvider = app.ApplicationServices.CreateScope().ServiceProvider; 
+            try 
+            { 
+                var context = serviceProvider.GetService<DefaultDataContext>(); 
+                InsertSeedData(context); 
+            } 
+            catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
+                // var logger = serviceProvider.GetRequiredService<ILogger<Program>>(); 
+                // logger.LogError(ex, "An error occurred while seeding the database."); 
+            } 
+            return app; 
+        } 
+
+        private static void InsertSeedData(DefaultDataContext context) { 
+
+            // AllRegion(context);
+
+            
+            var locations = $"{initialDir}locations/";
+
+            if (!context.Countries.Any()) { 
+
+                using (StreamReader jsonData = new StreamReader(Path.Combine(Path.GetFullPath($"{locations}Countries.json")))){
+                    var Countries = JsonConvert.DeserializeObject<List<Country>>(jsonData.ReadToEnd());
+                    Countries.ForEach(s => context.Countries.Add(s));
+                    
+                }
+
+                using (StreamReader jsonData = new StreamReader(Path.Combine(Path.GetFullPath($"{locations}States.json")))){
+                    var States = JsonConvert.DeserializeObject<List<State>>(jsonData.ReadToEnd());
+                    States.ForEach(s => context.States.Add(s));
+
+                }
+
+                context.SaveChanges();
+            } 
+
+            // context.SaveChanges();
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Exceptions;
+using Application.Infrastructure.Token;
 using Application.Interfaces.IRepositories;
 using Domain.Entities;
 using MediatR;
@@ -28,7 +29,10 @@ namespace Application.Entities.UserEntity.Query.SignIn
             if (user == null)
                 throw new NotFoundException(nameof(User), request.UserNameEmail);
 
-            return SignInModel.Create(user);
+            var response = SignInModel.Create(user);
+            response.Token = TokenFunctions.generateUserToken(user);
+
+            return response;
         }
     }
 }
