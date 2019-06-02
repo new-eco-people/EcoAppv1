@@ -11,6 +11,7 @@ namespace Application.Entities.UserEntity.Command.SignUp
             RuleFor(x => x.Password).NotEmpty();
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
             RuleFor(x => x.Username).NotEmpty();
+            RuleFor(x => x.AgreeToTermsAndCondition).Equal(true).WithMessage("You must agree to the terms and conditions");
         }
     }
 }

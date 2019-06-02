@@ -8,29 +8,29 @@ jobs:
     - stage: deploy-staging
       if: branch = develop
       before_install:
-        - docker build -t ecoafrica/frontend_dev ./frontend
-        - docker build -t ecoafrica/backend_dev -f ./backend/Dockerfile.staging ./backend
-        - docker build -t ecoafrica/nginx_dev ./nginx
+        - docker build -t newecopeoplev1/frontend_dev ./frontend
+        - docker build -t newecopeoplev1/backend_dev -f ./backend/Dockerfile.staging ./backend
+        - docker build -t newecopeoplev1/nginx_dev ./nginx
       install:
         # login to docker hub
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
         # push to docker hub
-        - docker push ecoafrica/frontend_dev
-        - docker push ecoafrica/backend_dev
-        - docker push ecoafrica/nginx_dev
+        - docker push newecopeoplev1/frontend_dev
+        - docker push newecopeoplev1/backend_dev
+        - docker push newecopeoplev1/nginx_dev
       
     - stage: deploy-production
       if: branch = master
       before_install:
-        - docker build -t ecoafrica/frontend ./frontend
-        - docker build -t ecoafrica/backend ./backend
-        - docker build -t ecoafrica/nginx ./nginx
+        - docker build -t newecopeoplev1/frontend ./frontend
+        - docker build -t newecopeoplev1/backend ./backend
+        - docker build -t newecopeoplev1/nginx ./nginx
       install:
         # login to docker hub
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
         # push to docker hub uisng login_page
-        - docker push ecoafrica/frontend
-        - docker push ecoafrica/backend
-        - docker push ecoafrica/nginx
+        - docker push newecopeoplev1/frontend
+        - docker push newecopeoplev1/backend
+        - docker push newecopeoplev1/nginx

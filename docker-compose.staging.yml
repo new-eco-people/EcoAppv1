@@ -4,15 +4,15 @@ services:
 
   nginx:
     restart: always
-    image: ecoafrica/nginx_dev
+    image: newecopeoplev1/nginx_dev
     ports:
       - "80:80"
 
   frontend:
-    image: ecoafrica/frontend_dev
+    image: newecopeoplev1/frontend_dev
 
   backend:
-    image: ecoafrica/backend_dev
+    image: newecopeoplev1/backend_dev
     environment:
-      - DefaultConnection=Data Source=StagingDb.db
+      - DefaultConnection=Filename=StagingDb.db
       - ASPNETCORE_ENVIRONMENT=Staging
