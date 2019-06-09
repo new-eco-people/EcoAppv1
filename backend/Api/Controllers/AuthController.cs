@@ -68,7 +68,7 @@ namespace Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         [AllowAnonymous]
-        [HttpGet("send-confirm-email")]
+        [HttpGet("resend-confirm-email")]
         public async Task<IActionResult> SendConfirmationEmail([FromQuery] SendConfirmEmailCommand command) {
             return Ok(await Mediator.Send(command));
             // return Ok(email);
