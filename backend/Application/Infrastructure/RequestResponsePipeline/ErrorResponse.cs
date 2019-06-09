@@ -8,7 +8,7 @@ namespace Application.Infrastructure.RequestResponsePipeline
         public object Errors { get; set; }
 
         [JsonProperty("error")]
-        public object Error { get; set; }
+        public string Error { get; set; }
 
         [JsonProperty("stackTrace")]
         public string StackTrace { get; set; }

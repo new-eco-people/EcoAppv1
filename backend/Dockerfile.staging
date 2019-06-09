@@ -25,4 +25,11 @@ FROM microsoft/dotnet:aspnetcore-runtime
 
 WORKDIR /app
 COPY --from=build-env /app/Api/out .
+
+# Copy country and state
+RUN mkdir -p ../Persistence/data/locations
+COPY --from=build-env /app/Persistence/data/locations ../Persistence/data/locations
+
+EXPOSE 5000
+
 ENTRYPOINT [ "dotnet","Api.dll"  ]

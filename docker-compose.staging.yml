@@ -16,3 +16,7 @@ services:
     environment:
       - DefaultConnection=Filename=StagingDb.db
       - ASPNETCORE_ENVIRONMENT=Staging
+      - AUTHORIZATION_TOKEN=Thisismenttobethesupersecretpassword
+      - HOSTNAME=http://localhost
+    ports:
+      - "5000:5000"
