@@ -105,13 +105,15 @@ namespace Api
                 app.UseHsts();
             }
 
-            if (env.IsStaging()) {
-                app.UseSwagger();
+            if (env.IsDevelopment() || env.IsStaging()) {
+                app.UseSwagger(c => {
+                    c.RouteTemplate = "api/docs/swagger/{documentName}/swagger.json";
+                });
                 // specifying the Swagger JSON endpoint.
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("swagger/v1/swagger.json", "My API V1");
-                    c.RoutePrefix = string.Empty;
+                    c.SwaggerEndpoint("/api/docs/swagger/v1/swagger.json", "My API V1");
+                    c.RoutePrefix = "api/docs";
                 });
             }
 
