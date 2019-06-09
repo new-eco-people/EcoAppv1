@@ -25,7 +25,6 @@ services:
       - DefaultConnection=Filename=StagingDb.db
       - ASPNETCORE_ENVIRONMENT=Staging
       - AUTHORIZATION_TOKEN=Thisismenttobethesupersecretpassword
-      - SENDGRID_API=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
       - HOSTNAME=http://localhost
     ports:
       - "5000:5000"
