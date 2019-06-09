@@ -10,12 +10,12 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class ProblemController : BaseController
     {
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<IActionResult> CreateProblem(CreateProblemCommand command) {
-            // return Ok(await Mediator.Send());
-            return Ok(command);
-            // return Ok( new ProblemsRepo().getCsv() );
-        }
+        // [AllowAnonymous]
+        // [HttpPost]
+        // public async Task<IActionResult> CreateProblem(CreateProblemCommand command) {
+        //     // return Ok(await Mediator.Send());
+        //     return Ok(command);
+        //     // return Ok( new ProblemsRepo().getCsv() );
+        // }
     }
 }
