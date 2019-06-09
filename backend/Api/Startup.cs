@@ -39,9 +39,12 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
             var prod = Environment.GetEnvironmentVariable("DefaultConnection");
-            var dev = Configuration.GetConnectionString("DefaultConnection");
+            var dev = Configuration.GetSection("ConnectionStrings:DefaultConnection").Value;
             var connectionString = prod != null ? prod : dev;
+            
             //  Configure Database and Microsoft Identity
             services.ConfigureDatabaseConnections(
                 connectionString,
@@ -57,11 +60,8 @@ namespace Api
             // For performing validation of user data before using in the application
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<SignUpValidator>());
 
-             //Add Mediator
-            services.AddMediatR();
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            // Handle Model state errors
+            services.AddScoped<IValidatorInterceptor, ValidatorInterceptor>();
      
              // Add DataContext implementation of Application interfaces
             services.ImplementApplicationDatabaseInterfaces();
@@ -71,6 +71,12 @@ namespace Api
 
             // Add AutoMapper
             services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
+            
+            //Add Mediator
+            services.AddMediatR();
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             if (env.IsDevelopment())
             {

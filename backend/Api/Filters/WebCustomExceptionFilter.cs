@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
 using FluentValidation.Results;
+using Application.Infrastructure.RequestResponsePipeline;
 
 namespace Api.Filters
 {
@@ -20,12 +21,16 @@ namespace Api.Filters
     {
         public override void OnException(ExceptionContext context)
         {
-            if (context.Exception is CustomValidationException)
+            System.Console.WriteLine(context.Exception.ToString());
+            if (context.Exception is Application.Exceptions.ValidationException)
             {
                 context.HttpContext.Response.ContentType = "application/json";
-                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NoContent;
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.Result = new JsonResult(
-                ((CustomValidationException)context.Exception).Failures);
+                    new ErrorResponse() {
+                        Errors = ((Application.Exceptions.ValidationException)context.Exception).Failures
+                    }
+                );
 
                 return;
             }
@@ -44,11 +49,12 @@ namespace Api.Filters
 
             context.HttpContext.Response.ContentType = "application/json";
             context.HttpContext.Response.StatusCode = (int)code;
-            context.Result = new JsonResult(new
-            {
-                error = new[] { context.Exception.Message },
-                stackTrace = context.Exception.StackTrace
-            });
+            context.Result = new JsonResult(
+                new ErrorResponse() {
+                    Error = context.Exception.Message,
+                    StackTrace = context.Exception.StackTrace
+                }
+            );
         }
     }
 }
