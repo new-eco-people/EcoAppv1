@@ -13,12 +13,19 @@ using System.Threading;
 using System.Linq;
 using FluentValidation.Results;
 using Application.Infrastructure.RequestResponsePipeline;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Api.Filters
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class WebCustomExceptionFilter : ExceptionFilterAttribute
     {
+        private readonly IHostingEnvironment _env;
+
+        public WebCustomExceptionFilter(IHostingEnvironment ienv)
+        {
+            _env = ienv;
+        }
         public override void OnException(ExceptionContext context)
         {
             System.Console.WriteLine(context.Exception.ToString());
@@ -47,14 +54,13 @@ namespace Api.Filters
                 code = HttpStatusCode.BadRequest;
             }
 
+            var errorresponse = new ErrorResponse() { Error =  context.Exception.Message };
+
+            errorresponse.StackTrace = _env.IsDevelopment() || _env.IsStaging() ? context.Exception.StackTrace : null;
+
             context.HttpContext.Response.ContentType = "application/json";
             context.HttpContext.Response.StatusCode = (int)code;
-            context.Result = new JsonResult(
-                new ErrorResponse() {
-                    Error = context.Exception.Message,
-                    StackTrace = context.Exception.StackTrace
-                }
-            );
+            context.Result = new JsonResult(errorresponse);
         }
     }
 }

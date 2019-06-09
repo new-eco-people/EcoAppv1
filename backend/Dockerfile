@@ -18,4 +18,8 @@ WORKDIR /app
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/Api/out .
+
+RUN mkdir Persistence/data/locations
+COPY --from=build-env /app/Persistence/data/locations ./Persistence/data/locations
+
 ENTRYPOINT [ "dotnet","Api.dll"  ]
