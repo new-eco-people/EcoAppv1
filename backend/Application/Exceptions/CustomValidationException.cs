@@ -5,15 +5,15 @@ using FluentValidation.Results;
 
 namespace Application.Exceptions
 {
-    public class CustomValidationException : Exception
+    public class ValidationException : Exception
     {
-        public CustomValidationException()
-            : base("One or more validation failures have occurred.")
+        public ValidationException()
+            : base("One or more")
         {
             Failures = new Dictionary<string, string[]>();
         }
 
-        public CustomValidationException(List<ValidationFailure> failures)
+        public ValidationException(IList<ValidationFailure> failures)
             : this()
         {
             var propertyNames = failures

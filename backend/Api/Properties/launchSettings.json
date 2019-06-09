@@ -24,8 +24,12 @@
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "AUTHORIZATION_TOKEN" : "This is ment to be the super secret password"
+        "AUTHORIZATION_TOKEN" : "This is ment to be the super secret password",
+        "SENDGRID_API" : "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",
+        "HOSTNAME" : "http://localhost"
       }
     }
   }
 }
+
+

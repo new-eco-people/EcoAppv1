@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Domain.Entities;
 using Application.Entities.UserEntity.Command.SignUp;
+using Application.Entities.UserEntity.Query.SendConfirmEmail;
 
 namespace Application.Interfaces.IRepositories
 {
@@ -12,5 +13,9 @@ namespace Application.Interfaces.IRepositories
         Task<SignUpResult> SignUp(User newUser, string Password);
 
         Task<User> SignIn(string userName, string Password);
+
+        Task<bool> VerifyEmail(string id, string token);
+
+        Task<SendConfirmEmailResult> SendVerificationEmail(string email); 
     }
 }

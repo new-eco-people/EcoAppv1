@@ -36,10 +36,12 @@ namespace Application.Infrastructure.RequestResponsePipeline
 
             if (failures.Count != 0)
             {
-                throw new CustomValidationException(failures);
+                throw new Exceptions.ValidationException(failures);
             }
-
-            return next();
+            else {
+                
+                return next();
+            }
         }
     }
 }

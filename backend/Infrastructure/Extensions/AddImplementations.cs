@@ -1,5 +1,5 @@
 using Application.Interfaces.IServices;
-using Infrastructure.Implementation;
+using Infrastructure.Implementation.Email;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Extensions

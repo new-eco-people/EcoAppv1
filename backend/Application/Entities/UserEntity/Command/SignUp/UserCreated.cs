@@ -8,7 +8,7 @@ namespace Application.Entities.UserEntity.Command.SignUp
 {
     public class UserCreated : INotification
     {
-        public User User { get; set; }
+        public SignUpResult SignUpResult { get; set; }
     }
 
     public class UserCreatedHandler : INotificationHandler<UserCreated>
@@ -21,7 +21,10 @@ namespace Application.Entities.UserEntity.Command.SignUp
         }
         public async Task Handle(UserCreated notification, CancellationToken cancellationToken)
         {
-            await _emailService.SendAsync(notification);
+            await _emailService.SendVerifyEmailAsync(new VerifyEmailData() {
+                User = notification.SignUpResult.User,
+                Token = notification.SignUpResult.EmailVerificationToken
+            });
         }
     }
 }
