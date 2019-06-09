@@ -78,7 +78,7 @@ namespace Api
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsStaging())
             {
                 // Add swagger
                 services.AddSwaggerGen(c =>
@@ -98,6 +98,14 @@ namespace Api
             {
                 app.UseDeveloperExceptionPage();
 
+            }
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            if (env.IsStaging()) {
                 app.UseSwagger();
                 // specifying the Swagger JSON endpoint.
                 app.UseSwaggerUI(c =>
@@ -105,13 +113,8 @@ namespace Api
                     c.SwaggerEndpoint("swagger/v1/swagger.json", "My API V1");
                     c.RoutePrefix = string.Empty;
                 });
+            }
 
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
             // Make sure the database is created and the migration that was created is up to date..
             app.EnsureDatabaseAndMigrationsExtension();
