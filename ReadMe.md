@@ -55,7 +55,7 @@ Follow these steps to get your environment set up. For Mac or Linux user, you ma
      ```
 
 
-Go to `http://localhost:4000` on your browser. If a react app shows, you are good to go else kindly contact [Perez247](https://github.com/perez247) detailing your issue.
+Go to `http://localhost` on your browser. If a react app shows, you are good to go else kindly contact [Perez247](https://github.com/perez247) detailing your issue.
 
 3. This is the most important part. kindly press Ctrl+c or CMD+c to end the application and `docker-compose -f <name of docker-compose file>.yml down` to clean up. Ensure this is done everytime an application is down.
 
@@ -65,11 +65,11 @@ Three (3) addresses are avaliable in development mode:
 
 *   Frontend which is `http://localhost:3000`.
 *   Backend which is `http://localhost:5000`.
-*   Nginx Which is `http://localhost:4000`.
+*   Nginx Which is `http://localhost`.
 
-Nginx connects directly to both the backend and the frontend. You can connect to the backend api via `localhost:5000/api` or `localhost:4000/api` but its is recommended to use `localhost:4000/api` and all react app api calls should follow this convention for development. Production should be set to `/api`.
+Nginx connects directly to both the backend and the frontend. You can connect to the backend api via `localhost:5000/api` or `localhost/api` but its is recommended to use `localhost/api` and all react app api calls should follow this convention for development. In Production, the api in the react app should be set to `/api`.
 
-To view all the api simple go to `localhost:5000/` and it will be shown thanks to Swagger.
+To view all the api documentation simple go to `localhost/api/docs` and it will be shown thanks to Swagger.
 
 Happy Coding...
 
