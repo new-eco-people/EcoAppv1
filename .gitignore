@@ -263,5 +263,6 @@ paket-files/
 __pycache__/
 *.pyc
 
-# 
+# store secrets
+launchSettings.json
 
