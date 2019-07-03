@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ModalTitle}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    x
+  </button>
+</div>
+<form [formGroup]="myForm" (ngSubmit)="submitForm()">
+  <div class="modal-body taskboard-modal">
+    <div class="container">
+      <fieldset class="form-group position-relative has-icon-left">
+        <div class="form-control-position">
+          <i class="icon-emoticon-smile"></i>
+        </div>
+        <input type="text" [formControl]="myForm.controls['title']" formControlName="title" class="form-control" id="todoTitle"
+          placeholder="Title" (keydown.enter)="$event.preventDefault()" required #todoTitle>
+        <div class="form-control-position control-position-right">
+          <i class="ft-image"></i>
+        </div>
+      </fieldset>
+      <fieldset class="form-group position-relative has-icon-left">
+        <div class="form-control-position">
+          <i class="icon-emoticon-smile"></i>
+        </div>
+        <input type="text" [formControl]="myForm.controls['message']" formControlName="message" class="form-control" id="todoMessage"
+          placeholder="Message" (keydown.enter)="$event.preventDefault()" required #todoMessage>
+        <div class="form-control-position control-position-right">
+          <i class="ft-image"></i>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="modal-footer taskboard-modal-footer">
+    <button class="btn btn-success btn-save" [disabled]="!myForm.valid">
+      Save
+    </button>
+  </div>
+</form>

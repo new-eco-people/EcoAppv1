@@ -1,0 +1,14 @@
+.chat-application {
+  .chat-app-form {
+    position: relative;
+    padding: 10px 10px;
+    overflow: hidden;
+
+    .form-group {
+      i.fa.fa-paper-plane-o {
+        padding: 0.25rem;
+      }
+
+    }
+  }
+}

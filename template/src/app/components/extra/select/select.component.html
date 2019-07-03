@@ -1,0 +1,148 @@
+<section id="switch">
+  <div class="row text-left">
+    <div class="col-sm-12">
+      <div class="content-header">Angular ng-select</div>
+      <p class="content-sub-header"></p>
+    </div>
+  </div>
+  <div class="row text-left">
+    <div class="col-xl-6 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Basic</h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <ng-select [items]="cities" bindLabel="name" placeholder="Select city" [(ngModel)]="selectedCity">
+            </ng-select>
+            <p>
+              Selected city: {{selectedCity | json}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Multiselect with custom bindings</h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <ng-select [items]="cities2" bindLabel="name" bindValue="id" [multiple]="true" placeholder="Select cities"
+              [(ngModel)]="selectedCityIds">
+            </ng-select>
+            <p>
+              Selected cities: {{selectedCityIds}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row text-left">
+    <div class="col-xl-6 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Custom tags</h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <ng-select [items]="users" bindLabel="name" bindValue="id" [addTag]="addCustomUser" [multiple]="true"
+              placeholder="Select user or add custom tag" [(ngModel)]="selectedUserIds">
+            </ng-select>
+            <p>
+              Selected user: {{selectedUserIds}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Custom templates</h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <ng-select [items]="cities3" bindLabel="name" bindValue="name" placeholder="Select city" [(ngModel)]="selectedCityName">
+              <ng-template ng-header-tmp>
+                Custom header
+              </ng-template>
+              <ng-template ng-label-tmp let-item="item">
+                <img height="15" width="15" [src]="item.avatar" />
+                <b>{{item.name}}</b> is cool
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-index="index">
+                <img height="15" width="15" [src]="item.avatar" />
+                <b>{{item.name}}</b>
+              </ng-template>
+              <ng-template ng-footer-tmp>
+                Custom footer
+              </ng-template>
+            </ng-select>
+            <p>
+              Selected city: {{selectedCityName}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row text-left">
+    <div class="col-xl-6 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Virtual scroll</h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <ng-select [items]="cities4" [virtualScroll]="true" bindLabel="name" bindValue="id" placeholder="Select city"
+              [(ngModel)]="selectedCityId">
+            </ng-select>
+            <p>
+              Selected city ID: {{selectedCityId}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Append dropdown to body</h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <ng-select [items]="cities4" bindLabel="name" [virtualScroll]="true" bindValue="id" appendTo="body"
+              placeholder="Select city" [(ngModel)]="selectedCityId">
+            </ng-select>
+            <p>
+              Selected city ID: {{selectedCityId}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row text-left">
+    <div class="col-xl-6 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Grouping</h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <ng-select [items]="accounts" bindLabel="name" bindValue="name" groupBy="country" [(ngModel)]="selectedAccount">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-12">
+
+    </div>
+
+  </div>
+
+</section>

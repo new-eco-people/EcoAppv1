@@ -1,0 +1,149 @@
+<div class="row">
+  <div class="col-sm-12">
+      <div class="content-header">Angular Wizard</div>
+  </div>
+</div>
+<section id="ngx">
+  <div class="card">
+      <div class="card-content">
+          <div class="card-body">
+              <aw-wizard #wizard navBarLayout="large-empty-symbols">
+                  <aw-wizard-step [stepTitle]="'Steptitle 1'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                      <form #personalForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Please tell us about yourself.</h4>
+                          <br/>
+                          <div class='row'>
+                              <div class='col-12'>
+                                  <div class="row">
+                                      <div class='col-12 col-sm-6'>
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="firstname">First Name</label>
+                                              <input class="form-control input-md" ngModel #firstname="ngModel" required id="firstname" name="firstname" type="text">
+                                              <small class="form-text text-muted danger" *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)">This field is required!</small>
+                                          </div>
+                                      </div>
+                                      <div class='col-12 col-sm-6'>
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="lastname">Last Name</label>
+                                              <input class="form-control input-md" ngModel #lastname="ngModel" required id="lastname" name="lastname" type="text">
+                                              <small class="form-text text-muted danger" *ngIf="!lastname.valid && (lastname.dirty || lastname.touched)">This field is required!</small>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="form-control-label" for="email">Email</label>
+                                      <input class="form-control input-md" ngModel #email="ngModel" required email id="email" name="email" type="text">
+                                      <small class="form-text text-muted danger" *ngIf="!email.valid && (email.dirty || email.touched)">Please enter a valid email!</small>
+                                  </div>
+
+                                  <div class="form-group text-center">
+                                      <button type="button" uiSref="work" class="btn btn-info btn-raised" [disabled]="!personalForm.valid" awNextStep>
+                                          Next
+                                          <span style="margin-left:10px;">
+                                              <i class="ft-chevron-right"></i>
+                                          </span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                  </aw-wizard-step>
+                  <aw-wizard-step  [stepTitle]="'Steptitle 2'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+                      <form #workForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">What do you do?</h4>
+                          <br/>
+                          <div class='row justify-content-center'>
+                              <div class='col-2'>
+                                  <div class="form-group">
+                                      <div class="custom-control custom-radio m-0">
+                                          <input type="radio" #work required id="customRadioInline1" name="work" class="custom-control-input" value="Design">
+                                          <label class="custom-control-label" for="customRadioInline1">Design</label>
+                                      </div>
+                                      <div class="custom-control custom-radio m-0">
+                                          <input type="radio" #work required id="customRadioInline2"  name="work" class="custom-control-input" value="Code">
+                                          <label class="custom-control-label" for="customRadioInline2">Code</label>
+                                      </div>
+                                      <div class="custom-control custom-radio m-0">
+                                          <input type="radio" #work required id="customRadioInline3" checked name="work" class="custom-control-input" value="Deploy">
+                                          <label class="custom-control-label" for="customRadioInline3">Deploy</label>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group text-center space-20">
+                              <button uiSref="personal" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                  <span style="margin-right:10px;">
+                                      <i class="ft-chevron-left"></i>
+                                  </span> Previous</button>
+                              <button uiSref="address" type="button" class="btn btn-raised btn-info" [disabled]="!workForm.valid" awNextStep>
+                                  Next
+                                  <span style="margin-left:10px;">
+                                      <i class="ft-chevron-right"></i>
+                                  </span>
+                              </button>
+                          </div>
+                      </form>                        
+                  </aw-wizard-step>
+                  <aw-wizard-step [stepTitle]="'Steptitle 3'" [navigationSymbol]="{ symbol: '&#xf0ac;', fontFamily: 'FontAwesome' }">
+                      <form #addressForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Where do you live?</h4>
+                          <br/>
+                          <div class='row'>
+                              <div class='col-sm-12'>
+                                  <div class="form-group">
+                                      <label class="form-control-label" for="street">Street Address</label>
+                                      <input class="form-control input-md" ngModel #street="ngModel" required id="street" name="street" type="text">
+                                      <small class="form-text text-muted danger" *ngIf="!street.valid && (street.dirty || street.touched)">This field is required!</small>
+
+                                  </div>
+                                  <div class="row">
+                                      <div class='col-12 col-sm-4'>
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="city">City</label>
+                                              <input class="form-control input-md" ngModel #city="ngModel" required id="city" name="city" type="text">
+                                              <small class="form-text text-muted danger" *ngIf="!city.valid && (city.dirty || city.touched)">This field is required!</small>
+
+                                          </div>
+                                      </div>
+                                      <div class='col-4 col-sm-offset-1 col-sm-3'>
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="state">State</label>
+                                              <input class="form-control input-md" ngModel #state="ngModel" required id="state" name="state" type="text">
+                                              <small class="form-text text-muted danger" *ngIf="!state.valid && (state.dirty || state.touched)">This field is required!</small>
+
+                                          </div>
+                                      </div>
+                                      <div class='col-offset-1 col-7 col-sm-offset-1 col-sm-3'>
+                                          <div class="form-group">
+                                              <label class="form-control-label" for="zip">Zip</label>
+                                              <input class="form-control input-md" ngModel #zip="ngModel" required id="zip" name="zip" type="text">
+                                              <small class="form-text text-muted danger" *ngIf="!zip.valid && (zip.dirty || zip.touched)">This field is required!</small>
+
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group text-center">
+                                      <button uiSref="work" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                          <span style="margin-right:10px;">
+                                              <i class="ft-chevron-left"></i>
+                                          </span> Previous</button>
+                                      <button uiSref="result" type="button" class="btn btn-raised btn-success" [disabled]="!addressForm.valid" awResetWizard>
+                                          Finish
+                                          <span style="margin-left:10px;">
+                                              <i class="ft-chevron-right"></i>
+                                          </span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                      
+                  </aw-wizard-step>
+              </aw-wizard>
+
+
+          </div>
+      </div>
+  </div>
+</section>

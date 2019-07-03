@@ -1,26 +1,32 @@
+# base image
+FROM node as builder
 
-# Pull node image
-FROM node:alpine as builder
-LABEL Eco Team
-
-# Store files in the app folder (so cliche)
+# set working directory
 WORKDIR /app
-COPY ./ ./
 
-# Restore all npm packages
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY package.json /app/package.json
+
+RUN npm install -g @angular/cli
 RUN npm install
 
-# Build React. Angular is different
-RUN npm run build
+# Copy source code
+COPY ./ ./
+
+# Create production application
+RUN npm run prod
 
 # Use nginx to serve application
 FROM nginx:alpine
 
 # expose port
-EXPOSE 3000
+EXPOSE 4201
 
 # copy default.conf file
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 
 # Copy ready prod file
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
