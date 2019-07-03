@@ -20,3 +20,12 @@ services:
       - HOSTNAME=http://localhost
     ports:
       - "5000:5000"
+
+  nginx_template:
+    restart: always
+    image: newecopeoplev1/nginx_template_dev
+    ports:
+      - "4000:4000"
+
+  template:
+    image: newecopeoplev1/template_dev

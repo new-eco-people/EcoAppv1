@@ -1,0 +1,105 @@
+<div class="row mt-2">
+  <div class="col-6">
+    <div class="content-header text-left">Task Board</div>
+    <p class="content-sub-header"></p>
+  </div>
+  <div class="col-6 text-right">
+    <button type="button" class="btn btn-raised btn-danger" (click)="addTask()">
+      <i class="fa fa-paper-plane-o d-lg-none d-block"></i>
+      <span class="d-lg-block d-none">Create</span>
+    </button>
+  </div>
+</div>
+<!-- Taskboard Starts -->
+<section id="taskboard">
+
+
+  <div class="row">
+    <div class="col-md-3 col-12">
+      <h4 class="ml-2 mt-2 text-bold-500 text-left"><i class="ft-list mr-1 float-left"></i> To Dos</h4>
+      <div class='dragdrop-container' [dragula]='"task-group"' id="New" [dragulaModel]='todo'>
+        <div *ngFor='let todo of todo' [attr.task-id]="todo.taskId">
+          <div class="card">
+            <div class="card-body pt-3 text-left">
+              <div class="clearfix">
+                <h5 class="text-bold-500 primary float-left">{{todo.taskTitle}}</h5>
+                <div class="actions float-right">
+                  <i class="ft-edit cursor-pointer mr-1 info" (click)="editTask(todo.taskId);"></i>
+                  <i class="ft-trash-2 cursor-pointer danger" (click)="deleteTask(todo.taskId);"></i>
+                </div>
+              </div>
+              <p>{{todo.taskMessage}}</p>
+              <img [src]="[todo.assignedTo]" class="rounded-circle width-50 mr-2"> <span class="primary">{{todo.createdOn}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-12">
+      <h4 class="ml-2 mt-2 text-bold-500 text-left"><i class="ft-trending-up mr-1  float-left"></i> In Progress</h4>
+      <div class='dragdrop-container' [dragula]='"task-group"' id="In-Process" [dragulaModel]='inProcess'>
+        <div *ngFor='let inProcess of inProcess' [attr.task-id]="inProcess.taskId">
+          <div class="card">
+            <div class="card-body pt-3 text-left">
+              <div class="clearfix">
+                <h5 class="text-bold-500 info float-left">{{inProcess.taskTitle}}</h5>
+                <div class="actions float-right">
+                  <i class="ft-edit cursor-pointer mr-1 info" (click)="editTask(inProcess.taskId);"></i>
+                  <i class="ft-trash-2 cursor-pointer danger" (click)="deleteTask(inProcess.taskId);"></i>
+                </div>
+              </div>
+              <p>{{inProcess.taskMessage}}</p>
+              <img [src]="[inProcess.assignedTo]" class="rounded-circle width-50 mr-2"> <span class="info">{{inProcess.createdOn}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-12">
+      <h4 class="ml-2 mt-2 text-bold-500 text-left"><i class="ft-thumbs-up mr-1  float-left"></i>Completed</h4>
+      <div class='dragdrop-container' [dragula]='"task-group"' id="Completed" [dragulaModel]='completed'>
+        <div *ngFor='let completed of completed' [attr.task-id]="completed.taskId">
+          <div class="card">
+            <div class="card-body pt-3 text-left">
+              <div class="clearfix">
+                <h5 class="text-bold-500 success float-left">{{completed.taskTitle}}</h5>
+                <div class="actions float-right">
+                  <i class="ft-edit cursor-pointer mr-1 info" (click)="editTask(completed.taskId);"></i>
+                  <i class="ft-trash-2 cursor-pointer danger" (click)="deleteTask(completed.taskId);"></i>
+                </div>
+              </div>
+              <p>{{completed.taskMessage}}</p>
+              <img [src]="[completed.assignedTo]" class="rounded-circle width-50 mr-2"> <span class="success">{{completed.createdOn}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-12">
+      <h4 class="ml-2 mt-2 text-bold-500 text-left"><i class="ft-alert-octagon mr-1  float-left"></i>On Hold</h4>
+      <div class='dragdrop-container' [dragula]='"task-group"' id="Pending" [dragulaModel]='backLog'>
+        <div *ngFor='let backLog of backLog' [attr.task-id]="backLog.taskId">
+          <div class="card">
+            <div class="card-body pt-3 text-left">
+              <div class="clearfix">
+                <h5 class="text-bold-500 warning float-left">{{backLog.taskTitle}}</h5>
+                <div class="actions float-right">
+                  <i class="ft-edit cursor-pointer mr-1 info" (click)="editTask(backLog.taskId);"></i>
+                  <i class="ft-trash-2 cursor-pointer danger" (click)="deleteTask(backLog.taskId);"></i>
+                </div>
+              </div>
+              <p>{{backLog.taskMessage}}</p>
+              <img [src]="[backLog.assignedTo]" class="rounded-circle width-50 mr-2"> <span class="warning">{{backLog.createdOn}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</section>
+<!-- Taskboard Ends -->

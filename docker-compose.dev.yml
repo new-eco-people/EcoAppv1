@@ -9,24 +9,6 @@ services:
         ACCEPT_EULA: "Y"
     ports:
       - "3200:1433"
-    
-  nginx:
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
-    ports:
-      - "80:80"
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    ports:
-      - "3000:3000"
 
   backend:
     build:
@@ -51,3 +33,39 @@ services:
       - mssql_image
     ports:
       - "5000:5000"
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "4200:4200"
+    
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "80:80"
+
+  template:
+    build:
+      context: ./template
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./template:/app
+      - /app/node_modules
+    ports:
+      - "4201:4201"
+
+  nginx_template:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx_template
+    ports:
+      - "4000:4000"
