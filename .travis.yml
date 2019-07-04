@@ -12,7 +12,7 @@ jobs:
         - docker build -t newecopeoplev1/frontend_dev ./frontend
         - docker build -t newecopeoplev1/backend_dev -f ./backend/Dockerfile.staging ./backend
         - docker build -t newecopeoplev1/nginx_dev ./nginx
-        - docker build -t newecopeoplev1/template_dev ./template
+        # - docker build -t newecopeoplev1/template_dev ./template
         - docker build -t newecopeoplev1/nginx_template_dev ./nginx_template
       install:
         # login to docker hub
@@ -22,7 +22,7 @@ jobs:
         - docker push newecopeoplev1/frontend_dev
         - docker push newecopeoplev1/backend_dev
         - docker push newecopeoplev1/nginx_dev
-        - docker push newecopeoplev1/template
+        # - docker push newecopeoplev1/template
         - docker push newecopeoplev1/nginx_template_dev
       
     - stage: deploy-production
@@ -32,8 +32,6 @@ jobs:
         - docker build -t newecopeoplev1/frontend ./frontend
         - docker build -t newecopeoplev1/backend ./backend
         - docker build -t newecopeoplev1/nginx ./nginx
-        - docker build -t newecopeoplev1/template ./nginx
-        - docker build -t newecopeoplev1/nginx_template ./nginx
       install:
         # login to docker hub
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
@@ -42,5 +40,3 @@ jobs:
         - docker push newecopeoplev1/frontend
         - docker push newecopeoplev1/backend
         - docker push newecopeoplev1/nginx
-        - docker push newecopeoplev1/template
-        - docker push newecopeoplev1/nginx_template
