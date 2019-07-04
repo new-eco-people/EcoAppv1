@@ -8,7 +8,7 @@ jobs:
     - stage: deploy-staging
       if: branch = develop
       before_install:
-        - travis_wait 30 mvn install
+        - travis_wait 30
         - docker build -t newecopeoplev1/frontend_dev ./frontend
         - docker build -t newecopeoplev1/backend_dev -f ./backend/Dockerfile.staging ./backend
         - docker build -t newecopeoplev1/nginx_dev ./nginx
@@ -28,7 +28,7 @@ jobs:
     - stage: deploy-production
       if: branch = master
       before_install:
-        - travis_wait 30 mvn install
+        - travis_wait 30
         - docker build -t newecopeoplev1/frontend ./frontend
         - docker build -t newecopeoplev1/backend ./backend
         - docker build -t newecopeoplev1/nginx ./nginx
