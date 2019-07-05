@@ -51,6 +51,15 @@ services:
       context: ./nginx
     ports:
       - "80:80"
+  
+  nginx_template:
+    restart: always
+    image: newecopeoplev1/nginx_template_dev
+    ports:
+      - "4000:4000"
+
+  template:
+    image: newecopeoplev1/template_dev
 
   template:
     build:
@@ -61,7 +70,6 @@ services:
       - /app/node_modules
     ports:
       - "4201:4201"
-
   nginx_template:
     restart: always
     build:
