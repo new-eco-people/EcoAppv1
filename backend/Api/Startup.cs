@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Api.Extensions;
 using Api.Filters;
 using Application.Entities.UserEntity.Command.SignUp;
 using Application.Infrastructure.AutoMapper;
@@ -78,13 +79,10 @@ namespace Api
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
+            // Add Swagger Open API
             if (env.IsDevelopment() || env.IsStaging())
             {
-                // Add swagger
-                services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new Info { Title = "ECO API", Version = "v1" });
-                });
+               services.AddSwaggerDocumentation();
             }
 
             // Check for JWT authentication where neccessary
@@ -106,15 +104,7 @@ namespace Api
             }
 
             if (env.IsDevelopment() || env.IsStaging()) {
-                app.UseSwagger(c => {
-                    c.RouteTemplate = "api/docs/swagger/{documentName}/swagger.json";
-                });
-                // specifying the Swagger JSON endpoint.
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/api/docs/swagger/v1/swagger.json", "My API V1");
-                    c.RoutePrefix = "api/docs";
-                });
+                app.UseSwaggerDocumentation();
             }
 
 
