@@ -1,0 +1,252 @@
+<!--Registration Page Starts-->
+<section id="regestration">
+    <div class="container-fluid">
+      <div class="row full-height-vh m-0">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body register-img">
+                <div class="row m-0">
+
+
+                  <section class="col-lg-6 d-none d-lg-block py-2 px-3 text-center">
+                    <img
+                      src="../../assets/img/gallery/register.png"
+                      alt=""
+                      class="img-fluid mt-3 pl-3"
+                      width="400"
+                      height="230"
+                    />
+                  </section>
+
+
+                  <section class="col-lg-6 col-md-12 pt-3 px-4 bg-white">
+                    <form [formGroup]="signupForm" >
+                      <h4 class="card-title mb-2">Be part of ECO</h4>
+                      <p class="card-text mb-3">
+                        and impact the society
+                      </p>
+                      
+                      <!-- First Name -->
+                      <div>
+                        <mat-form-field>
+
+                          <!-- First Name Input Field -->
+                          <input
+                            matInput
+                            type="text"
+                            placeholder="First Name"
+                            formControlName="firstName"
+                          />
+
+                          <!-- First Name Error Message -->
+                          <mat-error class="error-block"
+                            *ngIf=
+                            "(signupForm.get('firstName').touched && signupForm.get('firstName').invalid)"
+                          >
+                            <small>First Name is required</small>
+
+                            <!-- Server Error -->
+                            <small *ngIf="signupForm.get('firstName').hasError('firstName')">
+                              {{signupForm.get('firstName').getError('firstName').error}}
+                            </small>
+
+                          </mat-error>
+
+                        </mat-form-field>
+                      </div>
+
+                      <!-- Last Name -->
+                      <div>
+                        <mat-form-field>
+
+                          <!-- Last Name Input Field -->
+                          <input
+                            matInput
+                            type="text"
+                            placeholder="Last Name"
+                            formControlName="lastName"
+                          />
+
+                          <!-- Last Name Error Message -->
+                          <mat-error class="error-block"
+                            *ngIf="signupForm.get('lastName').touched && signupForm.get('lastName').invalid"
+                          >
+                            <small>Last Name is required</small>
+                          </mat-error>
+
+                          <!-- Server Error -->
+                          <small *ngIf="signupForm.get('lastName').hasError('lastName')">
+                              {{signupForm.get('lastName').getError('lastName').error}}
+                            </small>
+
+                        </mat-form-field>
+                      </div>
+
+                      <!-- Username -->
+                      <div>
+                        <mat-form-field>
+
+                          <input
+                            matInput
+                            type="text"
+                            placeholder="Username"
+                            formControlName="username"
+                          />
+
+                          <!-- Username Error Message -->
+                          <mat-error class="error-block"
+                            *ngIf="signupForm.get('username').touched && signupForm.get('username').invalid"
+                          >
+                            <small>Username is required</small>
+
+                            <!-- Server Error -->
+                            <small *ngIf="signupForm.get('username').hasError('username')">
+                              {{signupForm.get('username').getError('username').error}}
+                            </small>
+                          </mat-error>
+
+                        </mat-form-field>
+                      </div>
+
+                      <!-- Email -->
+                      <div>
+                        <mat-form-field>
+
+                          <!-- Email Input field -->
+                          <input
+                            matInput
+                            placeholder="Email"
+                            formControlName="email"
+                          />
+
+                          <!-- Email Error Message -->
+                          <mat-error class="error-block"
+                            *ngIf="signupForm.get('email').touched && signupForm.get('email').invalid"
+                          >
+                            <small *ngIf="signupForm.get('email').hasError('required')" >Email is required</small>
+                            <small *ngIf="signupForm.get('email').hasError('email')" >Email is invalid</small>
+
+                            <!-- Server Error -->
+                            <small *ngIf="signupForm.get('email').hasError('email')">
+                              {{signupForm.get('email').getError('email').error}}
+                            </small>
+                          </mat-error>
+
+                        </mat-form-field>
+                      </div>
+
+                      <!-- Password -->
+                      <div>
+                        <mat-form-field>
+
+                          <!-- Password Input Field -->
+                          <input
+                            matInput
+                            type="password"
+                            placeholder="Password"
+                            formControlName="password"
+                          />
+
+                          <!-- Password Error Message -->
+                          <mat-error class="error-block"
+                            *ngIf="signupForm.get('password').touched && signupForm.get('password').invalid"
+                          >
+                            <small *ngIf="signupForm.get('password').hasError('required')" >Password is required</small>
+
+                            <!-- Server Error -->
+                            <small *ngIf="signupForm.get('password').hasError('password')">
+                              {{signupForm.get('password').getError('password').error}}
+                            </small>
+
+                          </mat-error>
+
+                        </mat-form-field>
+                      </div>
+
+                      <!-- Confirm Password -->
+                      <div>
+                        <mat-form-field>
+
+                          <!-- Confirm Password Input Field -->
+                          <input
+                            matInput
+                            type="password"
+                            placeholder="Confirm Password"
+                            formControlName="confirmPassword"
+                          />
+
+                          <!-- Confirm Password Error Message -->
+                          <mat-error class="error-block"
+                            *ngIf="signupForm.get('confirmPassword').touched && signupForm.get('confirmPassword').invalid"
+                          >
+                            <small>Confirm Password does not match password</small>
+                          </mat-error>
+
+                        </mat-form-field>
+                      </div>
+                      
+                      <div class="custom-control custom-checkbox custom-control-inline mb-3">
+                        <input
+                          type="checkbox"
+                          id="customCheckboxInline1"
+                          name="customCheckboxInline1"
+                          class="custom-control-input"
+                          formControlName="agreeToTermsAndCondition"
+                        />
+                        <label
+                          class="custom-control-label"
+                          for="customCheckboxInline1"
+                        >
+                          I accept the terms & conditions.
+                        </label>
+                        <span
+                          *ngIf="(signupForm.get('agreeToTermsAndCondition').touched && signupForm.get('agreeToTermsAndCondition').invalid) || signupForm.get('agreeToTermsAndCondition').hasError('agreeToTermsAndCondition')"
+                          class="text-danger d-block"
+                        >
+                            <small
+                              *ngIf="signupForm.get('agreeToTermsAndCondition').hasError('requiredTrue') || signupForm.get('agreeToTermsAndCondition').hasError('agreeToTermsAndCondition')"
+                            >
+                            Agree to our terms and condition to continue
+                          </small>
+                            
+                        </span>
+                      </div>
+                      <div class="fg-actions d-flex justify-content-between">
+                        <div class="login-btn">
+                          <button class="btn btn-outline-primary">
+                            <a
+                              class="text-decoration-none"
+                              [routerLink]="['/public/signin']"
+                            >
+                              Back To Login
+                            </a>
+                          </button>
+                        </div>
+                        <div class="recover-pass">
+                          <button 
+                            class="btn btn-primary"
+                            [disabled]="signupForm.invalid || loading"
+                            (click)="submit()"
+                            >
+                              Register 
+                              <mat-spinner 
+                                *ngIf="loading"
+                                class="spinner-white d-inline mx-1" [diameter]="17" ></mat-spinner>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </section>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Registration Page Ends-->
+  

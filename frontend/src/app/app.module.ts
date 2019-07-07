@@ -1,26 +1,21 @@
 
+import { HttpClient } from "@angular/common/http";
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from "./shared/shared.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule, HttpClient } from "@angular/common/http";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-
-import { 
-    PerfectScrollbarModule, 
-    PERFECT_SCROLLBAR_CONFIG, 
-    PerfectScrollbarConfigInterface
-  } from 'ngx-perfect-scrollbar';
-
+import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
-import { FullLayoutComponent } from "./layouts/full/full-layout.component";
-
-import { AuthService } from './shared/auth/auth.service';
-import { AuthGuard } from './shared/auth/auth-guard.service';
+import { FullLayoutComponent } from "./shared/layouts/full/full-layout.component";
 import { SearchPipe } from './shared/pipes/search.pipe';
+import { AuthGuard } from './shared/services/auth/auth-guard.service';
+import { SharedModule } from "./shared/shared.module";
+
+
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true,
@@ -33,12 +28,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 
   @NgModule({
-    declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent, SearchPipe],
+    declarations: [AppComponent, FullLayoutComponent, SearchPipe],
     imports: [
+      BrowserModule,
       BrowserAnimationsModule,
       AppRoutingModule,
       SharedModule,
-      HttpClientModule,
       NgbModule.forRoot(),
       TranslateModule.forRoot({
         loader: {
@@ -50,7 +45,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       PerfectScrollbarModule
     ],
     providers: [
-      AuthService,
       AuthGuard,
       {
         provide: PERFECT_SCROLLBAR_CONFIG,

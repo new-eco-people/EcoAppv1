@@ -14,7 +14,7 @@ namespace Application.Entities.UserEntity.Command.SignUp
         public string Email { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
-        public bool AgreeToTermsAndCondition { get; set; }
+        public bool? AgreeToTermsAndCondition { get; set; }
     }
 
     public class SignUpHandler : IRequestHandler<SignUpCommand, Unit>
@@ -32,7 +32,7 @@ namespace Application.Entities.UserEntity.Command.SignUp
             var newUser = new User() {
                 Email = request.Email,
                 UserName = request.Username,
-                AgreeToTermsAndCondition = request.AgreeToTermsAndCondition,
+                AgreeToTermsAndCondition = request.AgreeToTermsAndCondition.Value,
                 UserDetail = new UserDetail() {
                     FirstName = request.FirstName,
                     LastName = request.LastName

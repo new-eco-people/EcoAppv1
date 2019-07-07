@@ -87,5 +87,13 @@ namespace Persistence.Repository
 
             return new SendConfirmEmailResult();
         }
+
+        public async Task<bool> UsernameOrEmailAvailable(string usernameOrEmail)
+        {
+            var user = await _userManager.Users.SingleOrDefaultAsync(
+                            u => u.NormalizedEmail == usernameOrEmail.ToUpper() || u.NormalizedUserName == usernameOrEmail.ToUpper());
+
+            return user != null;
+        }
     }
 } 

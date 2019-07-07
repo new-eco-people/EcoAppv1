@@ -14,6 +14,8 @@ using System.Linq;
 using FluentValidation.Results;
 using Application.Infrastructure.RequestResponsePipeline;
 using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Api.Filters
 {
@@ -28,6 +30,8 @@ namespace Api.Filters
         }
         public override void OnException(ExceptionContext context)
         {
+            var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            
             System.Console.WriteLine(context.Exception.ToString());
             if (context.Exception is Application.Exceptions.ValidationException)
             {
@@ -36,7 +40,8 @@ namespace Api.Filters
                 context.Result = new JsonResult(
                     new ErrorResponse() {
                         Errors = ((Application.Exceptions.ValidationException)context.Exception).Failures
-                    }
+                    },
+                    jsonSerializerSettings
                 );
 
                 return;
@@ -60,7 +65,7 @@ namespace Api.Filters
 
             context.HttpContext.Response.ContentType = "application/json";
             context.HttpContext.Response.StatusCode = (int)code;
-            context.Result = new JsonResult(errorresponse);
+            context.Result = new JsonResult(errorresponse, jsonSerializerSettings);
         }
     }
 }
