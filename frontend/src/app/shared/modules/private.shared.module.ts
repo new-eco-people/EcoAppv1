@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
+import { PrivateContentLayoutComponent } from '../layouts/private/private-content/private-content-layout.component';
+import { PrivateFullLayoutComponent } from '../layouts/private/private-full/private-full-layout.component';
 import { SharedModule } from '../shared.module';
-import { AdminContentLayoutComponent } from '../layouts/admin/admin-content/admin-content-layout.component';
-import { AdminFullLayoutComponent } from '../layouts/admin/admin-full/admin-full-layout.component';
 
 @NgModule({
     declarations: [
-        AdminContentLayoutComponent,
-        AdminFullLayoutComponent
+        PrivateContentLayoutComponent,
+        PrivateFullLayoutComponent
     ],
     imports: [
         SharedModule
     ],
     exports: [
         SharedModule,
-        AdminContentLayoutComponent,
-        AdminFullLayoutComponent
+        PrivateContentLayoutComponent,
+        PrivateFullLayoutComponent
     ]
 })
 
