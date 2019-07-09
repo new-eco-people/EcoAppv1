@@ -11,7 +11,7 @@ namespace Application.Entities.UserEntity.Command.SignUp
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; set; }
+        public string EmailAddress { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
         public bool? AgreeToTermsAndCondition { get; set; }
@@ -30,7 +30,7 @@ namespace Application.Entities.UserEntity.Command.SignUp
         public async Task<Unit> Handle(SignUpCommand request, CancellationToken cancellationToken)
         {
             var newUser = new User() {
-                Email = request.Email,
+                Email = request.EmailAddress,
                 UserName = request.Username,
                 AgreeToTermsAndCondition = request.AgreeToTermsAndCondition.Value,
                 UserDetail = new UserDetail() {

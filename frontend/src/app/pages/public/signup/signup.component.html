@@ -44,7 +44,7 @@
                             *ngIf=
                             "(signupForm.get('firstName').touched && signupForm.get('firstName').invalid)"
                           >
-                            <small>First Name is required</small>
+                            <small *ngIf="signupForm.get('firstName').hasError('required')" >First Name is required</small>
 
                             <!-- Server Error -->
                             <small *ngIf="signupForm.get('firstName').hasError('firstName')">
@@ -72,7 +72,7 @@
                           <mat-error class="error-block"
                             *ngIf="signupForm.get('lastName').touched && signupForm.get('lastName').invalid"
                           >
-                            <small>Last Name is required</small>
+                            <small *ngIf="signupForm.get('lastName').hasError('required')" >Last Name is required</small>
                           </mat-error>
 
                           <!-- Server Error -->
@@ -98,7 +98,7 @@
                           <mat-error class="error-block"
                             *ngIf="signupForm.get('username').touched && signupForm.get('username').invalid"
                           >
-                            <small>Username is required</small>
+                            <small *ngIf="signupForm.get('username').hasError('required')" >Username is required</small>
 
                             <!-- Server Error -->
                             <small *ngIf="signupForm.get('username').hasError('username')">
@@ -117,19 +117,19 @@
                           <input
                             matInput
                             placeholder="Email"
-                            formControlName="email"
+                            formControlName="emailAddress"
                           />
 
                           <!-- Email Error Message -->
                           <mat-error class="error-block"
-                            *ngIf="signupForm.get('email').touched && signupForm.get('email').invalid"
+                            *ngIf="signupForm.get('emailAddress').touched && signupForm.get('emailAddress').invalid"
                           >
-                            <small *ngIf="signupForm.get('email').hasError('required')" >Email is required</small>
-                            <small *ngIf="signupForm.get('email').hasError('email')" >Email is invalid</small>
+                            <small *ngIf="signupForm.get('emailAddress').hasError('required')" >Email is required</small>
+                            <small *ngIf="signupForm.get('emailAddress').hasError('email')" >Email is invalid</small>
 
                             <!-- Server Error -->
-                            <small *ngIf="signupForm.get('email').hasError('email')">
-                              {{signupForm.get('email').getError('email').error}}
+                            <small *ngIf="signupForm.get('emailAddress').hasError('emailAddress')">
+                              {{signupForm.get('emailAddress').getError('emailAddress').error}}
                             </small>
                           </mat-error>
 

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PublicContentLayoutComponent } from 'app/shared/layouts/public/public-content/public-content-layout.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
         {
           path: 'signup',
           component: SignupComponent
+        },
+        {
+          path: 'verify-email',
+          component: VerifyEmailComponent
         }
       ]
   }

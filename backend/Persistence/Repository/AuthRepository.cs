@@ -93,7 +93,7 @@ namespace Persistence.Repository
             var user = await _userManager.Users.SingleOrDefaultAsync(
                             u => u.NormalizedEmail == usernameOrEmail.ToUpper() || u.NormalizedUserName == usernameOrEmail.ToUpper());
 
-            return user != null;
+            return user == null;
         }
     }
 } 

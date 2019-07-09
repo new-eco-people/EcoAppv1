@@ -22,6 +22,7 @@ export interface ServerError {
 
 export class AppErrors {
     static setError(error: ServerError, reactiveForm: FormGroup) {
+        console.log(error);
         if (error.error) {
             throw new Error(error.error);
 

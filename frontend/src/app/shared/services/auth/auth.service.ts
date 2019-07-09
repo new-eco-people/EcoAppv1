@@ -16,6 +16,10 @@ export class AuthService extends BaseApiService  {
     return this.http.post(`${this.api}/signup`, data);
   }
 
+  verifyEmail(data: any) {
+    return this.http.post(`${this.api}/verify-email`, data);
+  }
+
   signinUser(email: string, password: string) {
     // your code for checking credentials and getting tokens for for signing in user
   }
