@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
@@ -7,10 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 
 //COMPONENTS
-import { FooterComponent } from "./footer/footer.component";
-import { NavbarComponent } from "./navbar/navbar.component";
-import { SidebarComponent } from "./sidebar/sidebar.component";
-import { NotificationSidebarComponent } from './notification-sidebar/notification-sidebar.component';
+import { FooterComponent } from "./components/footer/footer.component";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { NotificationSidebarComponent } from './components/notification-sidebar/notification-sidebar.component';
 
 //DIRECTIVES
 import { ToggleFullscreenDirective } from "./directives/toggle-fullscreen.directive";
@@ -19,25 +19,41 @@ import { SidebarLinkDirective } from './directives/sidebarlink.directive';
 import { SidebarListDirective } from './directives/sidebarlist.directive';
 import { SidebarAnchorToggleDirective } from './directives/sidebaranchortoggle.directive';
 import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { NgMaterial } from './modules/ng-material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './services/auth/auth.service';
+import { AppErrorHandler } from './interceptors/app-error.handler';
 
 @NgModule({
     exports: [
+        RouterModule,
         CommonModule,
+        HttpClientModule,
+        NgbModule,
+        TranslateModule,
+        PerfectScrollbarModule,
         FooterComponent,
         NavbarComponent,
         SidebarComponent,
         NotificationSidebarComponent,
         ToggleFullscreenDirective,
         SidebarDirective,
-        NgbModule,
-        TranslateModule
+        NgMaterial,
+        FormsModule,
+        ReactiveFormsModule,
     ],
     imports: [
         RouterModule,
         CommonModule,
+        HttpClientModule,
         NgbModule,
         TranslateModule,
-        PerfectScrollbarModule
+        PerfectScrollbarModule,
+        NgMaterial,
+        FormsModule,
+        ReactiveFormsModule,
     ],
     declarations: [
         FooterComponent,
@@ -50,6 +66,10 @@ import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
         SidebarListDirective,
         SidebarAnchorToggleDirective,
         SidebarToggleDirective
+    ],
+    providers: [
+        AuthService,
+        { provide: ErrorHandler, useClass: AppErrorHandler },
     ]
 })
 export class SharedModule { }

@@ -1,22 +1,31 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './shared/services/auth/auth-guard.service';
 
-import { FullLayoutComponent } from "./layouts/full/full-layout.component";
-import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
-
-import { Full_ROUTES } from "./shared/routes/full-layout.routes";
-import { CONTENT_ROUTES } from "./shared/routes/content-layout.routes";
-
-import { AuthGuard } from './shared/auth/auth-guard.service';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'full-layout',
+    redirectTo: 'public',
     pathMatch: 'full',
   },
-  { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
-  { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES, canActivate: [AuthGuard] },
+  // { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
+  // { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES, canActivate: [AuthGuard] },
+
+  {
+    path: 'public',
+    loadChildren: './pages/public/public.module#PublicModule',
+  },
+  {
+    path: 'private',
+    loadChildren: './pages/private/private.module#PrivateModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin',
+    loadChildren: './pages/admin/admin.module#AdminModule',
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

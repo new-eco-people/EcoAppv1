@@ -17,5 +17,7 @@ namespace Application.Interfaces.IRepositories
         Task<bool> VerifyEmail(string id, string token);
 
         Task<SendConfirmEmailResult> SendVerificationEmail(string email); 
+
+        Task<bool> UsernameOrEmailAvailable(string usernameOrEmail);
     }
 }

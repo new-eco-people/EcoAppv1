@@ -21,7 +21,7 @@ namespace Api.Controllers
         /// <response code="200">Email Comfirmed</response>
         /// <response code="400">Failed to verify email, providing error message</response>
         [AllowAnonymous]
-        [HttpPost("verifyemail")]
+        [HttpPost("verify-email")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> VerifyEmail(VerifyEmailCommand command) {
