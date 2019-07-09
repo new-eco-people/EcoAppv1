@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrivateContentLayoutComponent } from 'app/shared/layouts/private/private-content/private-content-layout.component';
+import { PrivateFullLayoutComponent } from 'app/shared/layouts/private/private-full/private-full-layout.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,12 @@ const routes: Routes = [
       component: PrivateContentLayoutComponent,
       children: [
       ]
+  },
+  {
+    path: '',
+    component: PrivateFullLayoutComponent,
+    children: [
+    ]
   }
 ];
 

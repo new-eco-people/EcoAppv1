@@ -5,6 +5,7 @@ import { PublicContentLayoutComponent } from 'app/shared/layouts/public/public-c
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { PublicFullLayoutComponent } from 'app/shared/layouts/public/public-full/public-full-layout.component';
 
 const routes: Routes = [
   {
@@ -29,7 +30,13 @@ const routes: Routes = [
           component: VerifyEmailComponent
         }
       ]
-  }
+  },
+  {
+    path: '',
+    component: PublicFullLayoutComponent,
+    children: [
+    ]
+}
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminContentLayoutComponent } from 'app/shared/layouts/admin/admin-content/admin-content-layout.component';
+import { AdminFullLayoutComponent } from 'app/shared/layouts/admin/admin-full/admin-full-layout.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,12 @@ const routes: Routes = [
       component: AdminContentLayoutComponent,
       children: [
       ]
+  },
+  {
+    path: '',
+    component: AdminFullLayoutComponent,
+    children: [
+    ]
   }
 ];
 
