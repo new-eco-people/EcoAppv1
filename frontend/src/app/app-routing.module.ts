@@ -1,13 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-
-import { FullLayoutComponent } from './shared/layouts/full/full-layout.component';
-import { ContentLayoutComponent } from './shared/layouts/content/content-layout.component';
-
-import { Full_ROUTES } from './shared/routes/full-layout.routes';
-import { CONTENT_ROUTES } from './shared/routes/content-layout.routes';
-
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/services/auth/auth-guard.service';
+
 
 const appRoutes: Routes = [
   {
