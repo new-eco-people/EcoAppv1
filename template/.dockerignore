@@ -4,10 +4,13 @@
 # Ignore all Windows, Linux and OSX special files
 # https://www.gitignore.io/api/windows,linux,osx,vim
 
-# Ignore all your language-specific build folders
+# Ignore all your language-specific build folders 
+# adding new line for travis
 **/[Bb]in/
 **/[Oo]bj/
 **/node_modules/
 **/.vscode/
 node_modules
 npm-debug.log
+
+**/nnnmp/

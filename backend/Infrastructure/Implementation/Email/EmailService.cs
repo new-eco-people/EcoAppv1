@@ -38,7 +38,7 @@ namespace Infrastructure.Implementation.Email
             
             var data = new VerifyEmailObject() {
                 FirstName = verifyEmailData.User.UserDetail.FirstName,
-                Url = $"{hostname}/verifyemail/?token={token}&id={id}"
+                Url = $"{hostname}/verify-email/?token={token}&id={id}"
             };
 
 

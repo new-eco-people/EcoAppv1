@@ -8,13 +8,13 @@ using MediatR;
 
 namespace Application.Entities.UserEntity.Command.VerifyEmail
 {
-    public class VerifyEmailCommand : IRequest<Unit>
+    public class VerifyEmailCommand : IRequest<bool>
     {
         public string UserId { get; set; }
         public string Token { get; set; }
     }
 
-    public class VerifyEmailHandler : IRequestHandler<VerifyEmailCommand, Unit>
+    public class VerifyEmailHandler : IRequestHandler<VerifyEmailCommand, bool>
     {
         private readonly IAuthRepository _auth;
 
@@ -22,14 +22,9 @@ namespace Application.Entities.UserEntity.Command.VerifyEmail
         {
             _auth = auth;
         }
-        public async Task<Unit> Handle(VerifyEmailCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(VerifyEmailCommand request, CancellationToken cancellationToken)
         {
-            var result = await _auth.VerifyEmail(request.UserId, WebUtility.UrlDecode(request.Token));
-
-            if (result)
-                return Unit.Value;
-
-            throw new CustomMessageException("Verification failed, please try again");
+            return await _auth.VerifyEmail(request.UserId, WebUtility.UrlDecode(request.Token));   
         }
     }
 }

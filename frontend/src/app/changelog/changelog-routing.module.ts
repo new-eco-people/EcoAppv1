@@ -6,7 +6,7 @@ import { ChangeLogComponent } from "./changelog.component";
 const routes: Routes = [
   {
     path: '',
-     component: ChangeLogComponent,
+    component: ChangeLogComponent,
     data: {
       title: 'ChangeLog'
     },    

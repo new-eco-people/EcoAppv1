@@ -51,21 +51,14 @@ services:
       context: ./nginx
     ports:
       - "80:80"
-
-  template:
-    build:
-      context: ./template
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./template:/app
-      - /app/node_modules
-    ports:
-      - "4201:4201"
-
+  
   nginx_template:
     restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx_template
+    image: newecopeoplev1/nginx_template_dev
     ports:
       - "4000:4000"
+
+  template:
+    image: newecopeoplev1/template_dev
+    ports:
+      - "4201:4201"
