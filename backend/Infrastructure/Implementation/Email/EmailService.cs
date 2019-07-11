@@ -55,9 +55,7 @@ namespace Infrastructure.Implementation.Email
             //     data
             // );
 
-            var response = await client.SendEmailAsync(msg);
-
-            _logger.LogInformation(response.StatusCode.ToString());
+            await client.SendEmailAsync(msg);
         }
 
 
