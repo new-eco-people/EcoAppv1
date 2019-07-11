@@ -17,7 +17,13 @@ export class AuthService extends BaseApiService  {
   }
 
   verifyEmail(data: any) {
+    data['token'] = encodeURIComponent(data['token']);
     return this.http.post(`${this.api}/verify-email`, data);
+  }
+
+  resendEmailConfirmLink(email: string) {
+    // resend-confirm-email
+    return this.http.get(`${this.api}/resend-confirm-email?emailAddress=${email}`)
   }
 
   signinUser(email: string, password: string) {

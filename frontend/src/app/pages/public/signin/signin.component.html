@@ -21,7 +21,7 @@
                 
                   <div class="col-lg-6 col-md-12 bg-white px-4 pt-3">
 
-                    <form #signInForm="ngForm" >
+                    <form [formGroup]="signInForm" >
                       <h4 class="card-title mb-2">Login</h4>
                       <p class="card-text mb-3">
                         Welcome back, please login to your account.
@@ -30,13 +30,12 @@
                       <div>
                         <mat-form-field>
                           <input 
-                            ngModel #username="ngModel" 
-                            required matInput 
+                            matInput 
                             placeholder="Username / Email"
-                            name="usernameEmail"
+                            formControlName="usernameEmail"
                           />
-                          <mat-error class="error-block" *ngIf="username.touched && username.invalid">
-                            <small >Username is required</small>
+                          <mat-error class="error-block">
+                            <app-validator-error-message [form]="signInForm" [field]="'usernameEmail'" ></app-validator-error-message>
                           </mat-error>
                         </mat-form-field>
                       </div>
@@ -44,14 +43,13 @@
                       <div>
                         <mat-form-field>
                           <input 
-                            ngModel #password="ngModel" 
-                            required matInput 
+                            matInput 
                             placeholder="Password"
-                            name="password"
                             type="password"
+                            formControlName="password"
                           />
-                          <mat-error class="error-block" *ngIf="password.touched && password.invalid">
-                            <small >Password is required</small>
+                          <mat-error class="error-block">
+                              <app-validator-error-message [form]="signInForm" [field]="'password'" ></app-validator-error-message>
                           </mat-error>
                         </mat-form-field>
                       </div>
@@ -64,8 +62,8 @@
                             <input
                               type="checkbox"
                               id="customCheckboxInline1"
-                              name="customCheckboxInline1"
                               class="custom-control-input"
+                              formControlName="rememberMe"
                             />
                             <label
                               class="custom-control-label"
@@ -85,16 +83,16 @@
                       </div>
                       <div class="fg-actions d-flex justify-content-between">
                         <div class="login-btn">
-                          <button class="btn btn-outline-primary">
+                          <button type="button" class="btn btn-outline-primary">
                             <a
                               [routerLink]="['/public/signup']"
                               class="text-decoration-none"
-                              >Register</a
+                              >Signup</a
                             >
                           </button>
                         </div>
                         <div class="recover-pass">
-                          <button [disabled]="signInForm.invalid" class="btn btn-primary" (click)="signIn(signInForm)" >
+                          <button class="btn btn-primary" (click)="signIn(signInForm)" >
                             Login
                           </button>
                         </div>

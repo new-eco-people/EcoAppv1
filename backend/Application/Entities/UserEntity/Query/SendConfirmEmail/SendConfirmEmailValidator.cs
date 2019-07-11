@@ -6,9 +6,9 @@ namespace Application.Entities.UserEntity.Query.SendConfirmEmail
     {
         public SendConfirmEmailValidator()
         {
-            RuleFor(e => e.Email)
-                .NotEmpty()
-                .EmailAddress();
+            RuleFor(e => e.EmailAddress)
+                .NotEmpty().WithMessage("Email is required")
+                .EmailAddress().WithMessage("Email is invalid");
         }
     }
 }

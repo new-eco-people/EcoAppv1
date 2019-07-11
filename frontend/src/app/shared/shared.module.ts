@@ -25,6 +25,8 @@ import { NgMaterial } from './modules/ng-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth/auth.service';
 import { AppErrorHandler } from './interceptors/app-error.handler';
+import { ValidatorErrorMessageComponent } from './validators/validator-error-message/validator-error-message.component';
+import { ToasterService } from './services/toaster/toaster.service';
 
 @NgModule({
     exports: [
@@ -43,6 +45,7 @@ import { AppErrorHandler } from './interceptors/app-error.handler';
         NgMaterial,
         FormsModule,
         ReactiveFormsModule,
+        ValidatorErrorMessageComponent
     ],
     imports: [
         RouterModule,
@@ -65,10 +68,12 @@ import { AppErrorHandler } from './interceptors/app-error.handler';
         SidebarLinkDirective,
         SidebarListDirective,
         SidebarAnchorToggleDirective,
-        SidebarToggleDirective
+        SidebarToggleDirective,
+        ValidatorErrorMessageComponent
     ],
     providers: [
         AuthService,
+        ToasterService,
         { provide: ErrorHandler, useClass: AppErrorHandler },
     ]
 })

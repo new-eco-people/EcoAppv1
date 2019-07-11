@@ -12,6 +12,7 @@ namespace Application.Entities.UserEntity.Query.SignIn
     {
         public string UserNameEmail { get; set; }
         public string Password { get; set; }
+        public bool? RememberMe { get; set; }
     }
 
     public class SignInCommandHandler : IRequestHandler<SignInCommand, SignInModel>
@@ -30,7 +31,7 @@ namespace Application.Entities.UserEntity.Query.SignIn
                 throw new NotFoundException(nameof(User), request.UserNameEmail);
 
             var response = SignInModel.Create(user);
-            response.Token = TokenFunctions.generateUserToken(user);
+            response.Token = TokenFunctions.generateUserToken(user, request.RememberMe.HasValue);
 
             return response;
         }

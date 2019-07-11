@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Application.Entities.UserEntity.Command.SignUp;
 using Application.Interfaces.IServices;
 using Application.Entities.UserEntity.Query.SendConfirmEmail;
+using Application.Exceptions;
 
 namespace Persistence.Repository
 {
@@ -23,18 +24,18 @@ namespace Persistence.Repository
             _emailService = emailService;
         }
 
-        public async Task<SignUpResult> SignUp(User user, string Password) {
+        public async Task<VerifyEmailData> SignUp(User user, string Password) {
             var result = await _userManager.CreateAsync(user, Password);
 
             if (!result.Succeeded)
-                return new SignUpResult() {
+                return new VerifyEmailData() {
                 Errors = string.Join(',', result.Errors.Select(x=>x.Description)),
                 User = null
             };
             
             var EmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             
-            return new SignUpResult() { Errors = null, User = user, EmailVerificationToken = EmailToken };
+            return new VerifyEmailData() { Errors = null, User = user, Token = EmailToken };
 
         }
 
@@ -63,33 +64,37 @@ namespace Persistence.Repository
             if (user == null)
                 return false;
 
+            if (await _userManager.IsEmailConfirmedAsync(user))
+                throw new CustomMessageException($"{user.Email} has already been confirm");
+
             var result = await _userManager.ConfirmEmailAsync(user,token);
 
             return result.Succeeded;
         }
 
-        public async Task<SendConfirmEmailResult> SendVerificationEmail(string email) 
+        public async Task<VerifyEmailData> SendVerificationEmail(string email) 
         {
             var user = await _userManager.Users.Include(u => u.UserDetail).SingleOrDefaultAsync(u => u.NormalizedEmail == email.ToUpper());
 
             if (user == null)
-                return new SendConfirmEmailResult(){ Error = $"{email} has not been signed up to the ECO platform" };
+                return new VerifyEmailData(){ Errors = $"{email} has not been signed up to the ECO platform" };
 
             if (await _userManager.IsEmailConfirmedAsync(user))
-                return new SendConfirmEmailResult(){ Error = $"{email} has already been confirm" };
+                return new VerifyEmailData(){ Errors = $"{email} has already been confirm" };
 
-            var verifyEmailDataObj = new VerifyEmailData() {
-                                            User = user,
-                                            Token = await _userManager.GenerateEmailConfirmationTokenAsync(user)
-                                        };
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-            await _emailService.SendVerifyEmailAsync(verifyEmailDataObj);
-
-            return new SendConfirmEmailResult();
+            return new VerifyEmailData() {
+                User = user,
+                Token = token
+            };
         }
 
         public async Task<bool> UsernameOrEmailAvailable(string usernameOrEmail)
         {
+            if (string.IsNullOrEmpty(usernameOrEmail))
+                throw new CustomMessageException("An error occurred, please try again later");
+
             var user = await _userManager.Users.SingleOrDefaultAsync(
                             u => u.NormalizedEmail == usernameOrEmail.ToUpper() || u.NormalizedUserName == usernameOrEmail.ToUpper());
 

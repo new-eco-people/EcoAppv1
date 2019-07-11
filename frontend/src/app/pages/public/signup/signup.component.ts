@@ -4,6 +4,10 @@ import { CommonValidator } from 'app/shared/validators/common-validator';
 import { AuthService } from 'app/shared/services/auth/auth.service';
 import { AppErrors, ServerError } from 'app/shared/interceptors/app-error.handler';
 import { finalize } from 'rxjs/operators';
+import { CustomValidator } from 'app/shared/validators/custom-validators';
+import { ErrorMessage } from 'app/shared/validators/error-message';
+import { ToasterService } from 'app/shared/services/toaster/toaster.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +19,13 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  errorMessage: ErrorMessage
+
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private toasterService: ToasterService,
+    private router: Router) { }
 
   ngOnInit() {
     this.initializeSignupForm();
@@ -23,13 +33,13 @@ export class SignupComponent implements OnInit {
 
   initializeSignupForm() {
     this.signupForm = this.fb.group({
-      firstName : [null, [Validators.required]],
-      lastName : [null, [Validators.required]],
-      username : [null, [Validators.required]],
-      emailAddress : [null, [Validators.required, Validators.email]],
-      password : [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required, CommonValidator.confirmation('password')]],
-      agreeToTermsAndCondition: [null, [Validators.requiredTrue]]
+      firstName : [null, [CustomValidator.CustomRequired('First Name')]],
+      lastName : [null, [CustomValidator.CustomRequired('Last Name')]],
+      username : [null, [CustomValidator.CustomRequired('Username')]],
+      emailAddress : [null, [CustomValidator.CustomRequired('Email'), CustomValidator.CustomEmail()]],
+      password : [null, [CustomValidator.CustomRequired('Password')]],
+      confirmPassword: [null, [CustomValidator.CustomRequired('Confirm Password'), CommonValidator.confirmation('password')]],
+      agreeToTermsAndCondition: [null, [CustomValidator.CustomRequiredTrue('Terms and Conditions')]]
     });
   }
 
@@ -39,9 +49,12 @@ export class SignupComponent implements OnInit {
     this.authService.signupUser(this.signupForm.value)
     .pipe(finalize(() => this.loading = false))
     .subscribe((x) => {
-      console.log(x);
+      this.toasterService.success('An email has been sent to you, please verify your email address');
+      this.router.navigate(['public']);
     },
-    (error: any) => { AppErrors.setError(error.error as ServerError, this.signupForm); }
+    (error: any) => {
+      AppErrors.setError(error.error as ServerError, this.signupForm);
+      }
     )
   }
 

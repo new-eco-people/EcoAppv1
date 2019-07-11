@@ -1,25 +1,24 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces.IServices;
-using Domain.Entities;
 using MediatR;
 
-namespace Application.Entities.UserEntity.Command.SignUp
+namespace Application.Entities.UserEntity.Query.SendConfirmEmail
 {
-    public class UserCreated : INotification
+    public class VerifyEmailTokenCreated : INotification
     {
         public VerifyEmailData VerifyEmailData { get; set; }
     }
 
-    public class UserCreatedHandler : INotificationHandler<UserCreated>
+    public class VerifyEmailTokenCreatedHandler : INotificationHandler<VerifyEmailTokenCreated>
     {
         private readonly IEmailService _emailService;
 
-        public UserCreatedHandler(IEmailService emailService)
+        public VerifyEmailTokenCreatedHandler(IEmailService emailService)
         {
             _emailService = emailService;
         }
-        public async Task Handle(UserCreated notification, CancellationToken cancellationToken)
+        public async Task Handle(VerifyEmailTokenCreated notification, CancellationToken cancellationToken)
         {
             await _emailService.SendVerifyEmailAsync(notification.VerifyEmailData);
         }

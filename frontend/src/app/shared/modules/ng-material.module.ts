@@ -4,7 +4,8 @@ import {
     MatFormFieldModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule,
 } from '@angular/material';
 
 @NgModule({
@@ -14,14 +15,16 @@ import {
         MatFormFieldModule,
         MatCheckboxModule,
         MatProgressSpinnerModule,
-        MatIconModule
+        MatIconModule,
+        MatSnackBarModule,
     ],
     exports: [
         MatInputModule,
         MatFormFieldModule,
         MatCheckboxModule,
         MatProgressSpinnerModule,
-        MatIconModule
+        MatIconModule,
+        MatSnackBarModule,
     ]
 })
 

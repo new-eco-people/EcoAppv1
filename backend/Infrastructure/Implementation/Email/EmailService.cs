@@ -15,7 +15,7 @@ namespace Infrastructure.Implementation.Email
 
         public async Task SendAsync(UserCreated UserCreatedDetails)
         {
-            await WriteToFile(UserCreatedDetails.SignUpResult.User.Email);
+            await WriteToFile(UserCreatedDetails.VerifyEmailData.User.Email);
         }
 
 
@@ -38,7 +38,7 @@ namespace Infrastructure.Implementation.Email
             
             var data = new VerifyEmailObject() {
                 FirstName = verifyEmailData.User.UserDetail.FirstName,
-                Url = $"{hostname}/verify-email/?token={token}&id={id}"
+                Url = $"{hostname}/verify-email/?token={token}&userId={id}"
             };
 
 
@@ -53,7 +53,7 @@ namespace Infrastructure.Implementation.Email
 
             var response = await client.SendEmailAsync(msg);
 
-            await WriteToFile(token);
+            // await WriteToFile($"{token}/{id}");
         }
 
 
