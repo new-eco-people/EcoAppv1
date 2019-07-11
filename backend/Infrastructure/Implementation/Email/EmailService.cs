@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Application.Entities.UserEntity.Command.SignUp;
 using Application.Interfaces.IServices;
+using Microsoft.Extensions.Logging;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
@@ -11,14 +12,17 @@ namespace Infrastructure.Implementation.Email
 {
     public class EmailService : IEmailService
     {
+        public EmailService(ILogger<EmailService> logger)
+        {
+            _logger = logger;
+        }
         public string VerifyEmailTemplateId = "d-ba9d004d434d49bfa5f7b137210c548e";
+        private readonly ILogger _logger;
 
         public async Task SendAsync(UserCreated UserCreatedDetails)
         {
             await WriteToFile(UserCreatedDetails.VerifyEmailData.User.Email);
         }
-
-
 
         public async Task SendVerifyEmailAsync(VerifyEmailData verifyEmailData)
         {
@@ -38,22 +42,22 @@ namespace Infrastructure.Implementation.Email
             
             var data = new VerifyEmailObject() {
                 FirstName = verifyEmailData.User.UserDetail.FirstName,
-                Url = $"{hostname}/verify-email/?token={token}&userId={id}"
+                Url = $"{hostname}/public/verify-email/?token={token}&userId={id}"
             };
 
 
             msg.SetTemplateData(data);
             // var msgv1 = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var msgv1 = MailHelper.CreateSingleTemplateEmail(
-                new EmailAddress("noreply@newecopeople.com", "Eco Team"),
-                new EmailAddress(verifyEmailData.User.Email),
-                VerifyEmailTemplateId,
-                data
-            );
+            // var msgv1 = MailHelper.CreateSingleTemplateEmail(
+            //     new EmailAddress("noreply@newecopeople.com", "Eco Team"),
+            //     new EmailAddress(verifyEmailData.User.Email),
+            //     VerifyEmailTemplateId,
+            //     data
+            // );
 
             var response = await client.SendEmailAsync(msg);
 
-            // await WriteToFile($"{token}/{id}");
+            _logger.LogInformation(response.StatusCode.ToString());
         }
 
 
