@@ -40,17 +40,10 @@
                           />
 
                           <!-- First Name Error Message -->
-                          <mat-error class="error-block"
-                            *ngIf=
-                            "(signupForm.get('firstName').touched && signupForm.get('firstName').invalid)"
-                          >
-                            <small *ngIf="signupForm.get('firstName').hasError('required')" >First Name is required</small>
-
-                            <!-- Server Error -->
-                            <small *ngIf="signupForm.get('firstName').hasError('firstName')">
-                              {{signupForm.get('firstName').getError('firstName').error}}
-                            </small>
-
+                          <mat-error class="error-block">
+                            
+                            <app-validator-error-message [form]="signupForm" [field]="'firstName'" ></app-validator-error-message>
+                          
                           </mat-error>
 
                         </mat-form-field>
@@ -69,16 +62,11 @@
                           />
 
                           <!-- Last Name Error Message -->
-                          <mat-error class="error-block"
-                            *ngIf="signupForm.get('lastName').touched && signupForm.get('lastName').invalid"
-                          >
-                            <small *ngIf="signupForm.get('lastName').hasError('required')" >Last Name is required</small>
-                          </mat-error>
+                          <mat-error class="error-block">
+                            
+                            <app-validator-error-message [form]="signupForm" [field]="'lastName'" ></app-validator-error-message>
 
-                          <!-- Server Error -->
-                          <small *ngIf="signupForm.get('lastName').hasError('lastName')">
-                              {{signupForm.get('lastName').getError('lastName').error}}
-                            </small>
+                          </mat-error>
 
                         </mat-form-field>
                       </div>
@@ -95,15 +83,9 @@
                           />
 
                           <!-- Username Error Message -->
-                          <mat-error class="error-block"
-                            *ngIf="signupForm.get('username').touched && signupForm.get('username').invalid"
-                          >
-                            <small *ngIf="signupForm.get('username').hasError('required')" >Username is required</small>
+                          <mat-error class="error-block">
+                          <app-validator-error-message [form]="signupForm" [field]="'username'" ></app-validator-error-message>
 
-                            <!-- Server Error -->
-                            <small *ngIf="signupForm.get('username').hasError('username')">
-                              {{signupForm.get('username').getError('username').error}}
-                            </small>
                           </mat-error>
 
                         </mat-form-field>
@@ -119,18 +101,10 @@
                             placeholder="Email"
                             formControlName="emailAddress"
                           />
-
+                          
                           <!-- Email Error Message -->
-                          <mat-error class="error-block"
-                            *ngIf="signupForm.get('emailAddress').touched && signupForm.get('emailAddress').invalid"
-                          >
-                            <small *ngIf="signupForm.get('emailAddress').hasError('required')" >Email is required</small>
-                            <small *ngIf="signupForm.get('emailAddress').hasError('email')" >Email is invalid</small>
-
-                            <!-- Server Error -->
-                            <small *ngIf="signupForm.get('emailAddress').hasError('emailAddress')">
-                              {{signupForm.get('emailAddress').getError('emailAddress').error}}
-                            </small>
+                          <mat-error class="error-block">
+                            <app-validator-error-message [form]="signupForm" [field]="'emailAddress'" ></app-validator-error-message>
                           </mat-error>
 
                         </mat-form-field>
@@ -149,16 +123,8 @@
                           />
 
                           <!-- Password Error Message -->
-                          <mat-error class="error-block"
-                            *ngIf="signupForm.get('password').touched && signupForm.get('password').invalid"
-                          >
-                            <small *ngIf="signupForm.get('password').hasError('required')" >Password is required</small>
-
-                            <!-- Server Error -->
-                            <small *ngIf="signupForm.get('password').hasError('password')">
-                              {{signupForm.get('password').getError('password').error}}
-                            </small>
-
+                          <mat-error class="error-block">  
+                            <app-validator-error-message [form]="signupForm" [field]="'password'" ></app-validator-error-message>
                           </mat-error>
 
                         </mat-form-field>
@@ -177,10 +143,8 @@
                           />
 
                           <!-- Confirm Password Error Message -->
-                          <mat-error class="error-block"
-                            *ngIf="signupForm.get('confirmPassword').touched && signupForm.get('confirmPassword').invalid"
-                          >
-                            <small>Confirm Password does not match password</small>
+                          <mat-error class="error-block">
+                            <app-validator-error-message [form]="signupForm" [field]="'confirmPassword'" ></app-validator-error-message>
                           </mat-error>
 
                         </mat-form-field>
@@ -200,21 +164,19 @@
                         >
                           I accept the terms & conditions.
                         </label>
-                        <span
-                          *ngIf="(signupForm.get('agreeToTermsAndCondition').touched && signupForm.get('agreeToTermsAndCondition').invalid) || signupForm.get('agreeToTermsAndCondition').hasError('agreeToTermsAndCondition')"
-                          class="text-danger d-block"
-                        >
-                            <small
-                              *ngIf="signupForm.get('agreeToTermsAndCondition').hasError('requiredTrue') || signupForm.get('agreeToTermsAndCondition').hasError('agreeToTermsAndCondition')"
-                            >
-                            Agree to our terms and condition to continue
-                          </small>
-                            
+
+                        <!-- Agree to terms and condition Error Message -->
+                        <span class="text-danger d-block">
+
+                          <app-validator-error-message [form]="signupForm" [field]="'agreeToTermsAndCondition'" ></app-validator-error-message>
+
                         </span>
+
                       </div>
+
                       <div class="fg-actions d-flex justify-content-between">
                         <div class="login-btn">
-                          <button class="btn btn-outline-primary">
+                          <button type="button" class="btn btn-outline-primary">
                             <a
                               class="text-decoration-none"
                               [routerLink]="['/public/signin']"
@@ -223,20 +185,23 @@
                             </a>
                           </button>
                         </div>
+
                         <div class="recover-pass">
+
                           <button 
-                            class="btn btn-primary"
-                            [disabled]="signupForm.invalid || loading"
-                            (click)="submit()"
+                            class="btn btn-primary" 
+                            (click)="submit()" 
+                            [disabled]="signupForm.invalid"
                             >
-                              Register 
-                              <mat-spinner 
-                                *ngIf="loading"
-                                class="spinner-white d-inline mx-1" [diameter]="17" ></mat-spinner>
+                              Signup <mat-spinner *ngIf="loading" class="spinner-white d-inline mx-1" [diameter]="17" ></mat-spinner>
                           </button>
+
                         </div>
+
                       </div>
+
                     </form>
+
                   </section>
 
 

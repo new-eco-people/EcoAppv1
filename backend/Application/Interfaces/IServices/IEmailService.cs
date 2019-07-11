@@ -13,5 +13,6 @@ namespace Application.Interfaces.IServices
     public class VerifyEmailData {
         public User User { get; set; }
         public string Token { get; set; }
+        public string Errors { get; set; }
     }
 }

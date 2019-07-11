@@ -20,20 +20,74 @@
                 </div>
                 <div class="col-lg-6 col-md-12 bg-white px-4 pt-3">
                   <h4 class="card-title mb-2">Email Verification</h4>
-                  <p class="card-text mb-3">
+
+                  <!-- Loading Icon -->
+                  <p class="card-text mb-3 text-center" *ngIf="loading">
                     <mat-spinner class="mx-auto spinner-eco" [diameter]="50"></mat-spinner>
+                    Verifying Email
                   </p>
 
 
-                  <input
-                    type="text"
-                    class="form-control mb-3"
-                    placeholder="Email"
-                  />
+                  <!-- If email was not verified -->
+                  <form *ngIf="isVerified === 'false'" [formGroup]="resendForm" >
+
+                    <h6 class="mb-2"><strong>Email could not be verified, kindly resend verification link</strong></h6>
+
+                    <!-- input field to resend verification link -->
+                    <div class="form-group">
+                      <mat-form-field>
+                          <input
+                            matInput
+                            type="text"
+                            placeholder="Email"
+                            formControlName="emailAddress"
+                        />
+                        
+                        <!-- Error message for email field -->
+                        <mat-error>
+                          <app-validator-error-message [form]="resendForm" [field]="'emailAddress'" ></app-validator-error-message>
+                        </mat-error>
 
 
-                  <div class="fg-actions d-flex justify-content-between">
+                      </mat-form-field>
+                    </div>
 
+
+                    <div class="fg-actions d-flex justify-content-between">
+
+                      <!-- Send user back to login -->
+                      <div class="login-btn">
+                        <button class="btn btn-outline-primary" type="button">
+                          <a
+                            class="text-decoration-none"
+                            [routerLink]="['/public']"
+                            >Back To Login</a
+                          >
+                        </button>
+                      </div>
+
+                      <!-- button to resend -->
+                      <div class="recover-pass">
+                        <button 
+                          class="btn btn-primary" 
+                          [disabled]="resendForm.invalid || resendLoading" 
+                          (click)="resendEmail()"
+                          >
+                            Re-send 
+                            <mat-spinner *ngIf="resendLoading" class="spinner-white d-inline mx-1" [diameter]="17" ></mat-spinner>
+                        </button>
+                      </div>
+
+
+                    </div>
+
+                  </form>
+
+
+                  <!-- If email was verified -->
+                  <div *ngIf="isVerified === 'true'">
+
+                    <h6 class="mb-2"><strong>Your email has been verified <i class="text-success ft-check-circle"></i></strong></h6>
 
                     <div class="login-btn">
                       <button class="btn btn-outline-primary">
@@ -45,15 +99,10 @@
                       </button>
                     </div>
 
-
-                    <div class="recover-pass">
-                      <button class="btn btn-primary">
-                          Re-send Email
-                      </button>
-                    </div>
-
-
                   </div>
+
+
+
                 </div>
               </div>
             </div>

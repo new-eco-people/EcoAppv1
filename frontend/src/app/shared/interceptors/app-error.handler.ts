@@ -1,15 +1,15 @@
 import { ErrorHandler, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as lodash from 'lodash';
+import { ToasterService } from '../services/toaster/toaster.service';
 
 export class AppErrorHandler implements ErrorHandler {
 
-    constructor() { }
+    constructor(@Inject(ToasterService) private toastService: ToasterService) {}
 
     handleError(error: string): void {
+        this.toastService.error(error);
         console.log(error);
-        // const result = error.replace(new RegExp('%n%', 'g'), '\n');
-        // console.log(error);
     }
 
 }
@@ -31,9 +31,11 @@ export class AppErrors {
             const errors = new Object(error.errors);
 
             Object.keys(errors).forEach((props: string) => {
-                reactiveForm.controls[props].setErrors( { [props]: { error: errors[props][0] } } );
+                reactiveForm.controls[props].setErrors( { message: errors[props][0], serverError: true  } );
             });
             return reactiveForm;
         }
+
+        throw new Error('An error occurred, please try again later');
     }
 }

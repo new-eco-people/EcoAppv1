@@ -44,15 +44,8 @@ namespace Application.Entities.UserEntity.Command.SignUp
             if (result.User == null)
                 throw new CreationFailureException(nameof(User), result.Errors);
 
-            await _mediator.Publish(new UserCreated() { SignUpResult = result });
+            await _mediator.Publish(new UserCreated() { VerifyEmailData = result });
             return Unit.Value;
         }
-    }
-
-    public class SignUpResult 
-    {
-        public string Errors { get; set; }
-        public User User { get; set; }
-        public string EmailVerificationToken { get; set; }
     }
 }
