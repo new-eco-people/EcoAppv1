@@ -29,17 +29,17 @@ services:
     ports:
       - "5000:5000"
 
-  nginx_template:
-    restart: always
-    build:
-      dockerfile: Dockerfile
-      context: ./nginx_template
-    ports:
-      - "4000:4000"
+  # nginx_template:
+  #   restart: always
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./nginx_template
+  #   ports:
+  #     - "4000:4000"
 
-  template:
-    build:
-      context: ./template
-      dockerfile: Dockerfile
-    ports:
-      - "4201:4201"
+  # template:
+  #   build:
+  #     context: ./template
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "4201:4201"
