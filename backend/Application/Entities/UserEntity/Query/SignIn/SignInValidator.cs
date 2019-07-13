@@ -6,8 +6,8 @@ namespace Application.Entities.UserEntity.Query.SignIn
     {
         public SignInValidator()
         {
-            RuleFor(x => x.UserNameEmail).NotEmpty();
-            RuleFor(x => x.Password).NotEmpty();
+            RuleFor(x => x.EmailAddress).NotEmpty().WithMessage("Email is required").EmailAddress().WithMessage("Email is invalid");
+            RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required");
         }
     }
 }

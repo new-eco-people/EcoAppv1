@@ -14,16 +14,16 @@ const appRoutes: Routes = [
 
   {
     path: 'public',
-    loadChildren: './pages/public/public.module#PublicModule',
+    loadChildren: './public/public.module#PublicModule',
   },
   {
     path: 'private',
-    loadChildren: './pages/private/private.module#PrivateModule',
+    loadChildren: './private/private.module#PrivateModule',
     canActivate: [AuthGuard]
   },
   {
     path: 'admin',
-    loadChildren: './pages/admin/admin.module#AdminModule',
+    loadChildren: './admin/admin.module#AdminModule',
     canActivate: [AuthGuard]
   },
 ];

@@ -8,7 +8,7 @@ namespace Application.Entities.UserEntity.Command.SignUp
 {
     public class UserCreated : INotification
     {
-        public VerifyEmailData VerifyEmailData { get; set; }
+        public EmailData VerifyEmailData { get; set; }
     }
 
     public class UserCreatedHandler : INotificationHandler<UserCreated>

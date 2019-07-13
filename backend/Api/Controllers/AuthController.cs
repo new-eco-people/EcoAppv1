@@ -1,8 +1,10 @@
 using System.Net;
 using System.Threading.Tasks;
+using Application.Entities.UserEntity.Command.ResetPassword;
 using Application.Entities.UserEntity.Command.SignUp;
 using Application.Entities.UserEntity.Command.VerifyEmail;
 using Application.Entities.UserEntity.Query.SendConfirmEmail;
+using Application.Entities.UserEntity.Query.SendForgotPasswordEmail;
 using Application.Entities.UserEntity.Query.SignIn;
 using Application.Infrastructure.RequestResponsePipeline;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +24,7 @@ namespace Api.Controllers
         /// <response code="400">Failed to verify email, providing error message</response>
         [AllowAnonymous]
         [HttpPost("verify-email")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(VerfiyEmailResult), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> VerifyEmail(VerifyEmailCommand command) {
             return Ok(await Mediator.Send(command));
@@ -70,6 +72,36 @@ namespace Api.Controllers
         [AllowAnonymous]
         [HttpGet("resend-confirm-email")]
         public async Task<IActionResult> SendConfirmationEmail([FromQuery] SendConfirmEmailCommand command) {
+            return Ok(await Mediator.Send(command));
+            // return Ok(email);
+        }
+
+        /// <summary>
+        /// Send forgot password link to email address
+        /// </summary>
+        /// <remarks>Good!</remarks>
+        /// <response code="200">Email has been sent hopefully</response>
+        /// <response code="400">Failed to send email with error message</response>
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        [AllowAnonymous]
+        [HttpGet("forgot-password")]
+        public async Task<IActionResult> SendForgotPasswordEmail([FromQuery] SendForgotPasswordEmailCommand command) {
+            return Ok(await Mediator.Send(command));
+            // return Ok(email);
+        }
+
+        /// <summary>
+        /// Change user's password using token (resets user's password)
+        /// </summary>
+        /// <remarks>Good!</remarks>
+        /// <response code="200">Password has been changed and an email has been sent</response>
+        /// <response code="400">Failed to change password giving reasons</response>
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        [AllowAnonymous]
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ChangePassword(ResetPasswordCommand command) {
             return Ok(await Mediator.Send(command));
             // return Ok(email);
         }

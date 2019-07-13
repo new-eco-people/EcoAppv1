@@ -22,13 +22,13 @@ export interface ServerError {
 
 export class AppErrors {
     static setError(error: ServerError, reactiveForm: FormGroup) {
-        console.log(error);
         if (error.error) {
             throw new Error(error.error);
 
         } else if (!lodash.isEmpty(error.errors)) {
 
             const errors = new Object(error.errors);
+            console.log(errors);
 
             Object.keys(errors).forEach((props: string) => {
                 reactiveForm.controls[props].setErrors( { message: errors[props][0], serverError: true  } );
