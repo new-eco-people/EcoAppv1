@@ -15,50 +15,18 @@ namespace Infrastructure.Implementation.Email
         public EmailService(ILogger<EmailService> logger)
         {
             _logger = logger;
+            _hostname = Environment.GetEnvironmentVariable("HOSTNAME");
+            _client = new SendGridClient(Environment.GetEnvironmentVariable("SENDGRID_API"));
         }
-        public string VerifyEmailTemplateId = "d-ba9d004d434d49bfa5f7b137210c548e";
         private readonly ILogger _logger;
+        private readonly SendGridClient _client;
+        private readonly string _hostname;
 
+        // ----------------------------------------------- 
         public async Task SendAsync(UserCreated UserCreatedDetails)
         {
             await WriteToFile(UserCreatedDetails.VerifyEmailData.User.Email);
         }
-
-        public async Task SendVerifyEmailAsync(VerifyEmailData verifyEmailData)
-        {
-            var hostname = Environment.GetEnvironmentVariable("HOSTNAME");
-            var client = new SendGridClient(Environment.GetEnvironmentVariable("SENDGRID_API"));
-
-            var msg = new SendGridMessage();
-
-            msg.SetFrom(new EmailAddress("info@newecopeople.com", "Eco Team"));
-            msg.AddTo(new EmailAddress(
-                verifyEmailData.User.Email
-            ));
-
-            msg.SetTemplateId(VerifyEmailTemplateId);
-            string token = WebUtility.UrlEncode(verifyEmailData.Token);
-            string id = WebUtility.UrlEncode(verifyEmailData.User.Id.ToString());
-            
-            var data = new VerifyEmailObject() {
-                FirstName = verifyEmailData.User.UserDetail.FirstName,
-                Url = $"{hostname}/public/verify-email/?token={token}&userId={id}"
-            };
-
-
-            msg.SetTemplateData(data);
-            // var msgv1 = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            // var msgv1 = MailHelper.CreateSingleTemplateEmail(
-            //     new EmailAddress("noreply@newecopeople.com", "Eco Team"),
-            //     new EmailAddress(verifyEmailData.User.Email),
-            //     VerifyEmailTemplateId,
-            //     data
-            // );
-
-            await client.SendEmailAsync(msg);
-        }
-
-
 
         public async Task WriteToFile(string data) {
             using (var writer = new StreamWriter(Path.GetFullPath("emailmessage.txt"), append: false))
@@ -66,9 +34,65 @@ namespace Infrastructure.Implementation.Email
                 await writer.WriteLineAsync(data);
             }
         }
+        // ------------------------------------------------
 
+        public async Task SendVerifyEmailAsync(EmailData verifyEmailData)
+        {
+            // Send Grid template for verify email
+            string VerifyEmailTemplateId = "d-ba9d004d434d49bfa5f7b137210c548e";
 
+            var msg = EmailFunctions.GenerateMsg("noreply@newecopeople.com", "Eco Team",VerifyEmailTemplateId, verifyEmailData.User.Email);
 
+            string token = WebUtility.UrlEncode(verifyEmailData.Token);
+            string id = WebUtility.UrlEncode(verifyEmailData.User.Id.ToString());
+            
+            var data = new VerifyEmailObject() {
+                FirstName = verifyEmailData.User.UserDetail.FirstName,
+                Url = $"{_hostname}/public/verify-email?token={token}&userId={id}"
+            };
+
+            msg.SetTemplateData(data);
+
+            await _client.SendEmailAsync(msg);
+        }
+
+        public async Task SendForgotPasswordEmailAsync(EmailData VerifyEmailData)
+        {
+            var templateId = "d-dbaf10c1b0184df6af7d188f333bd863";
+
+            var msg = EmailFunctions.GenerateMsg("noreply@newecopeople.com", "Eco Team", templateId, VerifyEmailData.User.Email);
+
+                        string token = WebUtility.UrlEncode(VerifyEmailData.Token);
+            string id = WebUtility.UrlEncode(VerifyEmailData.User.Id.ToString());
+            
+            var data = new VerifyEmailObject() {
+                FirstName = VerifyEmailData.User.UserDetail.FirstName,
+                Url = $"{_hostname}/public/reset-password?token={token}&userId={id}"
+            };
+
+            msg.SetTemplateData(data);
+
+            await _client.SendEmailAsync(msg);
+        }
+
+        public async Task SendChangePasswordNotificationAsync(EmailData VerifyEmailData)
+        {
+            var templateId = "d-8dbe4d32d3c142ff97717ee4609073b9";
+            
+            var msg = EmailFunctions.GenerateMsg("noreply@newecopeople.com", "Eco Team", templateId, VerifyEmailData.User.Email);
+
+            string token = WebUtility.UrlEncode(VerifyEmailData.Token);
+            string id = WebUtility.UrlEncode(VerifyEmailData.User.Id.ToString());
+            
+            var data = new VerifyEmailObject() {
+                FirstName = VerifyEmailData.User.UserDetail.FirstName,
+                Url = $"{_hostname}/public/reset-password?token={token}&userId={id}"
+            };
+
+            msg.SetTemplateData(data);
+
+            await _client.SendEmailAsync(msg);
+        }
     }
 }
 

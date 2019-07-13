@@ -19,19 +19,18 @@ export class CommonValidator {
         };
     }
 
-    static CustomRequired(visibleFieldName: string): ValidatorFn {
+    static ValidPassword(): ValidatorFn {
         return (c: AbstractControl) => {
-            const result  = Validators.required(c);
+            const pattern  = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{5,}$');
 
-            if (!result) {
+            const result = pattern.test(c.value);
+
+            if (result) {
                 return null
             }
 
-            const v = {...result, message: `${visibleFieldName} is required`}
+            return {invalidPassword: true, message: `Min 5 chars with one lowercase, uppercase, special char and number`}
 
-            console.log(v);
-
-            return { notEqual: true };
         };
     }
 }

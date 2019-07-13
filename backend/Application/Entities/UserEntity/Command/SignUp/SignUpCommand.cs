@@ -13,7 +13,6 @@ namespace Application.Entities.UserEntity.Command.SignUp
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
-        public string Username { get; set; }
         public bool? AgreeToTermsAndCondition { get; set; }
     }
 
@@ -31,7 +30,7 @@ namespace Application.Entities.UserEntity.Command.SignUp
         {
             var newUser = new User() {
                 Email = request.EmailAddress,
-                UserName = request.Username,
+                UserName = request.EmailAddress,
                 AgreeToTermsAndCondition = request.AgreeToTermsAndCondition.Value,
                 UserDetail = new UserDetail() {
                     FirstName = request.FirstName,

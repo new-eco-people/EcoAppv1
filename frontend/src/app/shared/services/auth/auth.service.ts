@@ -26,8 +26,19 @@ export class AuthService extends BaseApiService  {
     return this.http.get(`${this.api}/resend-confirm-email?emailAddress=${email}`)
   }
 
-  signinUser(email: string, password: string) {
+  signinUser(data: any) {
     // your code for checking credentials and getting tokens for for signing in user
+    return this.http.post(`${this.api}/signin`, data);
+  }
+
+  sendForgotPasswordEmail(email: string) {
+    // resend-confirm-email
+    return this.http.get(`${this.api}/forgot-password?emailAddress=${email}`)
+  }
+
+  resetPassword(data: any) {
+    // data['token'] = encodeURIComponent(data['token']);
+    return this.http.post(`${this.api}/reset-password`, data);
   }
 
   logout() {

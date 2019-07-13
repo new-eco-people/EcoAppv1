@@ -9,12 +9,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FullLayoutComponent } from './shared/layouts/full/full-layout.component';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { SharedModule } from './shared/shared.module';
-import { PrivateComponent } from './pages/private/private.component';
-import { ContentLayoutComponent } from './shared/layouts/content/content-layout.component';
 
 
 
@@ -32,8 +29,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   @NgModule({
     declarations: [
       AppComponent,
-      FullLayoutComponent,
-      ContentLayoutComponent,
       SearchPipe,
       ],
     imports: [

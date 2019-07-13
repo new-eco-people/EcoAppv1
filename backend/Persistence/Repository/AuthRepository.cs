@@ -24,18 +24,18 @@ namespace Persistence.Repository
             _emailService = emailService;
         }
 
-        public async Task<VerifyEmailData> SignUp(User user, string Password) {
+        public async Task<EmailData> SignUp(User user, string Password) {
             var result = await _userManager.CreateAsync(user, Password);
 
             if (!result.Succeeded)
-                return new VerifyEmailData() {
+                return new EmailData() {
                 Errors = string.Join(',', result.Errors.Select(x=>x.Description)),
                 User = null
             };
             
             var EmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             
-            return new VerifyEmailData() { Errors = null, User = user, Token = EmailToken };
+            return new EmailData() { Errors = null, User = user, Token = EmailToken };
 
         }
 
@@ -72,25 +72,25 @@ namespace Persistence.Repository
             return result.Succeeded;
         }
 
-        public async Task<VerifyEmailData> SendVerificationEmail(string email) 
+        public async Task<EmailData> SendVerificationEmail(string email) 
         {
             var user = await _userManager.Users.Include(u => u.UserDetail).SingleOrDefaultAsync(u => u.NormalizedEmail == email.ToUpper());
 
             if (user == null)
-                return new VerifyEmailData(){ Errors = $"{email} has not been signed up to the ECO platform" };
+                return new EmailData(){ Errors = $"{email} has not been signed up to the ECO platform" };
 
             if (await _userManager.IsEmailConfirmedAsync(user))
-                return new VerifyEmailData(){ Errors = $"{email} has already been confirm" };
+                return new EmailData(){ Errors = $"{email} has already been confirm" };
 
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-            return new VerifyEmailData() {
+            return new EmailData() {
                 User = user,
                 Token = token
             };
         }
 
-        public async Task<bool> UsernameOrEmailAvailable(string usernameOrEmail)
+        public async Task<bool> EmailAvailable(string usernameOrEmail)
         {
             if (string.IsNullOrEmpty(usernameOrEmail))
                 throw new CustomMessageException("An error occurred, please try again later");
@@ -100,5 +100,44 @@ namespace Persistence.Repository
 
             return user == null;
         }
+
+        public async Task<EmailData> SendForgotPasswordEmail(string email)
+        {
+            var user = await _userManager.Users.Include(u => u.UserDetail).SingleOrDefaultAsync(u => u.NormalizedEmail == email.ToUpper());
+
+            if (user == null)
+                return new EmailData(){ Errors = $"{email} has not been signed up to the ECO platform" };
+
+             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+             
+            return new EmailData() {
+                User = user,
+                Token = token
+            };
+        }
+
+        public async Task<EmailData> VarifyAndChangeUserPassword(string token, string userId, string password)
+        {
+            var user = await _userManager.Users.Include(u => u.UserDetail).FirstOrDefaultAsync(u => u.Id.ToString() == userId);
+
+            if (user == null)
+                throw new CustomMessageException("An error occurred, please try again later");
+            
+            var result = _userManager.ResetPasswordAsync(user,token, password).Result;
+
+            if (!result.Succeeded)
+                return new EmailData() {
+                Errors = string.Join(',', result.Errors.Select(x=>x.Description)),
+                User = null
+            };
+
+            return new EmailData() { User = user };
+        }
+
+        // public Task<EmailData> ChangeUserPassword(string userId, string password)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
     }
 } 

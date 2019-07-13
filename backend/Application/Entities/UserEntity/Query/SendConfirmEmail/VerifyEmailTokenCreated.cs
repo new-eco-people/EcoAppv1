@@ -7,7 +7,7 @@ namespace Application.Entities.UserEntity.Query.SendConfirmEmail
 {
     public class VerifyEmailTokenCreated : INotification
     {
-        public VerifyEmailData VerifyEmailData { get; set; }
+        public EmailData VerifyEmailData { get; set; }
     }
 
     public class VerifyEmailTokenCreatedHandler : INotificationHandler<VerifyEmailTokenCreated>
