@@ -11,7 +11,6 @@ import { ResetPasswordComponent } from 'app/public/pages/reset-password/reset-pa
 import { BotDetectCaptchaModule } from 'angular-captcha';
 import { SendEmailVerificationComponent } from './pages/send-email-verification/send-email-verification.component';
 
-
 @NgModule({
     declarations: [
         SignupComponent,
@@ -26,7 +25,7 @@ import { SendEmailVerificationComponent } from './pages/send-email-verification/
     imports: [
         SharedModule,
         BotDetectCaptchaModule.forRoot({
-            captchaEndpoint: `${document.location.origin}/api/simple-captcha-endpoint.ashx`
+            captchaEndpoint: `${window.location.origin}/api/simple-captcha-endpoint.ashx`
         }),
     ],
     exports: [
