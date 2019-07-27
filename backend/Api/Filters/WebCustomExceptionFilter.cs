@@ -32,7 +32,6 @@ namespace Api.Filters
         {
             var jsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             
-            System.Console.WriteLine(context.Exception.ToString());
             if (context.Exception is Application.Exceptions.ValidationException)
             {
                 context.HttpContext.Response.ContentType = "application/json";

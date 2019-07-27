@@ -21,7 +21,7 @@ export class CommonValidator {
 
     static ValidPassword(): ValidatorFn {
         return (c: AbstractControl) => {
-            const pattern  = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{5,}$');
+            const pattern  = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&_#£~|])[A-Za-z\\d@$!%*?&_#£~|]{5,}$');
 
             const result = pattern.test(c.value);
 

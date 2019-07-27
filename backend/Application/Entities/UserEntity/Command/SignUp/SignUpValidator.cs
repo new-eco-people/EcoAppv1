@@ -1,13 +1,15 @@
 using Application.Infrastructure.Validations;
 using Application.Interfaces.IRepositories;
+using Application.Interfaces.IServices;
 using FluentValidation;
 
 namespace Application.Entities.UserEntity.Command.SignUp
 {
-    public class SignUpValidator : AbstractValidator<SignUpCommand>
+    public class SignUpValidator : CaptchaValidator<SignUpCommand>
     {
-        public SignUpValidator(IAuthRepository auth)
+        public SignUpValidator(IAuthRepository auth, ICaptchaService captcha) : base(captcha)
         {
+
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name is required");
 
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name is required");
@@ -17,8 +19,8 @@ namespace Application.Entities.UserEntity.Command.SignUp
 
             RuleFor(x => x.EmailAddress).NotEmpty().WithMessage("Email is required").EmailAddress().WithMessage("Email is invalid");
             
-            RuleFor(x => x.EmailAddress).MustAsync(async (x, email, y) => await auth.EmailAvailable(x.EmailAddress))
-                                 .WithMessage(x => $"{x.EmailAddress} has been taken");
+            // RuleFor(x => x.EmailAddress).MustAsync(async (x, email, y) => await auth.EmailAvailable(x.EmailAddress))
+            //                      .WithMessage(x => $"{x.EmailAddress} has been taken");
 
             RuleFor(x => x.AgreeToTermsAndCondition).Equal(true).WithMessage("Agree to our terms and condition to continue");
         }

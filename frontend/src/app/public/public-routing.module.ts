@@ -8,6 +8,7 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
 import { PublicFullLayoutComponent } from 'app/public/layouts/public-full/public-full-layout.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { SendEmailVerificationComponent } from './pages/send-email-verification/send-email-verification.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
         {
           path: 'reset-password',
           component: ResetPasswordComponent
+        },
+        {
+          path: 'send-email-verification',
+          component: SendEmailVerificationComponent
         },
       ]
   },

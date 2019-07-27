@@ -1,13 +1,14 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Exceptions;
+using Application.Infrastructure.Validations;
 using Application.Interfaces.IRepositories;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Entities.UserEntity.Command.SignUp
 {
-    public class SignUpCommand : IRequest<Unit>
+    public class SignUpCommand : CaptchaCredentials, IRequest<Unit>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

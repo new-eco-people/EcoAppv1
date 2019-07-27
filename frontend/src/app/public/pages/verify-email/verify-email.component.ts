@@ -4,8 +4,9 @@ import { AuthService } from 'app/shared/services/auth/auth.service';
 import { finalize } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CustomValidator } from 'app/shared/validators/custom-validators';
-import { AppErrors, ServerError } from 'app/shared/interceptors/app-error.handler';
 import { ToasterService } from 'app/shared/services/toaster/toaster.service';
+import { ServerError } from 'app/shared/interceptors/form-error-handler';
+import { FormErrorService } from 'app/shared/services/form-error/form-error.service';
 
 @Component({
   selector: 'app-verify-email',
@@ -25,7 +26,8 @@ export class VerifyEmailComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private feService: FormErrorService
     ) { }
 
   ngOnInit() {
@@ -74,7 +76,7 @@ export class VerifyEmailComponent implements OnInit {
       this.router.navigate(['public']);
     },
 
-    (error: any) => AppErrors.setError(error.error as ServerError, this.resendForm)
+    (error: any) => this.feService.setError(error.error as ServerError, this.resendForm)
 
     );
   }

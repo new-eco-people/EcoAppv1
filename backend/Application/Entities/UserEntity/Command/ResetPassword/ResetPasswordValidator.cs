@@ -1,11 +1,12 @@
 using Application.Infrastructure.Validations;
+using Application.Interfaces.IServices;
 using FluentValidation;
 
 namespace Application.Entities.UserEntity.Command.ResetPassword
 {
-    public class ChangePasswordValidator : AbstractValidator<ResetPasswordCommand>
+    public class ChangePasswordValidator : CaptchaValidator<ResetPasswordCommand>
     {
-        public ChangePasswordValidator()
+        public ChangePasswordValidator(ICaptchaService captcha) : base(captcha)
         {
             RuleFor(x => x.Token).NotEmpty().WithMessage("An error occurred, please try again later");
             RuleFor(x => x.UserId).NotEmpty().WithMessage("An error occurred, please try again later");

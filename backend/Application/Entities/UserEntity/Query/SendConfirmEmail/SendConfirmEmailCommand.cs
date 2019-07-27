@@ -2,12 +2,20 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Entities.UserEntity.Command.SignUp;
 using Application.Exceptions;
+using Application.Infrastructure.Validations;
 using Application.Interfaces.IRepositories;
 using MediatR;
 
 namespace Application.Entities.UserEntity.Query.SendConfirmEmail
 {
-    public class SendConfirmEmailCommand : IRequest<Unit>
+    public class SendConfirmEmailModel
+    {
+        public string EmailAddress { get; set; }
+        public string Code { get; set; }
+        public string Id { get; set; }
+    }
+
+    public class SendConfirmEmailCommand : CaptchaCredentials, IRequest<Unit>
     {
         public string EmailAddress { get; set; }
     }

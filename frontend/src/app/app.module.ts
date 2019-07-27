@@ -14,8 +14,6 @@ import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { SharedModule } from './shared/shared.module';
 
 
-
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true,
     wheelPropagation: false
@@ -44,7 +42,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
           deps: [HttpClient]
         }
       }),
-      PerfectScrollbarModule
+      PerfectScrollbarModule,
     ],
     providers: [
       AuthGuard,
