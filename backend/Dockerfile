@@ -1,6 +1,14 @@
 FROM microsoft/dotnet AS build-env
 WORKDIR /app
 
+# install System.Drawing native dependencies
+RUN apt-get update \
+    && apt-get install -y --allow-unauthenticated \
+        libc6-dev \
+        libgdiplus \
+        libx11-dev \
+     && rm -rf /var/lib/apt/lists/*
+
 # Copy everything .dockerignore ignores the rest of the files
 COPY . ./
 

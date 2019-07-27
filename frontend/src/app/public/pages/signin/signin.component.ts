@@ -5,6 +5,7 @@ import { AuthService } from 'app/shared/services/auth/auth.service';
 import { finalize } from 'rxjs/operators';
 import { ToasterService } from 'app/shared/services/toaster/toaster.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CaptchaComponent } from 'angular-captcha';
 
 @Component({
   selector: 'app-signin',

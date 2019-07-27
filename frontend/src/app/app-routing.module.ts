@@ -26,6 +26,11 @@ const appRoutes: Routes = [
     loadChildren: './admin/admin.module#AdminModule',
     canActivate: [AuthGuard]
   },
+  {
+    path: '**',
+    redirectTo: 'public',
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({

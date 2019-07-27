@@ -21,9 +21,9 @@ export class AuthService extends BaseApiService  {
     return this.http.post(`${this.api}/verify-email`, data);
   }
 
-  resendEmailConfirmLink(email: string) {
+  resendEmailConfirmLink(data: any) {
     // resend-confirm-email
-    return this.http.get(`${this.api}/resend-confirm-email?emailAddress=${email}`)
+    return this.http.post(`${this.api}/resend-confirm-email`, data)
   }
 
   signinUser(data: any) {
@@ -31,9 +31,9 @@ export class AuthService extends BaseApiService  {
     return this.http.post(`${this.api}/signin`, data);
   }
 
-  sendForgotPasswordEmail(email: string) {
+  sendForgotPasswordEmail(data: any) {
     // resend-confirm-email
-    return this.http.get(`${this.api}/forgot-password?emailAddress=${email}`)
+    return this.http.post(`${this.api}/forgot-password`, data);
   }
 
   resetPassword(data: any) {

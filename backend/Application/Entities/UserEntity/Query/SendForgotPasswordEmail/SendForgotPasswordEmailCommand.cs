@@ -1,12 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Exceptions;
+using Application.Infrastructure.Validations;
 using Application.Interfaces.IRepositories;
 using MediatR;
 
 namespace Application.Entities.UserEntity.Query.SendForgotPasswordEmail
 {
-    public class SendForgotPasswordEmailCommand : IRequest<Unit>
+    public class SendForgotPasswordEmailCommand : CaptchaCredentials, IRequest<Unit>
     {
         public string EmailAddress { get; set; }
     }

@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CustomValidator } from 'app/shared/validators/custom-validators';
 import { AuthService } from 'app/shared/services/auth/auth.service';
 import { finalize } from 'rxjs/operators';
 import { ToasterService } from 'app/shared/services/toaster/toaster.service';
 import { Router } from '@angular/router';
-import { AppErrors, ServerError } from 'app/shared/interceptors/app-error.handler';
+import { CaptchaComponent } from 'angular-captcha';
+import { ServerError } from 'app/shared/interceptors/form-error-handler';
+import { FormErrorService } from 'app/shared/services/form-error/form-error.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -18,11 +20,16 @@ export class ForgotPasswordComponent implements OnInit {
 
   loading = false;
 
+     // uncomment the line bellow if you use Angular 8
+  @ViewChild(CaptchaComponent) captchaComponent: CaptchaComponent;
+
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private toast: ToasterService,
-    private router: Router
+    private router: Router,
+    private formerrorService: FormErrorService
     ) { }
 
   ngOnInit() {
@@ -31,14 +38,19 @@ export class ForgotPasswordComponent implements OnInit {
 
   initializeForm() {
     this.forgotPasswordForm = this.fb.group({
-      emailAddress: [null, [CustomValidator.CustomRequired('Email'), CustomValidator.CustomEmail()]]
+      emailAddress: [null, [CustomValidator.CustomRequired('Email'), CustomValidator.CustomEmail()]],
+      code: [null, [CustomValidator.CustomRequired('Capcha')]],
+      id: [null]
     });
   }
 
   sendEmail() {
+    // Start loading...
     this.loading = true;
 
-    this.authService.sendForgotPasswordEmail(this.forgotPasswordForm.value['emailAddress'])
+    this.forgotPasswordForm.patchValue({ id: this.captchaComponent.captchaId });
+
+    this.authService.sendForgotPasswordEmail(this.forgotPasswordForm.value)
     .pipe(finalize(() => this.loading = false))
     .subscribe((x: any) => {
 
@@ -47,7 +59,8 @@ export class ForgotPasswordComponent implements OnInit {
 
     },
     (error: any) => {
-      AppErrors.setError(error.error as ServerError, this.forgotPasswordForm);
+      this.formerrorService.setError(error.error as ServerError, this.forgotPasswordForm);
+      this.captchaComponent.reloadImage();
       }
     )
 

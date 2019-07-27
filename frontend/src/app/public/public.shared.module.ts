@@ -7,6 +7,10 @@ import { SignupComponent } from 'app/public/pages/signup/signup.component';
 import { VerifyEmailComponent } from 'app/public/pages/verify-email/verify-email.component';
 import { ForgotPasswordComponent } from 'app/public/pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from 'app/public/pages/reset-password/reset-password.component';
+// import the Angular Captcha Module
+import { BotDetectCaptchaModule } from 'angular-captcha';
+import { SendEmailVerificationComponent } from './pages/send-email-verification/send-email-verification.component';
+
 
 @NgModule({
     declarations: [
@@ -17,9 +21,13 @@ import { ResetPasswordComponent } from 'app/public/pages/reset-password/reset-pa
         VerifyEmailComponent,
         ForgotPasswordComponent,
         ResetPasswordComponent,
+        SendEmailVerificationComponent,
     ],
     imports: [
-        SharedModule
+        SharedModule,
+        BotDetectCaptchaModule.forRoot({
+            captchaEndpoint: `${document.location.origin}/api/simple-captcha-endpoint.ashx`
+        }),
     ],
     exports: [
         SharedModule,
@@ -30,6 +38,7 @@ import { ResetPasswordComponent } from 'app/public/pages/reset-password/reset-pa
         VerifyEmailComponent,
         ForgotPasswordComponent,
         ResetPasswordComponent,
+        SendEmailVerificationComponent,
     ]
 })
 

@@ -2,12 +2,13 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Exceptions;
+using Application.Infrastructure.Validations;
 using Application.Interfaces.IRepositories;
 using MediatR;
 
 namespace Application.Entities.UserEntity.Command.ResetPassword
 {
-    public class ResetPasswordCommand : IRequest<Unit>
+    public class ResetPasswordCommand : CaptchaCredentials, IRequest<Unit>
     {
         public string UserId { get; set; }
         public string Token { get; set; }

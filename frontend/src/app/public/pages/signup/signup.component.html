@@ -1,7 +1,7 @@
 <!--Registration Page Starts-->
 <section id="regestration">
     <div class="container-fluid">
-      <div class="row full-height-vh m-0">
+      <div class="row m-0">
         <div class="col-12 d-flex align-items-center justify-content-center">
           <div class="card">
             <div class="card-content">
@@ -130,6 +130,7 @@
                         </mat-form-field>
                       </div>
                       
+                      <!-- Agree to terms and conditions -->
                       <div class="custom-control custom-checkbox custom-control-inline mb-3">
                         <input
                           type="checkbox"
@@ -152,6 +153,29 @@
 
                         </span>
 
+                      </div>
+
+                      <!-- Captcha -->
+                      <div>
+                        <botdetect-captcha captchaStyleName="initialCaptchaStyle" title="none"></botdetect-captcha>  
+                        
+                        <mat-form-field>
+                          <input 
+                            matInput
+                            id="initialCaptchaUserInput" 
+                            name="initialCaptchaUserInput"
+                            type="text" 
+                            placeholder="Type Captcha"
+
+                            formControlName="code"
+                            > 
+
+                          <!-- Capcha Error Message -->
+                          <mat-error class="error-block">
+                            <app-validator-error-message [form]="signupForm" [field]="'code'" ></app-validator-error-message>
+                          </mat-error>
+
+                        </mat-form-field>
                       </div>
 
                       <div class="fg-actions d-flex justify-content-between">

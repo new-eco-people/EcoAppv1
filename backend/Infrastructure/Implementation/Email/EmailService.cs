@@ -53,6 +53,8 @@ namespace Infrastructure.Implementation.Email
 
             msg.SetTemplateData(data);
 
+            // await WriteToFile(data.Url);
+
             await _client.SendEmailAsync(msg);
         }
 
