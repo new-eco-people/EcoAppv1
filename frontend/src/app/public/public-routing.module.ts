@@ -9,12 +9,11 @@ import { PublicFullLayoutComponent } from 'app/public/layouts/public-full/public
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SendEmailVerificationComponent } from './pages/send-email-verification/send-email-verification.component';
-import { AppRoutes } from 'app/shared/routes/app.routes';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: AppRoutes.public.signIn.name,
+    redirectTo: 'signin',
     pathMatch: 'full',
   },
   {
@@ -22,27 +21,27 @@ const routes: Routes = [
       component: PublicContentLayoutComponent,
       children: [
         {
-          path: AppRoutes.public.signIn.name,
+          path: 'signin',
           component: SigninComponent
         },
         {
-          path: AppRoutes.public.signUp.name,
+          path: 'signup',
           component: SignupComponent
         },
         {
-          path: AppRoutes.public.verifyEmail.name,
+          path: 'verify-email',
           component: VerifyEmailComponent
         },
         {
-          path: AppRoutes.public.forgotPassword.name,
+          path: 'forgot-password',
           component: ForgotPasswordComponent
         },
         {
-          path: AppRoutes.public.resetPassword.name,
+          path: 'reset-password',
           component: ResetPasswordComponent
         },
         {
-          path: AppRoutes.public.sendEmailVerification.name,
+          path: 'send-email-verification',
           component: SendEmailVerificationComponent
         },
       ]
