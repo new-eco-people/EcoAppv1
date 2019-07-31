@@ -25,7 +25,7 @@ import { SendEmailVerificationComponent } from './pages/send-email-verification/
     imports: [
         SharedModule,
         BotDetectCaptchaModule.forRoot({
-            captchaEndpoint: `${window.location.origin}/api/simple-captcha-endpoint.ashx`
+            captchaEndpoint: `/api/simple-captcha-endpoint.ashx`
         }),
     ],
     exports: [

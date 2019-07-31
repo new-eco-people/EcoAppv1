@@ -16,6 +16,7 @@ using Application.Infrastructure.RequestResponsePipeline;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Application.Interfaces.IExceptions;
 
 namespace Api.Filters
 {
@@ -46,24 +47,19 @@ namespace Api.Filters
                 return;
             }
 
-            var code = HttpStatusCode.InternalServerError;
+            var code = (int)HttpStatusCode.InternalServerError;
+            var exception = context.Exception as IGeneralException;
 
-            if (context.Exception is NotFoundException)
+            if (exception != null )
             {
-                code = HttpStatusCode.NotFound;
+                code = (int)exception.StatusCode;
             }
-
-            if (context.Exception is CreationFailureException)
-            {
-                code = HttpStatusCode.BadRequest;
-            }
-
             var errorresponse = new ErrorResponse() { Error =  context.Exception.Message };
 
             errorresponse.StackTrace = _env.IsDevelopment() || _env.IsStaging() ? context.Exception.StackTrace : null;
 
             context.HttpContext.Response.ContentType = "application/json";
-            context.HttpContext.Response.StatusCode = (int)code;
+            context.HttpContext.Response.StatusCode = code;
             context.Result = new JsonResult(errorresponse, jsonSerializerSettings);
         }
     }

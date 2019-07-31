@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using Application.Interfaces.IExceptions;
 using FluentValidation.Results;
 
 namespace Application.Exceptions
@@ -32,7 +34,5 @@ namespace Application.Exceptions
         }
 
         public IDictionary<string, string[]> Failures { get; }
-    
-    
     }
 }

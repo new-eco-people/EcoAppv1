@@ -54,6 +54,9 @@ namespace Persistence.Repository
             if (!login)
                 return null;
 
+            if (!user.EmailConfirmed)
+                throw new ConfirmEmailException(user.Email);
+
             return user;
         }
 

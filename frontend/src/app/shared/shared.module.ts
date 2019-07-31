@@ -24,6 +24,7 @@ import { AuthService } from './services/auth/auth.service';
 import { ToasterService } from './services/toaster/toaster.service';
 import { ValidatorErrorMessageComponent } from './validators/validator-error-message/validator-error-message.component';
 import { FormErrorService } from './services/form-error/form-error.service';
+import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 
 
 
@@ -75,6 +76,7 @@ import { FormErrorService } from './services/form-error/form-error.service';
         AuthService,
         ToasterService,
         FormErrorService,
+        ErrorInterceptorProvider,
         { provide: ErrorHandler, useClass: AppErrorHandler },
     ]
 })

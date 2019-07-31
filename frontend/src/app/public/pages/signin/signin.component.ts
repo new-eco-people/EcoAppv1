@@ -6,6 +6,8 @@ import { finalize } from 'rxjs/operators';
 import { ToasterService } from 'app/shared/services/toaster/toaster.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CaptchaComponent } from 'angular-captcha';
+import { ServerError } from 'app/shared/interceptors/form-error-handler';
+import { FormErrorService } from 'app/shared/services/form-error/form-error.service';
 
 @Component({
   selector: 'app-signin',
@@ -24,7 +26,8 @@ export class SigninComponent implements OnInit {
     private authService: AuthService,
     private toast: ToasterService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private feService: FormErrorService
   ) { }
 
   ngOnInit() {
@@ -48,9 +51,9 @@ export class SigninComponent implements OnInit {
       .pipe(finalize(() => this.loading = false))
       .subscribe((x) => {
         console.log(x);
-        this.router.navigate([this.returnUrl]);
+        // this.router.navigate([this.returnUrl]);
       },
-        error => {this.toast.error('Invalid login credentials')}
+        (error) => {this.feService.setError(error.error as ServerError, this.signInForm); }
       )
   }
 

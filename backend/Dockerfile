@@ -1,14 +1,6 @@
 FROM microsoft/dotnet AS build-env
 WORKDIR /app
 
-# install System.Drawing native dependencies
-RUN apt-get update \
-    && apt-get install -y --allow-unauthenticated \
-        libc6-dev \
-        libgdiplus \
-        libx11-dev \
-     && rm -rf /var/lib/apt/lists/*
-
 # Copy everything .dockerignore ignores the rest of the files
 COPY . ./
 
@@ -25,8 +17,22 @@ WORKDIR /app
 # Build runtime image
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
+
+# install System.Drawing native dependencies
+RUN apt-get update \
+    && apt-get install -y --allow-unauthenticated \
+        libc6-dev \
+        libgdiplus \
+        libx11-dev \
+     && rm -rf /var/lib/apt/lists/*
+
 COPY --from=build-env /app/Api/out .
 
+# Copy botdetect.xml for botdetect captcha
+# RUN mkdir Api
+COPY --from=build-env /app/Api/botdetect.xml ./
+
+# Copy countries and states json files
 RUN mkdir Persistence/data/locations
 COPY --from=build-env /app/Persistence/data/locations ./Persistence/data/locations
 
