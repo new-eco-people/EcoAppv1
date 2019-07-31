@@ -83,7 +83,7 @@
                       </div>
                       <div class="fg-actions d-flex justify-content-between">
                         <div class="login-btn">
-                          <button type="button" class="btn btn-outline-primary">
+                          <button type="button" [disabled]="signInForm.invalid"  class="btn btn-outline-primary">
                             <a
                               [routerLink]="['/public/signup']"
                               class="text-decoration-none"

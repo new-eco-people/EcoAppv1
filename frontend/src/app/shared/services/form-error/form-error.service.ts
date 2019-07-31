@@ -20,7 +20,7 @@ export class FormErrorService {
     } else if (!lodash.isEmpty(error.errors)) {
 
         const errors = new Object(error.errors);
-        console.log(errors);
+        // console.log(errors);
 
         Object.keys(errors).forEach((props: string) => {
             reactiveForm.controls[props].setErrors( { message: errors[props][0], serverError: true  } );

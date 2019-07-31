@@ -28,7 +28,7 @@ namespace Application.Entities.UserEntity.Query.SignIn
             var user  = await _auth.SignIn(request.EmailAddress, request.Password);
 
             if (user == null)
-                throw new NotFoundException(nameof(User), request.EmailAddress);
+                throw new CustomMessageException("Invalid login credentials");
 
             var response = SignInModel.Create(user);
             response.Token = TokenFunctions.generateUserToken(user, request.RememberMe.HasValue);
