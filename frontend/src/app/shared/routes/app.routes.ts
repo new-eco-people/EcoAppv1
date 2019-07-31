@@ -11,7 +11,7 @@ export const AppRoutes = {
         get signIn() {
             return {
                 name: 'signin',
-                fullPath: `${this.default}/signin`
+                fullPath: `public/signin`
             }
         },
 
@@ -20,7 +20,7 @@ export const AppRoutes = {
         get signUp() {
             return {
                 name: 'signup',
-                fullPath: `${this.default}/signup`
+                fullPath: `public/signup`
             }
         },
 
@@ -28,7 +28,7 @@ export const AppRoutes = {
         get verifyEmail() {
             return {
                 name: 'verify-email',
-                fullPath: `${this.default}/verify-email`
+                fullPath: `public/verify-email`
             }
         },
 
@@ -36,7 +36,7 @@ export const AppRoutes = {
         get forgotPassword() {
             return {
                 name: 'forgot-password',
-                fullPath: `${this.default}/forgot-password`
+                fullPath: `public/forgot-password`
             }
         },
 
@@ -44,7 +44,7 @@ export const AppRoutes = {
         get resetPassword() {
             return {
                 name: 'reset-password',
-                fullPath: `${this.default}/reset-password`
+                fullPath: `public/reset-password`
             }
         },
 
@@ -52,7 +52,7 @@ export const AppRoutes = {
         get sendEmailVerification() {
             return {
                 name: 'send-email-verification',
-                fullPath: `${this.default}/send-email-verification`
+                fullPath: `public/send-email-verification`
             }
         },
     },
@@ -66,7 +66,7 @@ export const AppRoutes = {
         get profile() {
             return {
                 name: 'profile',
-                fullPath: `${this.default}/profile`
+                fullPath: `private/profile`
             }
         },
 
