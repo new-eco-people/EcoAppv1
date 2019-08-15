@@ -15,6 +15,7 @@ export class FormErrorService {
   setError(error: ServerError, reactiveForm: FormGroup) {
     if (error.error) {
         this.toast.error(error.error);
+        console.log(error);
         return;
 
     } else if (!lodash.isEmpty(error.errors)) {

@@ -53,9 +53,9 @@ namespace Infrastructure.Implementation.Email
 
             msg.SetTemplateData(data);
 
-            await WriteToFile(data.Url);
+            // await WriteToFile(data.Url);
 
-            // await _client.SendEmailAsync(msg);
+            await _client.SendEmailAsync(msg);
         }
 
         public async Task SendForgotPasswordEmailAsync(EmailData VerifyEmailData)

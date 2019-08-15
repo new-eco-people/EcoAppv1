@@ -3,6 +3,7 @@ import { PrivateContentLayoutComponent } from './layouts/private-content/private
 import { PrivateFullLayoutComponent } from './layouts/private-full/private-full-layout.component';
 import { SharedModule } from '../shared/shared.module';
 import { PrivateHomeComponent } from 'app/private/pages/private-home/private-home.component';
+import { FeedsService } from 'app/shared/services/feeds/feeds.service';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,9 @@ import { PrivateHomeComponent } from 'app/private/pages/private-home/private-hom
         PrivateContentLayoutComponent,
         PrivateFullLayoutComponent,
         PrivateHomeComponent
+    ],
+    providers: [
+        FeedsService
     ]
 })
 
