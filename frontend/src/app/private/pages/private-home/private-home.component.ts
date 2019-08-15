@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FeedsService } from 'app/shared/services/feeds/feeds.service';
 
 @Component({
   selector: 'app-private-home',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivateHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private feedService: FeedsService) { }
 
   ngOnInit() {
+    this.getProblemFeeds();
+  }
+
+  getProblemFeeds() {
+    this.feedService.getProblems().subscribe(x => {
+      console.log(x)
+    });
   }
 
 }

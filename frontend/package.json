@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-redux/store": "^9.0.0",
     "@angular/animations": "^7.2.15",
     "@angular/cdk": "^7.3.6",
     "@angular/common": "7.2.9",
@@ -25,6 +26,7 @@
     "@angular/platform-browser-dynamic": "7.2.9",
     "@angular/platform-server": "7.2.9",
     "@angular/router": "7.2.9",
+    "@auth0/angular-jwt": "^2.1.0",
     "@ng-bootstrap/ng-bootstrap": "4.0.0",
     "@ng-select/ng-select": "2.11.2",
     "@ngrx/store": "6.1.0",
@@ -44,9 +46,11 @@
     "node-sass": "4.12.0",
     "primeng": "^8.0.2",
     "prismjs": "1.15.0",
+    "redux": "4.0.1",
     "resize-observer-polyfill": "1.5.0",
     "rxjs": "6.4.0",
     "screenfull": "3.3.3",
+    "tassign": "^1.0.0",
     "tslib": "1.9.0",
     "web-animations-js": "2.2.5",
     "zone.js": "0.8.29"

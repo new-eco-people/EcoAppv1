@@ -14,6 +14,7 @@ namespace Api.Infrastructure.Captcha
             // create a captcha instance to be used for the captcha validation 
             SimpleCaptcha simpleCaptcha = new SimpleCaptcha();
             return simpleCaptcha.Validate(Code, Id);
+            // return false;
         }
     }
 }
