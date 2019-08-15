@@ -57,7 +57,7 @@ export class SignupComponent implements OnInit {
     this.authService.signupUser(this.signupForm.value)
     .pipe(finalize(() => this.loading = false))
     .subscribe((x) => {
-      this.toasterService.success('An email has been sent to you, please verify your email address');
+      this.toasterService.success('A verification email has been sent to your email address');
       this.router.navigate(['public']);
     },
     (error: any) => {
