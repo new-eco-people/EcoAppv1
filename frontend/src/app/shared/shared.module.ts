@@ -1,30 +1,34 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { CommonModule } from "@angular/common";
-import { RouterModule } from "@angular/router";
-
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
-
-//COMPONENTS
-import { FooterComponent } from "./components/footer/footer.component";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// COMPONENTS
+import { FooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotificationSidebarComponent } from './components/notification-sidebar/notification-sidebar.component';
-
-//DIRECTIVES
-import { ToggleFullscreenDirective } from "./directives/toggle-fullscreen.directive";
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SidebarDirective } from './directives/sidebar.directive';
+import { SidebarAnchorToggleDirective } from './directives/sidebaranchortoggle.directive';
 import { SidebarLinkDirective } from './directives/sidebarlink.directive';
 import { SidebarListDirective } from './directives/sidebarlist.directive';
-import { SidebarAnchorToggleDirective } from './directives/sidebaranchortoggle.directive';
 import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { NgMaterial } from './modules/ng-material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth/auth.service';
+// DIRECTIVES
+import { ToggleFullscreenDirective } from './directives/toggle-fullscreen.directive';
 import { AppErrorHandler } from './interceptors/app-error.handler';
+import { NgMaterial } from './modules/ng-material.module';
+import { AuthService } from './services/auth/auth.service';
+import { ToasterService } from './services/toaster/toaster.service';
+import { ValidatorErrorMessageComponent } from './validators/validator-error-message/validator-error-message.component';
+import { FormErrorService } from './services/form-error/form-error.service';
+import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
+import { JwtInterceptorProvider } from './interceptors/jwt.interceptor';
+
+
+
 
 @NgModule({
     exports: [
@@ -43,6 +47,7 @@ import { AppErrorHandler } from './interceptors/app-error.handler';
         NgMaterial,
         FormsModule,
         ReactiveFormsModule,
+        ValidatorErrorMessageComponent,
     ],
     imports: [
         RouterModule,
@@ -65,10 +70,15 @@ import { AppErrorHandler } from './interceptors/app-error.handler';
         SidebarLinkDirective,
         SidebarListDirective,
         SidebarAnchorToggleDirective,
-        SidebarToggleDirective
+        SidebarToggleDirective,
+        ValidatorErrorMessageComponent
     ],
     providers: [
         AuthService,
+        ToasterService,
+        FormErrorService,
+        ErrorInterceptorProvider,
+        JwtInterceptorProvider,
         { provide: ErrorHandler, useClass: AppErrorHandler },
     ]
 })

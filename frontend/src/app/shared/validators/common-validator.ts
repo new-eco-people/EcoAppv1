@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
 export class CommonValidator {
 
@@ -15,15 +15,22 @@ export class CommonValidator {
                 return null;
             }
 
-            return { invalidConfirmation: true };
+            return { invalidConfirmation: true, message: `field must match ${field}` };
         };
     }
 
-    static Equal(fievalueld: string): ValidatorFn {
+    static ValidPassword(): ValidatorFn {
         return (c: AbstractControl) => {
-            
+            const pattern  = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&_#£~|])[A-Za-z\\d@$!%*?&_#£~|]{5,}$');
 
-            return { notEqual: true };
+            const result = pattern.test(c.value);
+
+            if (result) {
+                return null
+            }
+
+            return {invalidPassword: true, message: `Min 5 chars with one lowercase, uppercase, special char and number`}
+
         };
     }
 }

@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
 export class BaseApiService {
   api: string;
 
-  constructor(document: Document, path: string) {
-    this.api = `${document.location.origin}/api/${path}`;
+  constructor(document: Document, path: string = null) {
+    const filteredPath = path ? '/' + path : '';
+    this.api = `${document.location.origin}/api${filteredPath}`;
   }
 
 }

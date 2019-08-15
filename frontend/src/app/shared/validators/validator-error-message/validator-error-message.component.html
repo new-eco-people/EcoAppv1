@@ -1,0 +1,11 @@
+<!-- Password Error Message -->
+
+    <div *ngIf="form && ((form.get(field).touched && form.get(field).invalid) || form.get(field).hasError('serverError') )">
+        <small>{{ form.get(field).errors['message'] }}</small>
+        <!-- <small>Error</small> -->
+        <!-- Server Error -->
+        <!-- <small *ngIf="signupForm.get('password').hasError('password')">
+          {{signupForm.get('password').getError('password').error}}
+        </small> -->
+    </div>
+    

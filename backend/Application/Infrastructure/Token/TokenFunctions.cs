@@ -9,19 +9,15 @@ namespace Application.Infrastructure.Token
 {
     public class TokenFunctions
     {
-        public static string generateUserToken(User user, bool confirmPhone = false) {
+        public static string generateUserToken(User user, bool rememberMe = false) {
                         // Create token an sent;
-            var claims = (confirmPhone == true) ? ConfirmPhoneTime(user) : defaultClaim(user);
+            var claims = defaultClaim(user);
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("AUTHORIZATION_TOKEN")));
         
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var tokenDescriptor = new SecurityTokenDescriptor(){
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
+            var tokenDescriptor = rememberMe ? RememberMeDescriptor(claims, creds) : defaultDescriptor(claims, creds);
 
             var tokenhandler = new JwtSecurityTokenHandler();
 
@@ -30,6 +26,22 @@ namespace Application.Infrastructure.Token
             // var data = new {token = tokenhandler.WriteToken(token)};
 
             return tokenhandler.WriteToken(token);
+        }
+
+        public static SecurityTokenDescriptor defaultDescriptor(Claim[] claims, SigningCredentials creds) {
+            return new SecurityTokenDescriptor(){
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddHours(1),
+                SigningCredentials = creds
+            };
+        }
+
+        public static SecurityTokenDescriptor RememberMeDescriptor(Claim[] claims, SigningCredentials creds) {
+            return new SecurityTokenDescriptor(){
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(10),
+                SigningCredentials = creds
+            };
         }
 
         
@@ -63,16 +75,6 @@ namespace Application.Infrastructure.Token
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-            };
-
-            return claims;
-        }
-
-        private static Claim[] ConfirmPhoneTime(User user) {
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, DateTime.Now.AddMinutes(5).ToString())
             };
 
             return claims;

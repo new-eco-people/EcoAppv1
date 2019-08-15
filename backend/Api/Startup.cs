@@ -5,10 +5,12 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Api.Extensions;
 using Api.Filters;
+using Api.Infrastructure;
 using Application.Entities.UserEntity.Command.SignUp;
 using Application.Infrastructure.AutoMapper;
 using Application.Infrastructure.RequestResponsePipeline;
 using AutoMapper;
+using BotDetect.Web;
 using FluentValidation.AspNetCore;
 using Infrastructure.Extensions;
 using MediatR;
@@ -70,6 +72,9 @@ namespace Api
             // Add Infrastructure implementation of Application interfaces
             services.AddInfractureServices();
 
+            // Add Api implementation of Application interfaces
+            services.AddAPIServices();
+
             // Add AutoMapper
             services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
             
@@ -87,6 +92,10 @@ namespace Api
 
             // Check for JWT authentication where neccessary
             services.AddJwtAuthentication();
+
+            services.AddMemoryCache(); // Adds a default in-memory  
+                                       // implementation of  
+                                       // IDistributedCache
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,6 +115,9 @@ namespace Api
             if (env.IsDevelopment() || env.IsStaging()) {
                 app.UseSwaggerDocumentation();
             }
+
+            // Implement simple capcha
+            app.UseSimpleCaptcha(Configuration.GetSection("BotDetect")); 
 
 
             // Make sure the database is created and the migration that was created is up to date..
