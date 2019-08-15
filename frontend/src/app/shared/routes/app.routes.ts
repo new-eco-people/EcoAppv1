@@ -8,52 +8,40 @@ export const AppRoutes = {
         default: 'public',
 
         // Signin route
-        get signIn() {
-            return {
-                name: 'signin',
-                fullPath: `public/signin`
-            }
+         signIn: {
+            name: 'signin',
+            path: `public/signin`
         },
 
         // Signup route
         // get signUp() { return `${this.default}/signup`},
-        get signUp() {
-            return {
-                name: 'signup',
-                fullPath: `public/signup`
-            }
+        signUp: {
+            name: 'signup',
+            path: `public/signup`
         },
 
         // Verify email route
-        get verifyEmail() {
-            return {
-                name: 'verify-email',
-                fullPath: `public/verify-email`
-            }
+        verifyEmail: {
+            name: 'verify-email',
+            path: `public/verify-email`
         },
 
         // forgot password route
-        get forgotPassword() {
-            return {
-                name: 'forgot-password',
-                fullPath: `public/forgot-password`
-            }
+        forgotPassword: {
+            name: 'forgot-password',
+            path: `public/forgot-password`
         },
 
         // reset password route
-        get resetPassword() {
-            return {
+        resetPassword: {
                 name: 'reset-password',
-                fullPath: `public/reset-password`
-            }
+                path: `public/reset-password`
         },
 
         // Send email verification
-        get sendEmailVerification() {
-            return {
+        sendEmailVerification: {
                 name: 'send-email-verification',
-                fullPath: `public/send-email-verification`
-            }
+                path: `public/send-email-verification`
         },
     },
 
@@ -63,13 +51,22 @@ export const AppRoutes = {
         default: 'private',
 
         // User profile page
-        get profile() {
-            return {
-                name: 'profile',
-                fullPath: `private/profile`
-            }
-        },
+        profile: {
+            default: 'profile',
+            path: 'private/profile',
 
+
+            intro : {
+                default: 'intro',
+                path: 'private/profile/intro'
+            }
+        }
+
+    },
+
+    admin : {
+        // Home page for admin
+        default: 'admin'
     }
 
 }

@@ -57,3 +57,24 @@ mat-form-field {
     stroke: #027779!important;
 }
 
+.profile-section .profile-menu {
+    position: relative;
+    top: -30px;
+    padding-bottom: 0;
+    padding-left: 15px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#user-profile .profile-with-cover .profil-cover-details {
+    margin-top: -50px;
+}
+
+#user-profile .profile-with-cover .profile-cover-buttons {
+    position: absolute;
+    top: 250px;
+    right: 0;
+}

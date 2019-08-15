@@ -26,6 +26,8 @@ import { ValidatorErrorMessageComponent } from './validators/validator-error-mes
 import { FormErrorService } from './services/form-error/form-error.service';
 import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 import { JwtInterceptorProvider } from './interceptors/jwt.interceptor';
+import { AuthGuard } from './services/auth/auth-guard.service';
+import { PublicGuard } from './guards/public.guard';
 
 
 
@@ -74,6 +76,8 @@ import { JwtInterceptorProvider } from './interceptors/jwt.interceptor';
         ValidatorErrorMessageComponent
     ],
     providers: [
+        PublicGuard,
+        AuthGuard,
         AuthService,
         ToasterService,
         FormErrorService,

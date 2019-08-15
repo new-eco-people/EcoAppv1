@@ -25,7 +25,7 @@ import { IAppState } from '../state-management/store';
 
                     if (error.status === 424) {
 
-                        this.router.navigate([AppRoutes.public.sendEmailVerification.fullPath])
+                        this.router.navigate([AppRoutes.public.sendEmailVerification.path])
 
                         return throwError(error);
                     }
