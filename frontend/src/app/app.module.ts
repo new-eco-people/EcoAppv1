@@ -10,7 +10,6 @@ import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLL
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchPipe } from './shared/pipes/search.pipe';
-import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { SharedModule } from './shared/shared.module';
 import { IAppState, INITIAL_STATE, rootReducer } from './shared/state-management/store';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
@@ -48,7 +47,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       PerfectScrollbarModule,
     ],
     providers: [
-      AuthGuard,
       {
         provide: PERFECT_SCROLLBAR_CONFIG,
         useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
