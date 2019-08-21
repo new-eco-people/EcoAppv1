@@ -11,19 +11,18 @@
 @import "scss/core";
 @import "scss/fonts/weather-icons";
 @import "scss/plugins";
-@import "scss/demo"; // Remove this SCSS from production
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 mat-form-field {
-    width: 100%;
+width: 100%;
 }
 
 .error-block > small {
-    display: none;
+display: none;
 }
 
 .error-block > small:first-child {
-    display: block;
+display: block;
 }
 
 /* Rules for sizing the icon. */
@@ -43,17 +42,15 @@ mat-form-field {
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 .mat-progress-spinner circle, .mat-spinner circle {
-    margin: 0px 4px;
-    
+margin: 0px 4px;
 }
 
 // Make spinner white
 .spinner-white.mat-progress-spinner circle, .spinner-white.mat-spinner circle {
-    stroke: #fff!important;
+stroke: #fff!important;
 }
 
 // Make spinner white
 .spinner-eco.mat-progress-spinner circle, .spinner-eco.mat-spinner circle {
-    stroke: #027779!important;
+stroke: #027779!important;
 }
-

@@ -1,9 +1,9 @@
 <div #wrapper class="wrapper" [ngClass]="{'nav-collapsed': iscollapsed, 'menu-collapsed': iscollapsed, 'sidebar-sm': isSidebar_sm, 'sidebar-lg': isSidebar_lg}" [dir]="options.direction">
   <div #appSidebar appSidebar class="app-sidebar" (toggleHideSidebar)="toggleHideSidebar($event)" [ngClass]="{'hide-sidebar': hideSidebar}" data-active-color="white" [attr.data-background-color]="bgColor">
-      <app-sidebar></app-sidebar>
+      <app-private-sidebar></app-private-sidebar>
       <div class="sidebar-background" #sidebarBgImage></div>
   </div>
-  <app-navbar (toggleHideSidebar)="toggleHideSidebar($event)"></app-navbar>
+  <app-private-navbar (toggleHideSidebar)="toggleHideSidebar($event)"></app-private-navbar>
   <div class="main-panel">
       <div class="main-content">
           <div class="content-wrapper">
@@ -14,5 +14,5 @@
       </div>
       <app-footer></app-footer>
   </div>
-  <app-notification-sidebar></app-notification-sidebar>
+  <app-private-notification-sidebar></app-private-notification-sidebar>
 </div>

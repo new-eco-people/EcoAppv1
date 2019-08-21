@@ -102,7 +102,6 @@ body {
       }
 
       .card {
-
         &.gradient-ibiza-sunset,
         &.gradient-blackberry,
         &.gradient-green-tea,
@@ -145,15 +144,15 @@ body {
       .wrapper,
       .wrapper.nav-collapsed.menu-collapsed {
         .sidebar-background {
-          background: transparent;
-          opacity: 0.2;
+          background: transparent !important;
+          opacity: 0.2 !important;
         }
       }
 
       .wrapper.nav-collapsed {
         .sidebar-background {
           background: $black !important;
-          opacity: 0.95 !important;
+          opacity: 0.8 !important;
           transition: all 0.5s ease;
         }
       }
@@ -196,7 +195,6 @@ body {
         }
 
         tr {
-
           th,
           td {
             border-color: rgba($color: $white, $alpha: 0.3);
@@ -206,7 +204,6 @@ body {
 
       .email-application,
       .chat-application {
-
         .email-app-sidebar,
         .email-app-list-mails,
         .email-search-box,
@@ -341,7 +338,6 @@ body {
       // For App Customizer
 
       app-customizer {
-
         a,
         p,
         span,
@@ -424,7 +420,7 @@ body {
             border-bottom: 1px solid rgba($color: $white, $alpha: 0.3);
           }
 
-          .form-group>div {
+          .form-group > div {
             border-left: 1px solid rgba($color: $white, $alpha: 0.3);
           }
         }
@@ -521,7 +517,7 @@ body {
         }
       }
 
-      // Ng Select 
+      // Ng Select
 
       .ng-select {
         .ng-select-container .ng-value-container .ng-placeholder {
@@ -529,7 +525,6 @@ body {
         }
 
         .ng-value {
-
           .ng-value-label,
           .ng-value-icon {
             color: $black !important;
@@ -542,7 +537,6 @@ body {
       .ng-dropdown-panel {
         .ng-dropdown-panel-items {
           .ng-option {
-
             span.ng-option-label,
             b {
               color: rgba(0, 0, 0, 0.87) !important;
@@ -647,16 +641,19 @@ body {
       // Notification Sidebar
 
       .notification-sidebar {
+        &.open {
+          background: rgba(0, 0, 0, 0.8) !important;
+        }
         .notification-sidebar-close {
           .ft-x {
-            color: $black !important;
+            color: $white !important;
           }
         }
 
         p,
         span,
         h6 {
-          color: $black !important;
+          color: $white !important;
         }
 
         .nav.nav-tabs {
@@ -666,13 +663,12 @@ body {
             }
 
             .nav-link.active {
-              color: $black !important;
+              color: $white !important;
               background: transparent !important;
             }
           }
         }
       }
-
       // Editor
       .ql-toolbar.ql-snow {
         .ql-formats {
@@ -734,13 +730,10 @@ body {
 
       // Tour
       .hopscotch-bubble {
-
         .hopscotch-bubble-number {
-          color: $black !important
+          color: $black !important;
         }
       }
-
-
     }
   }
 }
@@ -758,7 +751,6 @@ body {
 // for sidebar from 992px and below
 
 @media (max-width: 992px) {
-
   // for sidebar
   .layout-dark.layout-transparent {
     .app-sidebar {
