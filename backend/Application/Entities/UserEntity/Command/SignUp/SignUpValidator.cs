@@ -19,8 +19,8 @@ namespace Application.Entities.UserEntity.Command.SignUp
 
             RuleFor(x => x.EmailAddress).NotEmpty().WithMessage("Email is required").EmailAddress().WithMessage("Email is invalid");
             
-            // RuleFor(x => x.EmailAddress).MustAsync(async (x, email, y) => await auth.EmailAvailable(x.EmailAddress))
-            //                      .WithMessage(x => $"{x.EmailAddress} has been taken");
+            RuleFor(x => x.EmailAddress).MustAsync(async (x, email, y) => await auth.EmailAvailable(x.EmailAddress))
+                                 .WithMessage(x => $"{x.EmailAddress} has been taken");
 
             RuleFor(x => x.AgreeToTermsAndCondition).Equal(true).WithMessage("Agree to our terms and condition to continue");
         }

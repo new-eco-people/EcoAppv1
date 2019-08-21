@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/services/auth/auth-guard.service';
+import { NotFoundComponent } from './public/pages/not-found/not-found.component';
 
 
 const appRoutes: Routes = [
@@ -27,8 +28,7 @@ const appRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'public',
-    pathMatch: 'full',
+    component: NotFoundComponent
   }
 ];
 

@@ -26,8 +26,7 @@ import { ValidatorErrorMessageComponent } from './validators/validator-error-mes
 import { FormErrorService } from './services/form-error/form-error.service';
 import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 import { JwtInterceptorProvider } from './interceptors/jwt.interceptor';
-
-
+import { NotFoundComponent } from 'app/public/pages/not-found/not-found.component';
 
 
 @NgModule({
@@ -48,6 +47,11 @@ import { JwtInterceptorProvider } from './interceptors/jwt.interceptor';
         FormsModule,
         ReactiveFormsModule,
         ValidatorErrorMessageComponent,
+        SidebarLinkDirective,
+        SidebarListDirective,
+        SidebarAnchorToggleDirective,
+        SidebarToggleDirective,
+        NotFoundComponent,
     ],
     imports: [
         RouterModule,
@@ -71,7 +75,8 @@ import { JwtInterceptorProvider } from './interceptors/jwt.interceptor';
         SidebarListDirective,
         SidebarAnchorToggleDirective,
         SidebarToggleDirective,
-        ValidatorErrorMessageComponent
+        ValidatorErrorMessageComponent,
+        NotFoundComponent,
     ],
     providers: [
         AuthService,
