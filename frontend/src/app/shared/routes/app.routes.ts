@@ -1,75 +1,91 @@
 
-export const AppRoutes = {
+export class AppRoutes {
 
     // Routes for public pages
-    public: {
+    static get public() {
+        return {
+            path: `public`,
+            name: `public`,
 
-        // Home page of public site
-        default: 'public',
-
-        // Signin route
-        get signIn() {
-            return {
+            // Home page of public site
+            signIn: {
                 name: 'signin',
-                fullPath: `public/signin`
-            }
-        },
+                path: `public/signin`
+            },
 
-        // Signup route
-        // get signUp() { return `${this.default}/signup`},
-        get signUp() {
-            return {
+            // Signup route
+            signUp: {
                 name: 'signup',
-                fullPath: `public/signup`
-            }
-        },
+                path: `public/signup`
+            },
 
-        // Verify email route
-        get verifyEmail() {
-            return {
+            // Verify email route
+            verifyEmail: {
                 name: 'verify-email',
-                fullPath: `public/verify-email`
-            }
-        },
+                path: `public/verify-email`
+            },
 
-        // forgot password route
-        get forgotPassword() {
-            return {
+            // forgot password route
+            forgotPassword: {
                 name: 'forgot-password',
-                fullPath: `public/forgot-password`
-            }
-        },
+                path: `public/forgot-password`
+            },
 
-        // reset password route
-        get resetPassword() {
-            return {
+            // reset password route
+            resetPassword: { 
                 name: 'reset-password',
-                fullPath: `public/reset-password`
-            }
-        },
+                path: `public/reset-password`
+            },
 
-        // Send email verification
-        get sendEmailVerification() {
-            return {
+            // Send email verification
+            sendEmailVerification: {
                 name: 'send-email-verification',
                 fullPath: `public/send-email-verification`
             }
-        },
-    },
+        }
+    }
 
-    private : {
+    // Routes for public pages
+    static get private() {
+        return {
+            path: `private`,
+            name: `private`,
 
-        //  Home page for private users
-        default: 'private',
+            // User profile page
+            profile: {
+                name: `profile`,
+                path: `private/profile`,
 
-        // User profile page
-        get profile() {
-            return {
-                name: 'profile',
-                fullPath: `private/profile`
-            }
-        },
 
+                // Overview
+                intro: {
+                    name: `intro`,
+                    path: `private/profile/intro`
+                },
+
+                // projects
+                projects: {
+                    name: `projects`,
+                    path: `private/profile/projects`
+                },
+
+                // Communities
+                communities: {
+                    name: `communities`,
+                    path: `private/profile/communities`
+                }
+            },
+
+
+        }
+    }
+
+    // Routes for admin pages
+    static get admin() {
+        return {
+            path: `admin`,
+            name: `admin`
+        }
     }
 
 }
