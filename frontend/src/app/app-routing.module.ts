@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/services/auth/auth-guard.service';
+import { NotFoundComponent } from './public/pages/not-found/not-found.component';
 
 
 const appRoutes: Routes = [
@@ -10,7 +11,6 @@ const appRoutes: Routes = [
     pathMatch: 'full',
   },
   // { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
-  // { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES, canActivate: [AuthGuard] },
 
   {
     path: 'public',
@@ -28,8 +28,7 @@ const appRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'public',
-    pathMatch: 'full',
+    component: NotFoundComponent
   }
 ];
 
