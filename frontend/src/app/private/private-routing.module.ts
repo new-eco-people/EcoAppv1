@@ -7,12 +7,15 @@ import { PrivateProfileComponent } from './pages/private-profile/private-profile
 import { PrivateProfileIntroComponent } from './components/profile/private-profile-intro/private-profile-intro.component';
 import { PrivateProfileProjectsComponent } from './components/profile/private-profile-projects/private-profile-projects.component';
 import { PrivateProfileCommunitiesComponent } from './components/profile/private-profile-communities/private-profile-communities.component';
+import { AppRoutes } from 'app/shared/routes/app.routes';
 
+// Get the whole routes of the app
+const appRoutes = AppRoutes.generateRoutes();
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: appRoutes.private.home.name,
     pathMatch: 'full',
   },
   {
@@ -26,7 +29,7 @@ const routes: Routes = [
     component: PrivateFullLayoutComponent,
     children: [
       {
-        path: 'home',
+        path: appRoutes.private.home.name,
         component: PrivateHomeComponent
       }
     ]
@@ -36,24 +39,24 @@ const routes: Routes = [
     component: PrivateFullLayoutComponent,
     children: [
       {
-        path: 'profile',
+        path: appRoutes.private.profile.name,
         component: PrivateProfileComponent,
         children: [
           {
             path: '',
-            redirectTo: 'intro',
+            redirectTo: appRoutes.private.profile.intro.name,
             pathMatch: 'full',
           },
           {
-            path: 'intro',
+            path: appRoutes.private.profile.intro.name,
             component: PrivateProfileIntroComponent
           },
           {
-            path: 'projects',
+            path: appRoutes.private.profile.projects.name,
             component: PrivateProfileProjectsComponent
           },
           {
-            path: 'communities',
+            path: appRoutes.private.profile.communities.name,
             component: PrivateProfileCommunitiesComponent
           }
         ]

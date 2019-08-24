@@ -50,6 +50,12 @@ export class AppRoutes {
         path: `private`,
         name: `private`,
 
+        // Home
+        home: {
+            name: `home`,
+            path: `private/home`
+        },
+
         // User profile page
         profile: {
             name: `profile`,

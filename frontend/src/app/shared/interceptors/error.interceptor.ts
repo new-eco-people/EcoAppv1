@@ -12,6 +12,7 @@ import { IAppState } from '../state-management/store';
 
  export class ErrorInterceptor implements HttpInterceptor {
 
+    // Get the whole routes of the app
     routes = AppRoutes.generateRoutes();
 
     constructor(private router: Router, private redux: NgRedux<IAppState>) {}
