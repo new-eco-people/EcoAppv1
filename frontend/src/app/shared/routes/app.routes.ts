@@ -2,7 +2,7 @@
 export class AppRoutes {
 
     // Routes for public pages
-    static get public() {
+    get public() {
         return {
             path: `public`,
             name: `public`,
@@ -46,7 +46,7 @@ export class AppRoutes {
     }
 
     // Routes for public pages
-    static get private() {
+    get private() {
         return {
             path: `private`,
             name: `private`,
@@ -81,7 +81,7 @@ export class AppRoutes {
     }
 
     // Routes for admin pages
-    static get admin() {
+    get admin() {
         return {
             path: `admin`,
             name: `admin`
