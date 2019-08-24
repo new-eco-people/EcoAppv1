@@ -4,6 +4,7 @@ import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { NotFoundComponent } from './public/pages/not-found/not-found.component';
 import { AppRoutes } from './shared/routes/app.routes';
 
+// Get the whole routes of the app
 const routes = AppRoutes.generateRoutes();
 
 const appRoutes: Routes = [
@@ -12,7 +13,7 @@ const appRoutes: Routes = [
     redirectTo: routes.public.name,
     pathMatch: 'full',
   },
-  // { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
+  // { path: '', comp adogo onent: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
 
   {
     path: routes.public.name,
