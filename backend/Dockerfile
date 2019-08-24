@@ -32,7 +32,7 @@ COPY --from=build-env /app/Api/out .
 # RUN mkdir Api
 COPY --from=build-env /app/Api/botdetect.xml ./
 
-# Copy countries and states json files
+# Copy countries and states json files, locations
 RUN mkdir Persistence/data/locations
 COPY --from=build-env /app/Persistence/data/locations ./Persistence/data/locations
 
