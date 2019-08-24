@@ -4,7 +4,7 @@ import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { NotFoundComponent } from './public/pages/not-found/not-found.component';
 import { AppRoutes } from './shared/routes/app.routes';
 
-const routes = new AppRoutes();
+const routes = AppRoutes.generateRoutes();
 
 const appRoutes: Routes = [
   {
@@ -39,6 +39,4 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}

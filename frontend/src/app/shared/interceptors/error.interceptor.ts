@@ -12,6 +12,8 @@ import { IAppState } from '../state-management/store';
 
  export class ErrorInterceptor implements HttpInterceptor {
 
+    routes = AppRoutes.generateRoutes();
+
     constructor(private router: Router, private redux: NgRedux<IAppState>) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,7 +27,7 @@ import { IAppState } from '../state-management/store';
 
                     if (error.status === 424) {
 
-                        this.router.navigate([AppRoutes.public.sendEmailVerification.fullPath])
+                        this.router.navigate([this.routes.public.sendEmailVerification.path])
 
                         return throwError(error);
                     }
