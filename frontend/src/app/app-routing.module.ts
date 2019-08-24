@@ -4,27 +4,27 @@ import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { NotFoundComponent } from './public/pages/not-found/not-found.component';
 import { AppRoutes } from './shared/routes/app.routes';
 
-
+const routes = AppRoutes.generateRoutes();
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: AppRoutes.public.name,
+    redirectTo: routes.public.name,
     pathMatch: 'full',
   },
   // { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
 
   {
-    path: AppRoutes.public.name,
+    path: routes.public.name,
     loadChildren: './public/public.module#PublicModule',
   },
   {
-    path: AppRoutes.private.name,
+    path: routes.private.name,
     loadChildren: './private/private.module#PrivateModule',
     canActivate: [AuthGuard]
   },
   {
-    path: AppRoutes.admin.name,
+    path: routes.admin.name,
     loadChildren: './admin/admin.module#AdminModule',
     canActivate: [AuthGuard]
   },
@@ -39,6 +39,4 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}
