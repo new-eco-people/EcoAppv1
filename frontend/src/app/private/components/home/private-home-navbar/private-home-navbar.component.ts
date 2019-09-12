@@ -17,7 +17,7 @@ export class PrivateHomeNavbarComponent implements OnInit {
   }
 
   @HostListener('window:scroll', ['$event'])
-  scrollHandler() {
+  scrollHandler(event) {
     this.top = (window.pageYOffset) > 60 ? false : true;
   }
 
