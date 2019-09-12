@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from 'app/public/pages/reset-password/reset-pa
 // import the Angular Captcha Module
 import { BotDetectCaptchaModule } from 'angular-captcha';
 import { SendEmailVerificationComponent } from './pages/send-email-verification/send-email-verification.component';
+import { AuthUserGuard } from 'app/shared/guards/auth-user-guard';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,9 @@ import { SendEmailVerificationComponent } from './pages/send-email-verification/
         ForgotPasswordComponent,
         ResetPasswordComponent,
         SendEmailVerificationComponent,
+    ],
+    providers: [
+        AuthUserGuard
     ],
     imports: [
         SharedModule,

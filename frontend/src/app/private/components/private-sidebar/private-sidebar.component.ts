@@ -20,7 +20,7 @@ export class PrivateSidebarComponent implements OnInit, AfterViewInit {
   activeTitles: string[] = [];
   expanded: boolean;
   nav_collapsed_open = false;
-  logoUrl = 'assets/img/logo.png';
+  logoUrl = 'assets/img/ecologo.png';
   public config: any = {};
 
 
@@ -42,16 +42,6 @@ export class PrivateSidebarComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.config = this.configService.templateConf;
     this.menuItems = ROUTES;
-
-
-
-    if (this.config.layout.sidebar.backgroundColor === 'white') {
-      this.logoUrl = 'assets/img/logo-dark.png';
-    }
-    else {
-      this.logoUrl = 'assets/img/logo.png';
-    }
-
 
   }
 

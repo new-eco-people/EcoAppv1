@@ -10,6 +10,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SendEmailVerificationComponent } from './pages/send-email-verification/send-email-verification.component';
 import { AppRoutes } from 'app/shared/routes/app.routes';
+import { AuthUserGuard } from 'app/shared/guards/auth-user-guard';
 
 // Get the whole routes of the app
 const appRoutes = AppRoutes.generateRoutes();
@@ -26,7 +27,8 @@ const routes: Routes = [
       children: [
         {
           path: appRoutes.public.signIn.name,
-          component: SigninComponent
+          component: SigninComponent,
+          canActivate: [AuthUserGuard]
         },
         {
           path: appRoutes.public.signUp.name,

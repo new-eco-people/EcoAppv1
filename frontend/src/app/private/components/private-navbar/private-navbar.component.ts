@@ -2,6 +2,11 @@ import { Component, Output, EventEmitter, OnInit, AfterViewInit } from '@angular
 import { TranslateService } from '@ngx-translate/core';
 import { LayoutService } from 'app/shared/services/layout.service';
 import { ConfigService } from 'app/shared/services/config.service';
+import { Router } from '@angular/router';
+import { NgRedux } from '@angular-redux/store';
+import { IAppState } from 'app/shared/state-management/store';
+import { UserActionConstant } from 'app/shared/state-management/user-state/user-action-constant';
+import { AppRoutes } from 'app/shared/routes/app.routes';
 
 @Component({
   selector: 'app-private-navbar',
@@ -18,7 +23,15 @@ export class PrivateNavbarComponent implements OnInit, AfterViewInit {
 
   public config: any = {};
 
-  constructor(public translate: TranslateService, private layoutService: LayoutService, private configService: ConfigService) {
+  appRoutes = AppRoutes.generateRoutes();
+
+  constructor(
+    public translate: TranslateService,
+    private layoutService: LayoutService,
+    private configService: ConfigService,
+    private router: Router,
+    private redux: NgRedux<IAppState>
+    ) {
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|es|pt|de/) ? browserLang : 'en');
 
@@ -63,5 +76,10 @@ export class PrivateNavbarComponent implements OnInit, AfterViewInit {
     } else {
       this.toggleHideSidebar.emit(true);
     }
+  }
+
+  logout() {
+    this.redux.dispatch({ type: UserActionConstant.LOG_OUT  });
+    this.router.navigate([this.appRoutes.public.signIn.path]);
   }
 }
