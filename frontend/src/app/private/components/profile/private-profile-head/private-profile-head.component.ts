@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppRoutes } from 'app/shared/routes/app.routes';
 
 @Component({
   selector: 'app-private-profile-head',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./private-profile-head.component.scss']
 })
 export class PrivateProfileHeadComponent implements OnInit {
+
+  // Get the whole routes of the app
+  appRoutes = AppRoutes.generateRoutes();
 
   constructor() { }
 

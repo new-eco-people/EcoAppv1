@@ -45,7 +45,7 @@ export class AppRoutes {
         }
     },
 
-    // Routes for public pages
+    // Routes for private pages
     private: {
         path: `private`,
         name: `private`,
@@ -53,7 +53,34 @@ export class AppRoutes {
         // Home
         home: {
             name: `home`,
-            path: `private/home`
+            path: `private/home`,
+
+
+            // Feeds for:-
+            // Communities
+            communities: {
+                name: `communities`,
+                path: `private/home/communities`
+            },
+
+            // Projects
+            projects: {
+                name: `projects`,
+                path: `private/home/projects`
+            },
+
+            // Problems
+            problems: {
+                name: `problems`,
+                path: `private/home/problems`,
+            },
+
+            // Map
+            map: {
+                name: `map`,
+                path: `private/home/path`
+            }
+
         },
 
         // User profile page

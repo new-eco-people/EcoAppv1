@@ -39,10 +39,10 @@
                       <div class="col-lg-5 col-md-5 ">
                           <ul class="profile-menu no-list-style">
                               <li>
-                                  <a [routerLink]="['/private', 'profile', 'intro']" routerLinkActive="active"  >Intro</a>
+                                  <a [routerLink]="['/'+appRoutes.private.profile.intro.path]" routerLinkActive="active"  >Intro</a>
                               </li>
                               <li>
-                                  <a [routerLink]="['/private', 'profile', 'projects']" routerLinkActive="active" >Projects</a>
+                                  <a [routerLink]="['/'+appRoutes.private.profile.projects.path]" routerLinkActive="active" >Projects</a>
                               </li>
                           </ul>
                       </div>
@@ -53,7 +53,7 @@
                       <div class="col-lg-5 col-md-5">
                           <ul class="profile-menu no-list-style">
                               <li>
-                                  <a [routerLink]="['/private', 'profile', 'communities']" routerLinkActive="active" >Communities</a>
+                                  <a [routerLink]="['/'+appRoutes.private.profile.communities.path]" routerLinkActive="active" >Communities</a>
                               </li>
                               <li>
                                   <a [routerLink]="['/private', 'profile', 'Store']" routerLinkActive="active"  >Store</a>

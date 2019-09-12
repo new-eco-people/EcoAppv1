@@ -1,0 +1,108 @@
+<section id="home-icons" class="sticky-top" (scroll)="scrollHandler($event)">
+    <div class="row" *ngIf="top">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+              <div id="line-area" class="text-center">
+
+                <ul class="list-inline main-logo">
+
+                  <li class="p-3">
+                      <a> <i class="ft-plus-circle fa-2x display-block m-0 primary"></i><small class="content-sub-header">Create</small> </a>
+                  </li>
+
+                  <li class="p-3" [routerLink]="['/'+ appRoutes.private.home.problems.path]" routerLinkActive="router-link-active" >
+                      <a><i class="ft-alert-circle fa-2x display-block m-0"></i> <small class="content-sub-header">Problems</small></a>
+                  </li>
+
+                  <li class="p-3" [routerLink]="['/'+ appRoutes.private.home.projects.path]" routerLinkActive="router-link-active">
+                      <a><i class="ft-airplay fa-2x display-block m-0"></i> <small class="content-sub-header">Projects</small></a>
+                  </li>
+
+                  <li class="p-3" [routerLink]="['/'+ appRoutes.private.home.communities.path]" routerLinkActive="router-link-active"  >
+                      <a><i class="ft-users fa-2x display-block m-0"></i><small class="content-sub-header">Communities</small></a>
+                  </li>
+
+                  <li class="p-3">
+                      <a><i class="ft-map-pin fa-2x display-block m-0"></i> <small class="content-sub-header">Map</small></a>
+                  </li>
+
+                </ul>
+                
+  
+              </div>
+            </div>
+  
+          </div>
+  
+  
+          <div class="height-20 bg-primary rounded-bottom"></div>
+  
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="!top" class="pt-3" >
+        <div class="height-10 bg-white shadow-lg rounded-top"></div>
+  
+        <div class="text-white text-center">
+          <ul class="list-inline bg-primary rounded-bottom p-1">
+  
+            <li>
+              <button
+                mat-button
+                matTooltip="Create"
+                class="mx-2 p-0 text-white bg-primary"
+              >
+                <i class="ft-plus-circle fa-1x display-block"></i>
+              </button>
+            </li>
+  
+            <li>
+              <button
+                mat-button
+                matTooltip="Problems"
+                class="mx-2 p-0 text-white bg-primary"
+                [routerLink]="['/'+ appRoutes.private.home.problems.path]" routerLinkActive="router-link-active"
+              >
+                <i class="ft-alert-circle fa-1x display-block"></i>
+              </button>
+            </li>
+
+            <li>
+                <button
+                  mat-button
+                  matTooltip="Projects"
+                  class="mx-2 p-0 text-white bg-primary"
+                  [routerLink]="['/'+ appRoutes.private.home.projects.path]" routerLinkActive="router-link-active"
+                >
+                  <i class="ft-airplay fa-1x display-block"></i>
+                </button>
+              </li>
+  
+            <li>
+              <button
+                mat-button
+                matTooltip="Communities"
+                class="mx-2 p-0 text-white bg-primary"
+                [routerLink]="['/'+ appRoutes.private.home.communities.path]" routerLinkActive="router-link-active"
+              >
+                <i class="ft-users fa-1x display-block"></i>
+              </button>
+            </li>
+  
+            <li>
+              <button
+                mat-button
+                matTooltip="Map"
+                class="mx-2 p-0 text-white bg-primary"
+              >
+                <i class="ft-map-pin fa-1x display-block"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+    </div>
+  
+  </section>

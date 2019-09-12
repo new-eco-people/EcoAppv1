@@ -12,6 +12,13 @@ import { PrivateProfileHeadComponent } from './components/profile/private-profil
 import { PrivateProfileIntroComponent } from './components/profile/private-profile-intro/private-profile-intro.component';
 import { PrivateProfileProjectsComponent } from './components/profile/private-profile-projects/private-profile-projects.component';
 import { PrivateProfileCommunitiesComponent } from './components/profile/private-profile-communities/private-profile-communities.component';
+import { PrivateHomeNavbarComponent } from './components/home/private-home-navbar/private-home-navbar.component';
+import { PrivateProblemCardComponent } from './components/problem/private-problem-card/private-problem-card.component';
+import { PrivateCommunityFeedsComponent } from './components/communities/private-community-feeds/private-community-feeds.component';
+import { PrivateCommunityCardComponent } from './components/communities/private-community-card/private-community-card.component';
+import { PrivateProblemFeedsComponent } from './components/problem/private-problem-feeds/private-problem-feeds.component';
+import { PrivateProjectFeedsComponent } from './components/project/private-project-feeds/private-project-feeds.component';
+import { PrivateProjectCardComponent } from './components/project/private-project-card/private-project-card.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +32,14 @@ import { PrivateProfileCommunitiesComponent } from './components/profile/private
         PrivateProfileHeadComponent,
         PrivateProfileIntroComponent,
         PrivateProfileProjectsComponent,
-        PrivateProfileCommunitiesComponent
+        PrivateProfileCommunitiesComponent,
+        PrivateHomeNavbarComponent,
+        PrivateProblemCardComponent,
+        PrivateCommunityFeedsComponent,
+        PrivateCommunityCardComponent,
+        PrivateProblemFeedsComponent,
+        PrivateProjectFeedsComponent,
+        PrivateProjectCardComponent,
     ],
     imports: [
         SharedModule
@@ -39,7 +53,14 @@ import { PrivateProfileCommunitiesComponent } from './components/profile/private
         PrivateNavbarComponent,
         PrivateNotificationSidebarComponent,
         PrivateSidebarComponent,
-        PrivateProfileHeadComponent
+        PrivateProfileHeadComponent,
+        PrivateHomeNavbarComponent,
+        PrivateProblemCardComponent,
+        PrivateCommunityFeedsComponent,
+        PrivateCommunityCardComponent,
+        PrivateProblemFeedsComponent,
+        PrivateProjectFeedsComponent,
+        PrivateProjectCardComponent,
     ],
     providers: [
         FeedsService
