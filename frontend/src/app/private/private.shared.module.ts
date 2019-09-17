@@ -19,6 +19,10 @@ import { PrivateCommunityCardComponent } from './components/communities/private-
 import { PrivateProblemFeedsComponent } from './components/problem/private-problem-feeds/private-problem-feeds.component';
 import { PrivateProjectFeedsComponent } from './components/project/private-project-feeds/private-project-feeds.component';
 import { PrivateProjectCardComponent } from './components/project/private-project-card/private-project-card.component';
+import { PrivateHomeTopnavbarComponent } from './components/home/private-home-topnavbar/private-home-topnavbar.component';
+import { PrivateChatMessageComponent } from './components/chat/private-chat-message/private-chat-message.component';
+import { PrivateChatFeedsComponent } from './components/chat/private-chat-feeds/private-chat-feeds.component';
+import { PrivateAddProblemComponent } from './components/modals/problem/private-add-problem/private-add-problem.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +44,13 @@ import { PrivateProjectCardComponent } from './components/project/private-projec
         PrivateProblemFeedsComponent,
         PrivateProjectFeedsComponent,
         PrivateProjectCardComponent,
+        PrivateHomeTopnavbarComponent,
+        PrivateChatMessageComponent,
+        PrivateChatFeedsComponent,
+        PrivateAddProblemComponent,
+    ],
+    entryComponents: [
+        PrivateAddProblemComponent,
     ],
     imports: [
         SharedModule
@@ -61,6 +72,10 @@ import { PrivateProjectCardComponent } from './components/project/private-projec
         PrivateProblemFeedsComponent,
         PrivateProjectFeedsComponent,
         PrivateProjectCardComponent,
+        PrivateHomeTopnavbarComponent,
+        PrivateChatMessageComponent,
+        PrivateChatFeedsComponent,
+        PrivateAddProblemComponent,
     ],
     providers: [
         FeedsService
