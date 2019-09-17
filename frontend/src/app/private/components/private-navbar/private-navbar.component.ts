@@ -57,6 +57,7 @@ export class PrivateNavbarComponent implements OnInit, AfterViewInit {
     this.translate.use(language);
   }
 
+  // for full screen
   ToggleClass() {
     if (this.toggleClass === 'ft-maximize') {
       this.toggleClass = 'ft-minimize';

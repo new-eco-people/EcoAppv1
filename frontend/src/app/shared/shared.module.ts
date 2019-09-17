@@ -27,6 +27,7 @@ import { FormErrorService } from './services/form-error/form-error.service';
 import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 import { JwtInterceptorProvider } from './interceptors/jwt.interceptor';
 import { NotFoundComponent } from 'app/public/pages/not-found/not-found.component';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 @NgModule({
@@ -85,6 +86,10 @@ import { NotFoundComponent } from 'app/public/pages/not-found/not-found.componen
         ErrorInterceptorProvider,
         JwtInterceptorProvider,
         { provide: ErrorHandler, useClass: AppErrorHandler },
+        // {
+        //     provide: STEPPER_GLOBAL_OPTIONS,
+        //     useValue: { displayDefaultIndicatorType: false }
+        // },
     ]
 })
 export class SharedModule { }

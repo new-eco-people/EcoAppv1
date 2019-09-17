@@ -1,0 +1,79 @@
+<h2 mat-dialog-title>Share ECO Problem</h2>
+
+
+<mat-dialog-content>
+
+  <form [formGroup]="createEcoProblemForm">
+
+      <mat-vertical-stepper [linear]="false" >
+
+        <ng-template matStepperIcon="done">
+          <i class="ft-check"></i>
+        </ng-template>
+
+        <ng-template matStepperIcon="edit">
+          <i class="ft-edit-2"></i>
+        </ng-template>
+
+        
+
+        <mat-step label="Location of Problem" state="edit">
+          
+          <mat-form-field>
+            <input matInput placeholder="Country">
+          </mat-form-field>
+          
+          <mat-form-field>
+            <input matInput placeholder="State">
+          </mat-form-field>
+
+          <div>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+
+        </mat-step>
+
+          <mat-step state="edit" label="Category of Problem">
+              <mat-form-field>
+                <input matInput placeholder="Address" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button mat-button matStepperNext type="button">Next</button>
+              </div>
+          </mat-step>
+
+          <mat-step state="edit" label="Description of Problem">
+              <mat-form-field>
+                <input matInput placeholder="Address" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button mat-button matStepperNext type="button">Next</button>
+              </div>
+          </mat-step>
+
+          <mat-step state="edit">
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+            </div>
+          </mat-step>
+
+          
+
+        </mat-vertical-stepper>
+        
+    </form>
+
+
+
+</mat-dialog-content>
+
+
+<!-- <mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions> -->

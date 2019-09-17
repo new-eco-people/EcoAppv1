@@ -1,0 +1,101 @@
+<div *ngIf="!mobile" >
+          
+  <div class="text-center">
+    <ul class="list-inline rounded-bottom p-1">
+
+      <li>
+        <button
+          mat-button
+          matTooltip="Problems"
+          class="mx-2 p-0 primary"
+          [routerLink]="['/'+ appRoutes.private.home.problems.path]" routerLinkActive="router-link-active"
+        >
+          <i class="ft-alert-circle fa-1x display-block"></i> <small class="display-block mt--10">Problems</small>
+        </button>
+      </li>
+
+      <li>
+          <button
+            mat-button
+            matTooltip="Projects"
+            class="mx-2 p-0 primary"
+            [routerLink]="['/'+ appRoutes.private.home.projects.path]" routerLinkActive="router-link-active"
+          >
+            <i class="ft-airplay fa-1x display-block"></i><small class="display-block mt--10">Projects</small>
+          </button>
+        </li>
+
+      <li>
+        <button
+          mat-button
+          matTooltip="Communities"
+          class="mx-2 p-0 primary"
+          [routerLink]="['/'+ appRoutes.private.home.communities.path]" routerLinkActive="router-link-active"
+        >
+          <i class="ft-users fa-1x display-block"></i><small class="display-block mt--10">Communities</small>
+        </button>
+      </li>
+
+      <li>
+        <button
+          mat-button
+          matTooltip="Map"
+          class="mx-2 p-0 primary"
+        >
+          <i class="ft-map-pin fa-1x display-block"></i><small class="display-block mt--10">Map</small>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="mobile" >
+          
+  <div class="text-center">
+    <ul class="list-inline rounded-bottom p-1">
+
+      <li>
+        <button
+          mat-button
+          matTooltip="Problems"
+          class="mx-2 p-0 primary"
+          [routerLink]="['/'+ appRoutes.private.home.problems.path]" routerLinkActive="router-link-active"
+        >
+          <i class="ft-alert-circle fa-1x display-block"></i>
+        </button>
+      </li>
+
+      <li>
+          <button
+            mat-button
+            matTooltip="Projects"
+            class="mx-2 p-0 primary"
+            [routerLink]="['/'+ appRoutes.private.home.projects.path]" routerLinkActive="router-link-active"
+          >
+            <i class="ft-airplay fa-1x display-block"></i>
+          </button>
+        </li>
+
+      <li>
+        <button
+          mat-button
+          matTooltip="Communities"
+          class="mx-2 p-0 primary"
+          [routerLink]="['/'+ appRoutes.private.home.communities.path]" routerLinkActive="router-link-active"
+        >
+          <i class="ft-users fa-1x display-block"></i>
+        </button>
+      </li>
+
+      <li>
+        <button
+          mat-button
+          matTooltip="Map"
+          class="mx-2 p-0 primary"
+        >
+          <i class="ft-map-pin fa-1x display-block"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
