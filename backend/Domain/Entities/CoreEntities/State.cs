@@ -8,7 +8,7 @@ namespace Domain.Entities.CoreEntities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(60)]
         public string Name { get; set; }
         public Country Country { get; set; }
         public int CountryId { get; set; }

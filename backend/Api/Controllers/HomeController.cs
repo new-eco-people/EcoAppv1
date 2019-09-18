@@ -17,6 +17,7 @@ namespace Api.Controllers
         // [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> ProblemFeeds() {
             // return Ok(await Mediator.Send(command));
+            await Task.Delay(100);
             return Ok(new {feeds = "feeds"});
         }
     }
