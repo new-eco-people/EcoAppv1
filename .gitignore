@@ -264,5 +264,5 @@ __pycache__/
 *.pyc
 
 # store secrets
-launchSettings.json
+# launchSettings.json
 

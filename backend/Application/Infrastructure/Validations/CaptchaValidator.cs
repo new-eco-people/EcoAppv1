@@ -17,8 +17,6 @@ namespace Application.Infrastructure.Validations
         {
             _captcha = captcha;
 
-            
-
             RuleFor(x => x.Code).NotEmpty().WithMessage("Captcha is required")
                                 .Must((x, code) => _captcha.Ishuman(x.Id, x.Code)).WithMessage("Invalid Captcha");
         }

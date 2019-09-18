@@ -9,6 +9,7 @@ namespace Persistence.Extensions
         public static void ImplementApplicationDatabaseInterfaces(this IServiceCollection services) {
             // Add Auth Repository
             services.AddTransient<IAuthRepository, AuthRepository>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
         }
     }
 }

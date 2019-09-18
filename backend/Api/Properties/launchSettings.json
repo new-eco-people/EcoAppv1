@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json.schemastore.org/launchsettings.json",
+    "iisSettings": {
+      "windowsAuthentication": false, 
+      "anonymousAuthentication": true, 
+      "iisExpress": {
+        "applicationUrl": "http://localhost:65343",
+        "sslPort": 44395
+      }
+    },
+    "profiles": {
+      "IIS Express": {
+        "commandName": "IISExpress",
+        "launchBrowser": true,
+        "launchUrl": "api/values",
+        "environmentVariables": {
+          "ASPNETCORE_ENVIRONMENT": "Development"
+        }
+      },
+      "Api": {
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "api/values",
+        "applicationUrl": "http://localhost:5000",
+        "environmentVariables": {
+          "ASPNETCORE_ENVIRONMENT": "Development",
+          "AUTHORIZATION_TOKEN" : "This is ment to be the super secret password",
+          "SENDGRID_API" : "Send key goes in here for production or staging or ask lead developer for alternative way to add key to env",
+          "HOSTNAME" : "http://localhost"
+        }
+      }
+    }
+  }
+  
+  
+  
