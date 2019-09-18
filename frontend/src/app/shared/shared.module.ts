@@ -28,6 +28,7 @@ import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 import { JwtInterceptorProvider } from './interceptors/jwt.interceptor';
 import { NotFoundComponent } from 'app/public/pages/not-found/not-found.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { LocationService } from './services/location/location.service';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
         NotFoundComponent,
     ],
     providers: [
+        LocationService,
         AuthService,
         ToasterService,
         FormErrorService,

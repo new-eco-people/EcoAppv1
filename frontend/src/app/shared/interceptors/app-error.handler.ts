@@ -1,5 +1,6 @@
 import { ErrorHandler, Inject } from '@angular/core';
 import { ToasterService } from '../services/toaster/toaster.service';
+import { environment } from 'environments/environment';
 
 export class AppErrorHandler implements ErrorHandler {
 
@@ -7,7 +8,10 @@ export class AppErrorHandler implements ErrorHandler {
 
     handleError(error: string): void {
         this.toastService.error(error);
-        console.log(error);
+
+        if (!environment.production) {
+            console.log(error);
+        }
     }
 
 }

@@ -19,12 +19,33 @@
 
         <mat-step label="Location of Problem" state="edit">
           
+          <!-- Country select form -->
           <mat-form-field>
-            <input matInput placeholder="Country">
+            <mat-select
+              placeholder="Country"
+              (selectionChange)="getStates($event)"
+            >
+              <mat-option value="" >---</mat-option>
+              <mat-option *ngFor="let country of countries" [value]="country.id" >{{country.name}}</mat-option>
+            </mat-select>
+
+            <mat-hint>
+              <mat-icon ><mat-spinner *ngIf="loadingCountries" [diameter]="15" ></mat-spinner></mat-icon>
+            </mat-hint>
+
           </mat-form-field>
           
           <mat-form-field>
-            <input matInput placeholder="State">
+            <mat-select
+              placeholder="State"
+            >
+            <mat-option *ngFor="let state of states" [value]="state.id" >{{state.name}}</mat-option>
+
+            </mat-select>
+
+            <mat-hint>
+              <mat-icon ><mat-spinner *ngIf="loadingStates" [diameter]="15" ></mat-spinner></mat-icon>
+            </mat-hint>
           </mat-form-field>
 
           <div>
