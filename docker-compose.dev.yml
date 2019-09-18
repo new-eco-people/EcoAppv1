@@ -61,4 +61,4 @@ services:
   template:
     image: newecopeoplev1/template_dev
     ports:
-      - "4000:4000"
+      - "4000:4201"
