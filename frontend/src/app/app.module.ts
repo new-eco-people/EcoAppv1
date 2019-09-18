@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,8 +12,9 @@ import { AppComponent } from './app.component';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { AuthGuard } from './shared/services/auth/auth-guard.service';
 import { SharedModule } from './shared/shared.module';
-import { IAppState, INITIAL_STATE, rootReducer } from './shared/state-management/store';
+import { IAppState, INITIAL_STATE, rootReducer, AppInjector } from './shared/state-management/store';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
+import { Location } from '@angular/common';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -58,7 +59,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     bootstrap: [AppComponent]
   })
   export class AppModule {
-    constructor(ngRedux: NgRedux<IAppState>) {
+    constructor(private injector: Injector, ngRedux: NgRedux<IAppState>) {
+      AppInjector.location = injector.get<Location>(Location);
       ngRedux.configureStore(rootReducer, INITIAL_STATE);
     }
   }

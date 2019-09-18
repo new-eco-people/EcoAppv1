@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
+import { AppInjector } from '../state-management/store';
 
 @Injectable()
 export class BaseApiService {
   api: string;
+  private location: any = AppInjector.location;
 
-  constructor(document: Document, path: string = null) {
+  constructor(path: string = null) {
+    const hostname = this.location._platformStrategy._platformLocation.location.origin;
     const filteredPath = path ? '/' + path : '';
-    this.api = `${document.location.origin}/api${filteredPath}`;
+    this.api = `${hostname}/api${filteredPath}`;
   }
 
 }

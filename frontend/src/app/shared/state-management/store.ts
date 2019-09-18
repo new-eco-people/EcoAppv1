@@ -1,7 +1,12 @@
 import { combineReducers } from 'redux';
 import { IUserAppState, USER_INITIAL_STATE, userReducer } from './user-state/user-store';
+import { Location } from '@angular/common';
 
-export interface IAppState{
+export const AppInjector = {
+    location: {} as Location
+}
+
+export interface IAppState {
     user: IUserAppState;
 }
 

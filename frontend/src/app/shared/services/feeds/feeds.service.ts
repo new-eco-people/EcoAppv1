@@ -9,8 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class FeedsService extends BaseApiService  {
   token: string;
 
-  constructor(@Inject(DOCUMENT) document: Document, private http: HttpClient) {
-    super(document, 'home')
+  constructor(private http: HttpClient) {
+    super('home')
   }
 
   getProblems() {

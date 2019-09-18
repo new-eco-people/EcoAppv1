@@ -16,7 +16,6 @@ namespace Api.Controllers
         /// Return all the countries in world
         /// </summary>
         /// <remarks>Good!</remarks>
-        [AllowAnonymous]
         [HttpGet("get-countries")]
         [ProducesResponseType(typeof(CountriesDTO), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCountries() {
@@ -28,7 +27,6 @@ namespace Api.Controllers
         /// Return all the state in world
         /// </summary>
         /// <remarks>Good!</remarks>
-        [AllowAnonymous]
         [HttpGet("get-states")]
         [ProducesResponseType(typeof(StateDTO), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetState([FromQuery] GetStateCommand command) {

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomValidator } from 'app/shared/validators/custom-validators';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { LocationService } from 'app/shared/services/location/location.service';
+import { Country, State } from 'app/shared/domain/location';
+import { MatSelectChange } from '@angular/material';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-private-add-problem',
@@ -19,10 +23,17 @@ export class PrivateAddProblemComponent implements OnInit {
 
   createEcoProblemForm: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  countries: Country[];
+  states: State[];
+
+  loadingCountries = false;
+  loadingStates = false;
+
+  constructor(private _formBuilder: FormBuilder, private location: LocationService) {}
 
   ngOnInit() {
     this.initializeForm();
+    this.getCountries_();
   }
 
   initializeForm() {
@@ -35,6 +46,29 @@ export class PrivateAddProblemComponent implements OnInit {
       description: [null, [CustomValidator.CustomRequired('Description')]],
       photos: [null, [CustomValidator.CustomRequired('Photos')]]
     });
+  }
+
+  getCountries_() {
+    this.loadingCountries = true;
+
+    this.location.getCountries()
+      .pipe(finalize(() => this.loadingCountries = false))
+      .subscribe((countries: Country[]) => {
+      this.countries = countries;
+    })
+  }
+
+  getStates(matset: MatSelectChange) {
+
+    if (!matset.value) { return; }
+
+    this.loadingStates = true;
+
+    this.location.getStates(matset.value)
+      .pipe(finalize(() => this.loadingStates = false))
+      .subscribe((states: State[]) => {
+      this.states = states;
+    })
   }
 
 }

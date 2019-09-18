@@ -13,7 +13,6 @@ export class TokenService {
 
   save(token = null) {
     if (token) {
-      console.log(token);
       localStorage.setItem('token', token);
     }
   }

@@ -8,8 +8,8 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService extends BaseApiService  {
   token: string;
 
-  constructor(@Inject(DOCUMENT) document: Document, private http: HttpClient) {
-    super(document, 'auth')
+  constructor(private http: HttpClient) {
+    super('auth')
   }
 
   signupUser(data: any) {
