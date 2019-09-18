@@ -11,8 +11,7 @@ services:
       - "3200:1433"
 
   backend:
-    build:
-      context: newecopeoplev1/backend_dev
+    image: newecopeoplev1/backend_dev
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DefaultConnection=server=mssql_image;Database=eco-appDb;user id=sa;password=noPassword@247;MultipleActiveResultSets=True
@@ -44,4 +43,4 @@ services:
   template:
     image: newecopeoplev1/template_dev
     ports:
-      - "4000:4000"
+      - "4000:4201"
