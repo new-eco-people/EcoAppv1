@@ -31,7 +31,7 @@ For Development, the following tools are required:
 * [Visual Studio Code](https://code.visualstudio.com/) or your preferred IDE.
 * [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2).
 * [Nodejs](https://nodejs.org/en/) LTS version please.
-* SQL Server for the Database (Default). This is required and is neccesary for migrations. 
+* PostGres for the Database (Default). This is required and is neccesary for migrations. 
 
 
 ### Setup
@@ -39,25 +39,25 @@ For Development, the following tools are required:
 Follow these steps to get your environment set up. For Mac or Linux user, you may be required to add `sudo` before the command.
 
   1. Clone or download the repository
-  2. Open ther terminal at the root directory of the download folder and start docker: (note: It will take long time for the very first time).
-     Before typing in the following command, there are four docker-compose commands. docker-compose.dev.yml, docker-compose.local_prod.yml, docker-compose.staging.yml and docker-compose.yml. docker-compose.staging.yml and docker-compose.yml are only used for staging and production respectively and should be ignored for production. 
+  2. Open ther terminal at the root directory of the download folder and start docker: (note: It will take a long time for the very first time).
+     Before typing in the following command, there are five docker-compose commands. docker-compose.dev.yml, docker-compose.local_prod.yml, docker-compose.staging.yml and docker-compose.yml. docker-compose.staging.yml and docker-compose.yml are only used for staging and production respectively and should be ignored except for development. 
 
-     docker-compose.dev.yml uses MS SQL database and uses the local docker build while docker-compose.local_prod.yml uses SQlite database and uses the dockerhub containers. Migrations should be made via the docker-compose.dev.yml and copied from the container since it will contain the most recent MS SQL migrations.
+frontend developers should use docker-compose.frontend.yml while backend develops should use docker-compose.dev.yml. Migrations should be made via the docker-compose.dev.yml and copied from the container since it will contain the most recent migrations.
 
-     So you can either use for local container build
+     So you can either use docker-compose.dev.yml for backend developers
      ```
      docker-compose -f docker-compose.dev.yml up --build
      ```
 
-     or you can use the dockerhub build images
+     or docker-compose.frontend.yml for frontend developers
      ```
-     docker-compose -f docker-compose.local_prod.yml up --build
+     docker-compose -f docker-compose.frontend.yml up --build
      ```
 
 
-Go to `http://localhost` on your browser. If a react app shows, you are good to go else kindly contact [Perez247](https://github.com/perez247) detailing your issue.
+Go to `http://localhost` on your browser. If a react/angular app shows, you are good to go else kindly contact [Perez247](https://github.com/perez247) detailing your issue.
 
-3. This is the most important part. kindly press Ctrl+c or CMD+c to end the application and `docker-compose -f <name of docker-compose file>.yml down` to clean up. Ensure this is done everytime an application is down.
+3. This is the most important part when cloasing the docker application. kindly press Ctrl+c or CMD+c to end the application and `docker-compose -f <name of docker-compose file>.yml down` to clean up. Ensure this is done everytime an application is down.
 
 ### For Development
 
@@ -67,7 +67,7 @@ Three (3) addresses are avaliable in development mode:
 *   Backend which is `http://localhost:5000`.
 *   Nginx Which is `http://localhost`.
 
-Nginx connects directly to both the backend and the frontend. You can connect to the backend api via `localhost:5000/api` or `localhost/api` but its is recommended to use `localhost/api` and all react app api calls should follow this convention for development. In Production, the api in the react app should be set to `/api`.
+Nginx connects directly to both the backend and the frontend. You can connect to the backend api via `localhost:5000/api` or `localhost/api` but its is recommended to use `localhost/api` and all react/Angular app api calls should follow this convention for development. In Production, the api in the react app should be set to `/api`.
 
 To view all the api documentation simple go to `localhost/api/docs` and it will be shown thanks to Swagger.
 
