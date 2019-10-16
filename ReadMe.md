@@ -21,7 +21,7 @@ For Development, the following tools are required:
 
 * [Docker CE](https://docs.docker.com/install/). The installation guide for the preferred OS is found on the left sidebar. You will need to create a dockerhub account so be prepared.
 
-    Once you have downloaded and installed docker on your machine (hopefully), run in your terminal for Mac/Linux or CMD/Powershell for Windows to login to dockerhub with the credentials used to create the docker hub account. This will be done only once. For Mac or Linux user, you may be required to run by add ```sudo``` before the command.
+    Once you have downloaded and installed docker on your machine (hopefully), run in your terminal for Mac/Linux or CMD/Powershell for Windows to login to dockerhub with the credentials used to create the docker hub account. This will be done only once. For Mac or Linux user, you may be required to add ```sudo``` before the command.
 
     ```
     docker login
@@ -39,8 +39,8 @@ For Development, the following tools are required:
 Follow these steps to get your environment set up. For Mac or Linux user, you may be required to add `sudo` before the command.
 
   1. Clone or download the repository
-  2. Open ther terminal at the root directory of the download folder and start docker: (note: It will take a long time for the very first time).
-     Before typing in the following command, there are five docker-compose commands. docker-compose.dev.yml, docker-compose.local_prod.yml, docker-compose.staging.yml and docker-compose.yml. docker-compose.staging.yml and docker-compose.yml are only used for staging and production respectively and should be ignored except for development. 
+  2. Open ther terminal at the root directory of the downloaded folder and start docker: (note: It will take a long time for the very first time).
+     Before typing in the following command, it is good to know that there are five docker-compose files: docker-compose.dev.yml, docker-compose.local_prod.yml, docker-compose.staging.yml and docker-compose.yml. docker-compose.staging.yml and docker-compose.yml are only used for staging and production respectively and should be ignored. 
 
 frontend developers should use docker-compose.frontend.yml while backend develops should use docker-compose.dev.yml. Migrations should be made via the docker-compose.dev.yml and copied from the container since it will contain the most recent migrations.
 
