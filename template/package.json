@@ -62,7 +62,7 @@
     "ngx-ui-switch": "7.0.1",
     "node-sass": "4.12.0",
     "nouislider": "12.0.0",
-    "prismjs": "1.15.0",
+    "prismjs": "1.24.0",
     "quill": "1.3.6",
     "resize-observer-polyfill": "1.5.0",
     "rxjs": "6.4.0",
