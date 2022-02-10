@@ -43,7 +43,7 @@
     "intl": "1.2.5",
     "ng2-validation": "4.2.0",
     "ngx-perfect-scrollbar": "5.3.5",
-    "node-sass": "4.12.0",
+    "node-sass": "7.0.0",
     "primeng": "^8.0.2",
     "prismjs": "1.15.0",
     "redux": "4.0.1",
